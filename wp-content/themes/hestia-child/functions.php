@@ -12,20 +12,16 @@ function my_theme_enqueue_styles() {
 }
 add_action( 'wp_enqueue_scripts', 'my_theme_enqueue_styles' );
 
-function my_theme_enqueue_scripts() {
 
-    $parent_style = 'hestia_scripts'; // This is 'twentyfifteen-style' for the Twenty Fifteen theme.
-
-    wp_enqueue_script( $parent_style, get_template_directory_uri() . '/scripts.js' );
-    wp_enqueue_script( 'hestia_scripts',
-        get_stylesheet_directory_uri() . '/scripts.js',
-        array( $parent_style ),
-        wp_get_theme()->get('Version')
-    );
+function wpdocs_dequeue_script() {
+   wp_dequeue_script( 'hestia_scripts' );
 }
-add_action( 'wp_enqueue_scripts', 'my_theme_enqueue_scripts' );
+add_action( 'wp_print_scripts', 'wpdocs_dequeue_script', 100 );
 
-remove_filter( 'hestia_filter_features', array($files_to_load, 'sections/hestia-contact-section') );
-remove_filter( 'hestia_filter_features', array($files_to_load, 'sections/hestia-blog-section') );
 
+add_action('wp_enqueue_scripts', 'my_theme_enqueue_scripts', 100);
+function my_theme_enqueue_scripts() {
+  wp_dequeue_script( 'hestia_scripts' );
+  wp_enqueue_script('child_theme_script_handle', get_stylesheet_directory_uri().'/scripts/scripts.js', array('material'));
+}
 ?>
