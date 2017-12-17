@@ -40,7 +40,7 @@ class Hestia_Contact_Info extends WP_Customize_Control {
 		} else {
 			printf(
 				/* translators: %1$s is Plugin name */
-				esc_html__( 'In order to add a contact form to this section, you need to install the %s plugin.','hestia' ),
+				esc_html__( 'In order to add a contact form to this section, you need to install the %s plugin.', 'hestia' ),
 				esc_html( 'Pirate Forms' )
 			);
 			echo $this->create_plugin_install_button( 'pirate-forms' );

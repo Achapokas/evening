@@ -50,7 +50,7 @@ if (typeof jQuery === 'undefined') {
 		.on( 'mouseleave.bs.carousel', $.proxy( this.cycle, this ) )
 	}
 
-	Carousel.VERSION  = '3.3.7'
+	Carousel.VERSION = '3.3.7'
 
 	Carousel.TRANSITION_DURATION = 600
 
@@ -93,11 +93,11 @@ if (typeof jQuery === 'undefined') {
 
 	Carousel.prototype.getItemForDirection = function (direction, active) {
 		var activeIndex = this.getItemIndex( active )
-		var willWrap = (direction == 'prev' && activeIndex === 0)
+		var willWrap    = (direction == 'prev' && activeIndex === 0)
 				|| (direction == 'next' && activeIndex == (this.$items.length - 1))
 		if (willWrap && ! this.options.wrap) {
 			return active
-			var delta = direction == 'prev' ? -1 : 1
+			var delta     = direction == 'prev' ? -1 : 1
 			var itemIndex = (activeIndex + delta) % this.$items.length
 			return this.$items.eq( itemIndex )
 		}
@@ -159,7 +159,7 @@ if (typeof jQuery === 'undefined') {
 			return (this.sliding = false)
 
 			var relatedTarget = $next[0]
-			var slideEvent = $.Event(
+			var slideEvent    = $.Event(
 				'slide.bs.carousel', {
 					relatedTarget: relatedTarget,
 					direction: direction
@@ -253,7 +253,7 @@ if (typeof jQuery === 'undefined') {
 		var $target = $( $this.attr( 'data-target' ) || (href = $this.attr( 'href' )) && href.replace( /.*(?=#[^\s]+$)/, '' ) ) // strip for ie7
 		if ( ! $target.hasClass( 'carousel' )) {
 			return
-			var options = $.extend( {}, $target.data(), $this.data() )
+			var options    = $.extend( {}, $target.data(), $this.data() )
 			var slideIndex = $this.attr( 'data-slide-to' )
 			if (slideIndex) {
 				options.interval = false
@@ -372,7 +372,7 @@ if (typeof jQuery === 'undefined') {
 					.on( 'click', clearMenus )
 				}
 
-				var relatedTarget = { relatedTarget: this }
+				var relatedTarget  = { relatedTarget: this }
 				$parent.trigger( e = $.Event( 'show.bs.dropdown', relatedTarget ) )
 
 				if (e.isDefaultPrevented()) {
@@ -416,7 +416,7 @@ if (typeof jQuery === 'undefined') {
 			}
 		}
 
-		var desc = ' li:not(.disabled):visible a'
+		var desc   = ' li:not(.disabled):visible a'
 		var $items = $parent.find( '.dropdown-menu' + desc )
 
 		if ( ! $items.length) {
@@ -506,7 +506,7 @@ if (typeof jQuery === 'undefined') {
 		this.init( 'tooltip', element, options )
 	}
 
-	Tooltip.VERSION  = '3.3.7'
+	Tooltip.VERSION = '3.3.7'
 
 	Tooltip.TRANSITION_DURATION = 150
 
@@ -696,7 +696,7 @@ if (typeof jQuery === 'undefined') {
 					this.options.placement.call( this, $tip[0], this.$element[0] ) :
 					this.options.placement
 
-					var autoToken = / \s ?auto ?\s ? /i
+					var autoToken = / \s ? auto ? \s ? / i
 					var autoPlace = autoToken.test( placement )
 					if (autoPlace) {
 						placement = placement.replace( autoToken, '' ) || 'top'
@@ -716,7 +716,7 @@ if (typeof jQuery === 'undefined') {
 
 						if (autoPlace) {
 							var orgPlacement = placement
-							var viewportDim = this.getPosition( this.$viewport )
+							var viewportDim  = this.getPosition( this.$viewport )
 
 							placement = placement == 'bottom' && pos.bottom + actualHeight > viewportDim.bottom ? 'top' :
 							  placement == 'top' && pos.top - actualHeight < viewportDim.top ? 'bottom' :
@@ -739,7 +739,7 @@ if (typeof jQuery === 'undefined') {
 			var complete = function () {
 				var prevHoverState = that.hoverState
 				that.$element.trigger( 'shown.bs.' + that.type )
-				that.hoverState = null
+				that.hoverState    = null
 
 				if (prevHoverState == 'out') {
 					that.leave( that )
@@ -760,12 +760,12 @@ if (typeof jQuery === 'undefined') {
 		var height = $tip[0].offsetHeight
 
 		// manually read margins because getBoundingClientRect includes difference
-		var marginTop = parseInt( $tip.css( 'margin-top' ), 10 )
+		var marginTop  = parseInt( $tip.css( 'margin-top' ), 10 )
 		var marginLeft = parseInt( $tip.css( 'margin-left' ), 10 )
 
 		// we must check for NaN for ie 8/9
 		if (isNaN( marginTop )) {
-			marginTop  = 0
+			marginTop = 0
 			if (isNaN( marginLeft )) {
 				marginLeft = 0
 
@@ -880,12 +880,12 @@ if (typeof jQuery === 'undefined') {
 	}
 
 	Tooltip.prototype.getPosition = function ($element) {
-		$element   = $element || this.$element
+		$element = $element || this.$element
 
 		var el     = $element[0]
 		var isBody = el.tagName == 'BODY'
 
-		var elRect    = el.getBoundingClientRect()
+		var elRect = el.getBoundingClientRect()
 		if (elRect.width == null) {
 			// width and height are missing in IE8, so compute them manually; see https://github.com/twbs/bootstrap/issues/14093
 			elRect = $.extend( {}, elRect, { width: elRect.right - elRect.left, height: elRect.bottom - elRect.top } )
@@ -913,7 +913,7 @@ if (typeof jQuery === 'undefined') {
 		if ( ! this.$viewport) {
 			return delta
 
-			var viewportPadding = this.options.viewport && this.options.viewport.padding || 0
+			var viewportPadding    = this.options.viewport && this.options.viewport.padding || 0
 			var viewportDimensions = this.getPosition( this.$viewport )
 
 			if (/right|left/.test( placement )) {
@@ -1014,10 +1014,10 @@ if (typeof jQuery === 'undefined') {
 				if (that.$tip) {
 					that.$tip.detach()
 				}
-				that.$tip = null
-				that.$arrow = null
+				that.$tip      = null
+				that.$arrow    = null
 				that.$viewport = null
-				that.$element = null
+				that.$element  = null
 			}
 		)
 	}
@@ -1093,7 +1093,7 @@ if (typeof jQuery === 'undefined') {
 		}
 	}
 
-	Collapse.VERSION  = '3.3.7'
+	Collapse.VERSION = '3.3.7'
 
 	Collapse.TRANSITION_DURATION = 350
 
@@ -1239,7 +1239,7 @@ if (typeof jQuery === 'undefined') {
 	function getTargetFromTrigger($trigger) {
 		var href
 		var target = $trigger.attr( 'data-target' )
-		|| (href = $trigger.attr( 'href' )) && href.replace( /.*(?=#[^\s]+$)/, '' ) // strip for ie7
+		|| (href   = $trigger.attr( 'href' )) && href.replace( /.*(?=#[^\s]+$)/, '' ) // strip for ie7
 
 		return $( target )
 	}
@@ -1282,7 +1282,7 @@ if (typeof jQuery === 'undefined') {
 	// =================
 	$( document ).on(
 		'click.bs.collapse.data-api', '[data-toggle="collapse"]', function (e) {
-			var $this   = $( this )
+			var $this = $( this )
 
 			if ( ! $this.attr( 'data-target' )) {
 				e.preventDefault()
@@ -1334,7 +1334,7 @@ if (typeof jQuery === 'undefined') {
 	// http://blog.alexmaccaw.com/css-transitions
 	$.fn.emulateTransitionEnd = function (duration) {
 		var called = false
-		var $el = this
+		var $el    = this
 		$( this ).one( 'bsTransitionEnd', function () { called = true } )
 		var callback = function () { if ( ! called) {
 				$( $el ).trigger( $.support.transition.end ) }

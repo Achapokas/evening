@@ -15,7 +15,7 @@ $hestia_page_sidebar_layout = get_theme_mod( 'hestia_page_sidebar_layout', 'full
 $args         = array(
   'sidebar-right' => 'col-md-9 page-content-wrap',
   'sidebar-left'  => 'col-md-9 page-content-wrap',
-  'full-width'    => 'col-md-8 col-md-offset-2 page-content-wrap',
+  'full-width'    => 'col-md-12 page-content-wrap',
 );
 $class_to_add = hestia_get_content_classes( $hestia_page_sidebar_layout, 'sidebar-1', $args );
 ?>

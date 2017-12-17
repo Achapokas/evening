@@ -31,31 +31,31 @@ class Hestia_Import_Zerif extends Hestia_Import_Utilities {
 	 * @var array
 	 */
 	private $match_controls = array(
-		'hestia_features_hide' => 'zerif_ourfocus_show',
-		'hestia_features_title' => 'zerif_ourfocus_title',
-		'hestia_features_subtitle' => 'zerif_ourfocus_subtitle',
-		'hestia_team_hide' => 'zerif_ourteam_show',
-		'hestia_team_title' => 'zerif_ourteam_title',
-		'hestia_team_subtitle' => 'zerif_ourteam_subtitle',
-		'hestia_testimonials_hide' => 'zerif_testimonials_show',
-		'hestia_testimonials_title' => 'zerif_testimonials_title',
+		'hestia_features_hide'         => 'zerif_ourfocus_show',
+		'hestia_features_title'        => 'zerif_ourfocus_title',
+		'hestia_features_subtitle'     => 'zerif_ourfocus_subtitle',
+		'hestia_team_hide'             => 'zerif_ourteam_show',
+		'hestia_team_title'            => 'zerif_ourteam_title',
+		'hestia_team_subtitle'         => 'zerif_ourteam_subtitle',
+		'hestia_testimonials_hide'     => 'zerif_testimonials_show',
+		'hestia_testimonials_title'    => 'zerif_testimonials_title',
 		'hestia_testimonials_subtitle' => 'zerif_testimonials_subtitle',
-		'hestia_clients_bar_hide' => 'zerif_aboutus_show',
-		'hestia_pricing_title' => 'zerif_packages_title',
-		'hestia_pricing_subtitle' => 'zerif_packages_subtitle',
-		'custom_logo' => 'custom_logo',
-		'hestia_portfolio_title' => 'zerif_portofolio_title',
-		'hestia_portfolio_subtitle' => 'zerif_portofolio_subtitle',
-		'hestia_portfolio_items' => 'zerif_portofolio_number',
-		'hestia_portfolio_hide' => 'zerif_portofolio_show',
-		'hestia_ribbon_text' => 'zerif_ribbonright_text',
-		'hestia_ribbon_button_text' => 'zerif_ribbonright_buttonlabel',
-		'hestia_ribbon_button_url' => 'zerif_ribbonright_buttonlink',
-		'hestia_contact_title' => 'zerif_contactus_title',
-		'hestia_contact_subtitle' => 'zerif_contactus_subtitle',
-		'hestia_general_credits' => 'zerif_copyright',
-		'hestia_blog_title' => 'zerif_latestnews_title',
-		'hestia_blog_subtitle' => 'zerif_latestnews_subtitle',
+		'hestia_clients_bar_hide'      => 'zerif_aboutus_show',
+		'hestia_pricing_title'         => 'zerif_packages_title',
+		'hestia_pricing_subtitle'      => 'zerif_packages_subtitle',
+		'custom_logo'                  => 'custom_logo',
+		'hestia_portfolio_title'       => 'zerif_portofolio_title',
+		'hestia_portfolio_subtitle'    => 'zerif_portofolio_subtitle',
+		'hestia_portfolio_items'       => 'zerif_portofolio_number',
+		'hestia_portfolio_hide'        => 'zerif_portofolio_show',
+		'hestia_ribbon_text'           => 'zerif_ribbonright_text',
+		'hestia_ribbon_button_text'    => 'zerif_ribbonright_buttonlabel',
+		'hestia_ribbon_button_url'     => 'zerif_ribbonright_buttonlink',
+		'hestia_contact_title'         => 'zerif_contactus_title',
+		'hestia_contact_subtitle'      => 'zerif_contactus_subtitle',
+		'hestia_general_credits'       => 'zerif_copyright',
+		'hestia_blog_title'            => 'zerif_latestnews_title',
+		'hestia_blog_subtitle'         => 'zerif_latestnews_subtitle',
 	);
 
 	/**
@@ -98,15 +98,15 @@ class Hestia_Import_Zerif extends Hestia_Import_Utilities {
 			/* Static front page settings */
 			if ( 'posts' === get_option( 'show_on_front' ) ) {
 				$about_content = get_theme_mod( 'hestia_page_editor' );
-				$page_content = ! empty( $about_content ) ? $about_content : '';
-				$page = array(
-					'post_type'     => 'page',
-					'post_title'    => 'Front page',
-					'post_content'  => wp_kses_post( $page_content ),
-					'post_status'   => 'publish',
-					'post_author'   => 1,
+				$page_content  = ! empty( $about_content ) ? $about_content : '';
+				$page          = array(
+					'post_type'    => 'page',
+					'post_title'   => 'Front page',
+					'post_content' => wp_kses_post( $page_content ),
+					'post_status'  => 'publish',
+					'post_author'  => 1,
 				);
-				$pid = wp_insert_post( $page );
+				$pid           = wp_insert_post( $page );
 				update_option( 'show_on_front', 'page' );
 				update_option( 'page_on_front', $pid );
 			}
@@ -211,7 +211,7 @@ class Hestia_Import_Zerif extends Hestia_Import_Utilities {
 			for ( $i = 1; $i <= 3; $i++ ) {
 				$bg = $this->previous_theme_content[ 'zerif_bgslider_' . $i ];
 				if ( ! empty( $bg ) ) {
-					$slide = $main_slide;
+					$slide              = $main_slide;
 					$slide['image_url'] = esc_url( $bg );
 					array_push( $settings, $slide );
 				}
@@ -239,13 +239,13 @@ class Hestia_Import_Zerif extends Hestia_Import_Utilities {
 	 */
 	private function import_zerif_about() {
 
-		 $css_to_add = '';
+		$css_to_add = '';
 
-		 $about_content = get_theme_mod( 'hestia_page_editor' );
+		$about_content = get_theme_mod( 'hestia_page_editor' );
 
 		/* Title and subtitle */
-		 $title = ! empty( $this->previous_theme_content['zerif_aboutus_title'] ) ? $this->previous_theme_content['zerif_aboutus_title'] : '';
-		 $subtitle = ! empty( $this->previous_theme_content['zerif_aboutus_subtitle'] ) ? $this->previous_theme_content['zerif_aboutus_subtitle'] : '';
+		$title    = ! empty( $this->previous_theme_content['zerif_aboutus_title'] ) ? $this->previous_theme_content['zerif_aboutus_title'] : '';
+		$subtitle = ! empty( $this->previous_theme_content['zerif_aboutus_subtitle'] ) ? $this->previous_theme_content['zerif_aboutus_subtitle'] : '';
 		if ( ! empty( $title ) || ! empty( $subtitle ) ) {
 			$about_content .= '<div class="row"><div class="col-md-8 col-md-offset-2 text-center">';
 			if ( ! empty( $title ) ) {
@@ -272,11 +272,11 @@ class Hestia_Import_Zerif extends Hestia_Import_Utilities {
 			$knob_color      = ! empty( $this->previous_theme_content[ 'zerif_aboutus_feature' . $i . '_color' ] ) ? $this->previous_theme_content[ 'zerif_aboutus_feature' . $i . '_color' ] : '';
 			if ( ! empty( $knob_percentage ) ) {
 				if ( $knob_percentage <= 50 ) {
-					$rotation       = (int) $knob_percentage * 3.6;
+					$rotation    = (int) $knob_percentage * 3.6;
 					$css_to_add .= '.progress' . $i . ' .progress-right .progress-bar { margin-right: 10px;border-color: ' . $knob_color . ';-webkit-transform: rotate(' . $rotation . 'deg); transform: rotate(' . $rotation . 'deg);}';
 					$css_to_add .= '.progress' . $i . ' .progress-left .progress-bar { margin-right: 10px;border-color: ' . $knob_color . ';-webkit-transform: rotate(0deg); transform: rotate(0deg); }';
 				} else {
-					$rotation       = ( (int) $knob_percentage - 50 ) * 3.6;
+					$rotation    = ( (int) $knob_percentage - 50 ) * 3.6;
 					$css_to_add .= '.progress' . $i . ' .progress-left .progress-bar { margin-right: 10px;border-color: ' . $knob_color . ';-webkit-transform: rotate(' . $rotation . 'deg); transform: rotate(' . $rotation . 'deg);}';
 					$css_to_add .= '.progress' . $i . ' .progress-right .progress-bar { margin-right: 10px;border-color: ' . $knob_color . ';-webkit-transform: rotate(180deg); transform: rotate(180deg);}';
 				}
@@ -298,7 +298,7 @@ class Hestia_Import_Zerif extends Hestia_Import_Utilities {
 		}
 
 		/* About section in zerif have 3 columns. If one column is empty, divide the section in two*/
-		$content = array( $left_content, $center_content, $right_content );
+		$content          = array( $left_content, $center_content, $right_content );
 		$not_empty_colums = count( array_filter( $content ) );
 		if ( ! function_exists( 'wp_update_custom_css_post' ) ) {
 			$not_empty_colums--;
@@ -308,7 +308,7 @@ class Hestia_Import_Zerif extends Hestia_Import_Utilities {
 		}
 
 		/* Get bootstrap class name for columns */
-		$nb = 12 / $not_empty_colums;
+		$nb    = 12 / $not_empty_colums;
 		$class = 'col-md-' . $nb;
 
 		/* Add section content */
@@ -438,7 +438,7 @@ class Hestia_Import_Zerif extends Hestia_Import_Utilities {
 			return;
 		}
 		$ids_to_grab = array();
-		$items = 2;
+		$items       = 2;
 		foreach ( $widget_ids as $widget_id ) {
 			if ( strpos( $widget_id, 'color-picker' ) !== false && $items > 0 ) {
 				$short_id_transient = explode( '-', $widget_id );
@@ -481,7 +481,7 @@ class Hestia_Import_Zerif extends Hestia_Import_Utilities {
 		$pricing_table_features = get_theme_mod( 'hestia_pricing_table_' . $table . '_features' );
 		$pricing_table_link     = get_theme_mod( 'hestia_pricing_table_' . $table . '_link' );
 		$pricing_table_text     = get_theme_mod( 'hestia_pricing_table_' . $table . '_text' );
-		$table_is_empty = empty( $pricing_table_title ) && empty( $pricing_table_price ) && empty( $pricing_table_features ) && empty( $pricing_table_link ) && empty( $pricing_table_text ) && empty( $table_is_empty );
+		$table_is_empty         = empty( $pricing_table_title ) && empty( $pricing_table_price ) && empty( $pricing_table_features ) && empty( $pricing_table_link ) && empty( $pricing_table_text ) && empty( $table_is_empty );
 
 		if ( ! $table_is_empty ) {
 			return;
@@ -537,10 +537,10 @@ class Hestia_Import_Zerif extends Hestia_Import_Utilities {
 	private function widgets_to_theme_mods() {
 
 		$sidebars = array(
-			'hestia_features_content' => array( 'sidebar-ourfocus', 'ctup-ads' ),
+			'hestia_features_content'     => array( 'sidebar-ourfocus', 'ctup-ads' ),
 			'hestia_testimonials_content' => array( 'sidebar-testimonials', 'zerif_testim' ),
-			'hestia_clients_bar_content' => array( 'sidebar-aboutus', 'zerif_clients' ),
-			'hestia_team_content' => array( 'sidebar-ourteam', 'zerif_team' ),
+			'hestia_clients_bar_content'  => array( 'sidebar-aboutus', 'zerif_clients' ),
+			'hestia_team_content'         => array( 'sidebar-ourteam', 'zerif_team' ),
 		);
 
 		foreach ( $sidebars as $hestia_corespondent => $sidebar_settings ) {
@@ -565,7 +565,7 @@ class Hestia_Import_Zerif extends Hestia_Import_Utilities {
 	 * @return array|string
 	 */
 	private function get_sidebar_content( $sidebar, $prefix ) {
-		$sidebars = get_option( 'sidebars_widgets' );
+		$sidebars              = get_option( 'sidebars_widgets' );
 		$data_in_hestia_format = array();
 		if ( array_key_exists( $sidebar, $sidebars ) ) {
 			$widget_ids = $sidebars[ $sidebar ];
@@ -599,7 +599,7 @@ class Hestia_Import_Zerif extends Hestia_Import_Utilities {
 							}
 						}
 						$widget_data['social_repeater'] = json_encode( $social_repeater );
-						$widget_data['choice'] = 'customizer_repeater_image';
+						$widget_data['choice']          = 'customizer_repeater_image';
 					}
 				}
 				if ( ! empty( $widget_data ) ) {
@@ -686,11 +686,11 @@ class Hestia_Import_Zerif extends Hestia_Import_Utilities {
 	 */
 	private function get_key( $key ) {
 		$repeater_map = array(
-			'image_url' => array( 'image_url', 'image_uri' ),
-			'title' => array( 'title', 'name' ),
-			'subtitle' => array( 'subtitle', 'position', 'details' ),
-			'text' => array( 'text', 'description' ),
-			'link' => array( 'link' ),
+			'image_url'       => array( 'image_url', 'image_uri' ),
+			'title'           => array( 'title', 'name' ),
+			'subtitle'        => array( 'subtitle', 'position', 'details' ),
+			'text'            => array( 'text', 'description' ),
+			'link'            => array( 'link' ),
 			'social_repeater' => array( 'fb_link', 'tw_link', 'bh_link', 'db_link', 'ln_link', 'gp_link', 'pinterest_link', 'tumblr_link', 'reddit_link', 'youtube_link', 'instagram_link', 'website_link', 'email_link', 'phone_link', 'profile_link' ),
 		);
 		foreach ( $repeater_map as $k => $v ) {
@@ -727,8 +727,8 @@ class Hestia_Import_Zerif extends Hestia_Import_Utilities {
 	 * @since 1.1.51
 	 */
 	private final function set_hestia_mod( $hestia_mod_id, $imported_mod_id ) {
-		$hestia_mod   = get_theme_mod( $hestia_mod_id );
-		if ( array_key_exists( $imported_mod_id , $this->previous_theme_content ) ) {
+		$hestia_mod = get_theme_mod( $hestia_mod_id );
+		if ( array_key_exists( $imported_mod_id, $this->previous_theme_content ) ) {
 			$imported_mod = $this->previous_theme_content[ $imported_mod_id ];
 			if ( ! empty( $imported_mod ) && empty( $hestia_mod ) ) {
 				set_theme_mod( $hestia_mod_id, $imported_mod );
@@ -743,9 +743,9 @@ class Hestia_Import_Zerif extends Hestia_Import_Utilities {
 	 * @since 1.1.51
 	 */
 	private function import_zerif_bottom_button_ribbon() {
-		$title = ! empty( $this->previous_theme_content['zerif_bottomribbon_text'] ) ? $this->previous_theme_content['zerif_bottomribbon_text'] : '';
+		$title        = ! empty( $this->previous_theme_content['zerif_bottomribbon_text'] ) ? $this->previous_theme_content['zerif_bottomribbon_text'] : '';
 		$button_label = ! empty( $this->previous_theme_content['zerif_bottomribbon_buttonlabel'] ) ? $this->previous_theme_content['zerif_bottomribbon_buttonlabel'] : '';
-		$button_link = ! empty( $this->previous_theme_content['zerif_bottomribbon_buttonlink'] ) ? $this->previous_theme_content['zerif_bottomribbon_buttonlink'] : '';
+		$button_link  = ! empty( $this->previous_theme_content['zerif_bottomribbon_buttonlink'] ) ? $this->previous_theme_content['zerif_bottomribbon_buttonlink'] : '';
 		if ( empty( $title ) && empty( $button_label ) ) {
 			return;
 		}
@@ -759,7 +759,7 @@ class Hestia_Import_Zerif extends Hestia_Import_Utilities {
 		}
 		$section_content .= '</div></div>';
 
-		$hestia_about = get_theme_mod( 'hestia_page_editor' );
+		$hestia_about  = get_theme_mod( 'hestia_page_editor' );
 		$hestia_about .= $section_content;
 		if ( ! empty( $hestia_about ) ) {
 			set_theme_mod( 'hestia_page_editor', $hestia_about );
@@ -774,12 +774,12 @@ class Hestia_Import_Zerif extends Hestia_Import_Utilities {
 	 * @since 1.1.51
 	 */
 	private function import_zerif_footer() {
-		$icon1 = ! empty( $this->previous_theme_content['zerif_email_icon'] ) ? $this->previous_theme_content['zerif_email_icon'] : '';
-		$text1 = ! empty( $this->previous_theme_content['zerif_email'] ) ? $this->previous_theme_content['zerif_email'] : '';
-		$icon2 = ! empty( $this->previous_theme_content['zerif_phone_icon'] ) ? $this->previous_theme_content['zerif_phone_icon'] : '';
-		$text2 = ! empty( $this->previous_theme_content['zerif_phone'] ) ? $this->previous_theme_content['zerif_phone'] : '';
-		$icon3 = ! empty( $this->previous_theme_content['zerif_address_icon'] ) ? $this->previous_theme_content['zerif_address_icon'] : '';
-		$text3 = ! empty( $this->previous_theme_content['zerif_address'] ) ? $this->previous_theme_content['zerif_address'] : '';
+		$icon1           = ! empty( $this->previous_theme_content['zerif_email_icon'] ) ? $this->previous_theme_content['zerif_email_icon'] : '';
+		$text1           = ! empty( $this->previous_theme_content['zerif_email'] ) ? $this->previous_theme_content['zerif_email'] : '';
+		$icon2           = ! empty( $this->previous_theme_content['zerif_phone_icon'] ) ? $this->previous_theme_content['zerif_phone_icon'] : '';
+		$text2           = ! empty( $this->previous_theme_content['zerif_phone'] ) ? $this->previous_theme_content['zerif_phone'] : '';
+		$icon3           = ! empty( $this->previous_theme_content['zerif_address_icon'] ) ? $this->previous_theme_content['zerif_address_icon'] : '';
+		$text3           = ! empty( $this->previous_theme_content['zerif_address'] ) ? $this->previous_theme_content['zerif_address'] : '';
 		$section_content = array(
 			$icon1 => $text1,
 			$icon2 => $text2,
@@ -837,8 +837,8 @@ class Hestia_Import_Zerif extends Hestia_Import_Utilities {
 					if ( ! empty( $this->previous_theme_content[ $social ] ) ) {
 						wp_update_nav_menu_item(
 							$menu_id, 0, array(
-								'menu-item-title' => 'Custom Page',
-								'menu-item-url' => $this->previous_theme_content[ $social ],
+								'menu-item-title'  => 'Custom Page',
+								'menu-item-url'    => $this->previous_theme_content[ $social ],
 								'menu-item-status' => 'publish',
 							)
 						);
@@ -859,7 +859,7 @@ class Hestia_Import_Zerif extends Hestia_Import_Utilities {
 	 */
 	private function import_sidebars() {
 		$widgets_from_old_theme = wp_get_sidebars_widgets();
-		$new_widget_array = array();
+		$new_widget_array       = array();
 
 		if ( ! empty( $widgets_from_old_theme['sidebar-1'] ) ) {
 			$new_widget_array['sidebar-1'] = $widgets_from_old_theme['sidebar-1'];
@@ -904,36 +904,36 @@ class Hestia_Import_Zerif extends Hestia_Import_Utilities {
 	 * @since 1.1.51
 	 */
 	private function import_section_order() {
-		$result_order = array(
-			'hestia_features' => 10,
-			'hestia_ribbon' => 15,
-			'hestia_portfolio' => 20,
-			'hestia_about' => 25,
-			'hestia_clients_bar' => 30,
-			'hestia_team' => 35,
-			'hestia_testimonials' => 40,
-			'hestia_contact' => 45,
-			'hestia_pricing' => 50,
+		$result_order    = array(
+			'hestia_features'                   => 10,
+			'hestia_ribbon'                     => 15,
+			'hestia_portfolio'                  => 20,
+			'hestia_about'                      => 25,
+			'hestia_clients_bar'                => 30,
+			'hestia_team'                       => 35,
+			'hestia_testimonials'               => 40,
+			'hestia_contact'                    => 45,
+			'hestia_pricing'                    => 50,
 			'sidebar-widgets-subscribe-widgets' => 55,
-			'hestia_shop' => 60,
-			'hestia_blog' => 65,
+			'hestia_shop'                       => 60,
+			'hestia_blog'                       => 65,
 		);
 		$section_mapping = array(
-			'our_focus' => 'hestia_features',
-			'portofolio' => 'hestia_portfolio',
-			'about_us' => 'hestia_about',
-			'our_team' => 'hestia_team',
+			'our_focus'    => 'hestia_features',
+			'portofolio'   => 'hestia_portfolio',
+			'about_us'     => 'hestia_about',
+			'our_team'     => 'hestia_team',
 			'testimonials' => 'hestia_testimonials',
 			'right_ribbon' => 'hestia_ribbon',
-			'contact_us' => 'hestia_contact',
-			'packages' => 'hestia_pricing',
-			'subscribe' => 'sidebar-widgets-subscribe-widgets',
-			'latest_news' => 'hestia_blog',
+			'contact_us'   => 'hestia_contact',
+			'packages'     => 'hestia_pricing',
+			'subscribe'    => 'sidebar-widgets-subscribe-widgets',
+			'latest_news'  => 'hestia_blog',
 		);
 		for ( $i = 1; $i <= 13; $i++ ) {
 			if ( ! empty( $this->previous_theme_content[ 'section' . $i ] ) ) {
 				if ( array_key_exists( $this->previous_theme_content[ 'section' . $i ], $section_mapping ) ) {
-					$hestia_section = $section_mapping[ $this->previous_theme_content[ 'section' . $i ] ];
+					$hestia_section                  = $section_mapping[ $this->previous_theme_content[ 'section' . $i ] ];
 					$result_order[ $hestia_section ] = ( $i * 5 ) + 5;
 				}
 			}

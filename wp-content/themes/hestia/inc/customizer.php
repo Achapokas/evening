@@ -114,36 +114,36 @@ function hestia_customize_register( $wp_customize ) {
 	$wp_customize->add_panel(
 		'hestia_appearance_settings', array(
 			'priority' => 25,
-			'title' => esc_html__( 'Appearance Settings', 'hestia' ),
+			'title'    => esc_html__( 'Appearance Settings', 'hestia' ),
 		)
 	);
 
 	$wp_customize->add_panel(
 		'hestia_frontpage_sections', array(
-			'priority' => 30,
-			'title' => esc_html__( 'Frontpage Sections', 'hestia' ),
-			'description' => esc_html__( 'Drag and drop panels to change the order of sections.','hestia' ),
+			'priority'    => 30,
+			'title'       => esc_html__( 'Frontpage Sections', 'hestia' ),
+			'description' => esc_html__( 'Drag and drop panels to change the order of sections.', 'hestia' ),
 		)
 	);
 
 	$wp_customize->add_panel(
 		'hestia_blog_settings', array(
 			'priority' => 45,
-			'title' => esc_html__( 'Blog Settings', 'hestia' ),
+			'title'    => esc_html__( 'Blog Settings', 'hestia' ),
 		)
 	);
 
-	$wp_customize->get_section( 'header_image' )->panel = 'hestia_appearance_settings';
-	$wp_customize->get_section( 'background_image' )->panel = 'hestia_appearance_settings';
-	$wp_customize->get_setting( 'blogname' )->transport = 'postMessage';
+	$wp_customize->get_section( 'header_image' )->panel        = 'hestia_appearance_settings';
+	$wp_customize->get_section( 'background_image' )->panel    = 'hestia_appearance_settings';
+	$wp_customize->get_setting( 'blogname' )->transport        = 'postMessage';
 	$wp_customize->get_setting( 'blogdescription' )->transport = 'postMessage';
-	$wp_customize->get_setting( 'custom_logo' )->transport = 'postMessage';
+	$wp_customize->get_setting( 'custom_logo' )->transport     = 'postMessage';
 
 	if ( isset( $wp_customize->selective_refresh ) ) {
 		$wp_customize->selective_refresh->add_partial(
 			'custom_logo', array(
-				'selector' => '.navbar-brand',
-				'settings' => 'custom_logo',
+				'selector'        => '.navbar-brand',
+				'settings'        => 'custom_logo',
 				'render_callback' => 'hestia_custom_logo_callback',
 			)
 		);
@@ -151,7 +151,7 @@ function hestia_customize_register( $wp_customize ) {
 		if ( 'posts' === get_option( 'show_on_front' ) ) {
 			$wp_customize->selective_refresh->add_partial(
 				'blogdescription', array(
-					'selector' => '.home .hestia-title',
+					'selector'        => '.home .hestia-title',
 					'render_callback' => 'hestia_blogdescription_callback',
 				)
 			);
@@ -168,7 +168,7 @@ function hestia_customize_register( $wp_customize ) {
 
 	$wp_customize->add_control(
 		'hestia_placeholder_sidebar_1', array(
-			'type' => 'hidden',
+			'type'     => 'hidden',
 			'section'  => 'header_image',
 			'priority' => 10,
 		)
@@ -192,7 +192,7 @@ function hestia_customize_register( $wp_customize ) {
 
 	$wp_customize->add_control(
 		'hestia_placeholder_sidebar_woocommerce', array(
-			'type' => 'hidden',
+			'type'     => 'hidden',
 			'section'  => 'header_image',
 			'priority' => 10,
 		)
@@ -245,14 +245,10 @@ add_action( 'customize_register', 'hestia_register_control_types', 0 );
  */
 function hestia_custom_logo_callback() {
 	if ( get_theme_mod( 'custom_logo' ) ) {
-		$logo = wp_get_attachment_image_src( get_theme_mod( 'custom_logo' ) , 'full' );
+		$logo = wp_get_attachment_image_src( get_theme_mod( 'custom_logo' ), 'full' );
 		$logo = '<img src="' . esc_url( $logo[0] ) . '">';
 	} else {
-		if ( is_front_page() ) {
-			$logo = '<h1>' . get_bloginfo( 'name' ) . '</h1>';
-		} else {
-			$logo = '<p>' . get_bloginfo( 'name' ) . '</p>';
-		}
+		$logo = '<p>' . get_bloginfo( 'name' ) . '</p>';
 	}
 	return $logo;
 }
@@ -291,7 +287,7 @@ function hestia_woocommerce_check() {
  * @return string
  */
 function hestia_sanitize_alignment_options( $value ) {
-	$value = sanitize_text_field( $value );
+	$value        = sanitize_text_field( $value );
 	$valid_values = array(
 		'left',
 		'center',
@@ -351,9 +347,9 @@ function hestia_sanitize_colors( $input ) {
  * @return string
  */
 function hestia_sanitize_rgba( $value ) {
-	$red = 'rgba(0,0,0,0)';
+	$red   = 'rgba(0,0,0,0)';
 	$green = 'rgba(0,0,0,0)';
-	$blue = 'rgba(0,0,0,0)';
+	$blue  = 'rgba(0,0,0,0)';
 	$alpha = 'rgba(0,0,0,0)';   // If empty or an array return transparent
 	if ( empty( $value ) || is_array( $value ) ) {
 		return '';
@@ -373,7 +369,7 @@ function hestia_sanitize_rgba( $value ) {
  * @return object
  */
 function hestia_repeater_sanitize( $input ) {
-	$input_decoded = json_decode( $input,true );
+	$input_decoded = json_decode( $input, true );
 
 	if ( ! empty( $input_decoded ) ) {
 		foreach ( $input_decoded as $boxk => $box ) {

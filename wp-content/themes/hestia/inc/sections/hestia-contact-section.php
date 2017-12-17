@@ -35,7 +35,7 @@ if ( ! function_exists( 'hestia_contact' ) ) :
 			/* translators: 1 - link to customizer setting. 2 - 'customizer' */
 			$hestia_contact_subtitle = get_theme_mod( 'hestia_contact_subtitle', sprintf( __( 'Change this subtitle in %s.', 'hestia' ), sprintf( '<a href="%1$s" class="default-link">%2$s</a>', esc_url( admin_url( 'customize.php?autofocus&#91;control&#93;=hestia_contact_subtitle' ) ), __( 'customizer', 'hestia' ) ) ) );
 		} else {
-			$hestia_contact_subtitle   = get_theme_mod( 'hestia_contact_subtitle' );
+			$hestia_contact_subtitle = get_theme_mod( 'hestia_contact_subtitle' );
 		}
 		$hestia_contact_title      = get_theme_mod( 'hestia_contact_title', esc_html__( 'Get in Touch', 'hestia' ) );
 		$hestia_contact_area_title = get_theme_mod( 'hestia_contact_area_title', esc_html__( 'Contact Us', 'hestia' ) );
@@ -44,8 +44,7 @@ if ( ! function_exists( 'hestia_contact' ) ) :
 
 		$wrapper_class = $is_shortcode === true ? 'is-shortcode' : '';
 		?>
-		<section class="contactus section-image <?php echo esc_attr( $wrapper_class ); ?>" id="contact" data-sorder="hestia_contact"
-				 style="background-image: url('<?php echo get_theme_mod( 'hestia_contact_background', get_template_directory_uri() . '/assets/img/contact.jpg' ); ?>')">
+		<section class="contactus section-image <?php echo esc_attr( $wrapper_class ); ?>" id="contact" data-sorder="hestia_contact" style="background-image: url('<?php echo get_theme_mod( 'hestia_contact_background', apply_filters( 'hestia_contact_background_default', get_template_directory_uri() . '/assets/img/contact.jpg' ) ); ?>')">
 			<?php
 			if ( is_customize_preview() ) {
 			?>
@@ -78,7 +77,7 @@ if ( ! function_exists( 'hestia_contact' ) ) :
 					</div>
 					<?php
 					$hestia_contact_form_shortcode_default = '[pirate_forms]';
-					$hestia_contact_form_shortcode = get_theme_mod( 'hestia_contact_form_shortcode', $hestia_contact_form_shortcode_default );
+					$hestia_contact_form_shortcode         = get_theme_mod( 'hestia_contact_form_shortcode', $hestia_contact_form_shortcode_default );
 					if ( defined( 'PIRATE_FORMS_VERSION' ) || ( $hestia_contact_form_shortcode != $hestia_contact_form_shortcode_default ) ) {
 						?>
 							<div class="col-md-5 col-md-offset-2">

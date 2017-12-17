@@ -256,7 +256,7 @@ $config = array(
 				'plugin_slug' => 'pirate-forms',
 				'id'          => 'pirate-forms',
 			),
-			'elementor' => array(
+			'elementor'           => array(
 				'title'       => 'Elementor',
 				'description' => hestia_get_wporg_plugin_description( 'elementor' ),
 				'check'       => ( defined( 'ELEMENTOR_VERSION' ) || ! hestia_check_passed_time( '259200' ) ),

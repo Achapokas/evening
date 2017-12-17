@@ -31,6 +31,10 @@ p {
   }
 }
 
+ul {
+  padding: 0 15px;
+}
+
 button,
 .btn {
   letter-spacing: 1px;
@@ -51,8 +55,12 @@ button,
 }
 
 .navbar .dropdown-menu li > a {
-  font-size: 14px;
-  letter-spacing: 1px;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+.navbar .navbar-brand img {
+    max-height: 60px;
 }
 
 .main-raised {
@@ -61,11 +69,19 @@ button,
   box-shadow: 0;
 }
 
+.hestia-title {
+  text-transform: capitalize;
+}
+
 .hestia-about {
   display: none;
 }
 
 .hestia-blogs {
+  display: none;
+}
+
+.contactus {
   display: none;
 }
 

@@ -1,4 +1,47 @@
 
+ ### v1.1.56 - 2017-11-28 
+ **Changes:** 
+ * Added back titles on pages when WooCoomerce is not installed
+ 
+ ### v1.1.55 - 2017-11-27 
+ **Changes:** 
+ * [New Feature] Scroll to top option
+* [New Feature] Search icon in the navigation menu
+* Fixed issue with primary menu items not visible on iPads
+* [Hestia PRO] Fixed issue with the footer widgets layout
+* Fixed issue with Team member section not opening external links in a new tab
+* [Hestia PRO] Fixed issue with navbar background color on mobile devices
+* [Hestia PRO] Fixed issue with navigation menu ( with the Full menu option activated ) closing button color
+* Improved layout for the WooCommerce Cart and Checkout pages
+* Fixed alignment issues with the front page sections
+ 
+ ### v1.1.54 - 2017-11-13 
+ **Changes:** 
+ * Updated resources for bundled images
+* Removed duplicated featured images on single portfolio pages
+* Added missing IDs for Ribbon and Clients Bar sections
+* Fixed issue with hidden label for the custom color controls in customizer in WordPress 4.9
+* Allow Skip logo cropping
+ 
+ ### v1.1.53 - 2017-11-06 
+ **Changes:** 
+ * [Hestia PRO] NEW Video background option in the header area
+* [Hestia PRO] NEW Container width option
+* [Hestia PRO] New option for changing the Header Gradient color
+* Fixed compatibility issues with SiteOrigin Page Builder overriding the About section
+* Fixed WooCommerce layout for single product pages when no tabs were displayed
+ 
+ ### v1.1.52 - 2017-10-24 
+ **Changes:** 
+ * Fixed problem with parallax effect in the Ribbon section on iOS
+* New filter for the header background wrapper to be used in a child theme, to allow users to have a featured image for each category - http://docs.themeisle.com/article/706-how-to-use-categories-featured-images-as-header-image-in-hestia
+* Fixed vertical alignment issue on frontpage Products section
+* Fixed compatibility responsive issues with Pirate Forms
+* Fixed callback function used for the custom logo
+* Fixed issue with items descriptions appearing in the primary menu
+* Fixed active buttons color issue in the primary menu
+* Fixed small JavaScript console error in Customizer
+ 
  ### v1.1.51 - 2017-10-18 
  **Changes:** 
  * [Hestia PRO] New cart icon in the primary menu when WooCommerce is used

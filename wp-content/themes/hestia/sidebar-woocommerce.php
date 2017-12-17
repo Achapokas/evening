@@ -7,11 +7,11 @@
  * @modified 1.1.30
  */
 
-$class_to_add = '';
+$class_to_add          = '';
 $hestia_sidebar_layout = '';
 
 $hestia_sidebar_layout = get_theme_mod( 'hestia_page_sidebar_layout', 'full-width' );
-$hestia_sidebar_width = get_theme_mod( 'hestia_sidebar_width',25 );
+$hestia_sidebar_width  = get_theme_mod( 'hestia_sidebar_width', 25 );
 if ( $hestia_sidebar_layout === 'sidebar-right' && $hestia_sidebar_width > 3 && $hestia_sidebar_width < 80 ) {
 	$class_to_add = 'col-md-offset-1';
 }

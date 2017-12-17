@@ -74,10 +74,10 @@ class Hestia_Customizer_Info extends WP_Customize_Section {
 	 * @return array
 	 */
 	public function json() {
-		$json = parent::json();
-		$json['section_text'] = $this->section_text;
-		$json['hide_notice'] = $this->hide_notice;
-		$json['button_screenreader'] = $this->button_screenreader;
+		$json                          = parent::json();
+		$json['section_text']          = $this->section_text;
+		$json['hide_notice']           = $this->hide_notice;
+		$json['button_screenreader']   = $this->button_screenreader;
 		$json['plugin_install_button'] = $this->create_plugin_install_button( $this->slug );
 		return $json;
 	}

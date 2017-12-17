@@ -33,7 +33,7 @@ if ( ! function_exists( 'hestia_subscribe' ) ) :
 
 		if ( current_user_can( 'edit_theme_options' ) ) {
 			/* translators: 1 - link to customizer setting. 2 - 'customizer' */
-			$hestia_subscribe_subtitle = get_theme_mod( 'hestia_subscribe_subtitle', sprintf( __( 'Change this subtitle in %s.','hestia' ), sprintf( '<a href="%1$s" class="default-link">%2$s</a>', esc_url( admin_url( 'customize.php?autofocus&#91;control&#93;=hestia_subscribe_subtitle' ) ), __( 'customizer','hestia' ) ) ) );
+			$hestia_subscribe_subtitle = get_theme_mod( 'hestia_subscribe_subtitle', sprintf( __( 'Change this subtitle in %s.', 'hestia' ), sprintf( '<a href="%1$s" class="default-link">%2$s</a>', esc_url( admin_url( 'customize.php?autofocus&#91;control&#93;=hestia_subscribe_subtitle' ) ), __( 'customizer', 'hestia' ) ) ) );
 		} else {
 			$hestia_subscribe_subtitle = get_theme_mod( 'hestia_subscribe_subtitle' );
 		}
@@ -88,7 +88,7 @@ if ( ! function_exists( 'hestia_subscribe' ) ) :
 endif;
 
 if ( function_exists( 'hestia_subscribe' ) ) {
-	$old_priority = apply_filters( 'hestia_section_priority', 55, 'hestia_subscribe' );
+	$old_priority     = apply_filters( 'hestia_section_priority', 55, 'hestia_subscribe' );
 	$section_priority = apply_filters( 'hestia_section_priority', $old_priority, 'sidebar-widgets-subscribe-widgets' );
 	add_action( 'hestia_sections', 'hestia_subscribe', absint( $section_priority ) );
 }

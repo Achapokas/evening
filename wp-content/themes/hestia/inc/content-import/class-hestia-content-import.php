@@ -28,54 +28,54 @@ final class Hestia_Content_Import {
 	private $simple_theme_mods = array(
 
 		// Big title
-		'hestia_big_title_title' => 'header_title',
-		'hestia_big_title_text' => 'header_subtitle',
+		'hestia_big_title_title'       => 'header_title',
+		'hestia_big_title_text'        => 'header_subtitle',
 		'hestia_big_title_button_text' => 'header_button_text',
 		'hestia_big_title_button_link' => 'header_button_link',
 
 		// Logos section
-		'hestia_clients_bar_hide' => 'logos_show',
-		'hestia_clients_bar_content' => 'logos_content',
+		'hestia_clients_bar_hide'      => 'logos_show',
+		'hestia_clients_bar_content'   => 'logos_content',
 
 		// Ribbon section
-		'hestia_ribbon_hide' => 'ribbon_show',
-		'hestia_ribbon_text' => 'ribbon_title',
-		'hestia_ribbon_button_text' => 'button_text',
-		'hestia_ribbon_button_url' => 'button_link',
+		'hestia_ribbon_hide'           => 'ribbon_show',
+		'hestia_ribbon_text'           => 'ribbon_title',
+		'hestia_ribbon_button_text'    => 'button_text',
+		'hestia_ribbon_button_url'     => 'button_link',
 
 		// Contact subtitle
-		'hestia_contact_subtitle' => 'copyright',
+		'hestia_contact_subtitle'      => 'copyright',
 
 		// Features section
-		'hestia_features_hide' => 'our_services_show',
-		'hestia_features_title' => 'our_services_title',
-		'hestia_features_subtitle' => 'our_services_subtitle',
+		'hestia_features_hide'         => 'our_services_show',
+		'hestia_features_title'        => 'our_services_title',
+		'hestia_features_subtitle'     => 'our_services_subtitle',
 
 		// About section
-		'hestia_about_hide' => 'our_story_show',
+		'hestia_about_hide'            => 'our_story_show',
 
 		// Team section
-		'hestia_team_hide' => 'our_team_show',
-		'hestia_team_title' => 'our_team_title',
-		'hestia_team_subtitle' => 'our_team_subtitle',
-		'hestia_team_content' => 'team_content',
+		'hestia_team_hide'             => 'our_team_show',
+		'hestia_team_title'            => 'our_team_title',
+		'hestia_team_subtitle'         => 'our_team_subtitle',
+		'hestia_team_content'          => 'team_content',
 
 		// Testimonials
-		'hestia_testimonials_hide' => 'happy_customers_show',
-		'hestia_testimonials_title' => 'happy_customers_title',
+		'hestia_testimonials_hide'     => 'happy_customers_show',
+		'hestia_testimonials_title'    => 'happy_customers_title',
 		'hestia_testimonials_subtitle' => 'happy_customers_subtitle',
-		'hestia_testimonials_content' => 'testimonials_content',
+		'hestia_testimonials_content'  => 'testimonials_content',
 
 		// Portfolio
-		'hestia_portfolio_title' => 'plus_portfolio_section_title',
-		'hestia_portfolio_subtitle' => 'plus_portfolio_section_subtitle',
-		'hestia_portfolio_items' => 'plus_number_of_portfolio_posts',
+		'hestia_portfolio_title'       => 'plus_portfolio_section_title',
+		'hestia_portfolio_subtitle'    => 'plus_portfolio_section_subtitle',
+		'hestia_portfolio_items'       => 'plus_number_of_portfolio_posts',
 
 		// Shop
-		'hestia_shop_hide' => 'shop_section_show',
+		'hestia_shop_hide'             => 'shop_section_show',
 
 		// Copyright
-		'hestia_general_credits' => 'pwd',
+		'hestia_general_credits'       => 'pwd',
 	);
 
 	/**
@@ -163,12 +163,12 @@ final class Hestia_Content_Import {
 					'hestia_big_title_background' => 'header_image',
 
 					// Ribbon background
-					'hestia_ribbon_background' => 'azera_shop_ribbon_background',
+					'hestia_ribbon_background'    => 'azera_shop_ribbon_background',
 
 					// Shop section
-					'hestia_shop_title' => 'azera_shop_shop_section_title',
-					'hestia_shop_subtitle' => 'azera_shop_shop_section_subtitle',
-					'hestia_shop_items' => 'azera_shop_number_of_products',
+					'hestia_shop_title'           => 'azera_shop_shop_section_title',
+					'hestia_shop_subtitle'        => 'azera_shop_shop_section_subtitle',
+					'hestia_shop_items'           => 'azera_shop_number_of_products',
 
 				);
 				$this->simple_theme_mods = array_merge( $this->simple_theme_mods, $theme_exceptions );
@@ -182,15 +182,15 @@ final class Hestia_Content_Import {
 					'hestia_big_title_background' => 'header_image',
 
 					// Ribbon background
-					'hestia_ribbon_background' => 'paralax_one_ribbon_background',
+					'hestia_ribbon_background'    => 'paralax_one_ribbon_background',
 
 					// Shop section
-					'hestia_shop_title' => 'parallax_one_plus_shop_section_title',
-					'hestia_shop_subtitle' => 'parallax_one_plus_shop_section_subtitle',
-					'hestia_shop_items' => 'parallax_one_plus_number_of_products',
+					'hestia_shop_title'           => 'parallax_one_plus_shop_section_title',
+					'hestia_shop_subtitle'        => 'parallax_one_plus_shop_section_subtitle',
+					'hestia_shop_items'           => 'parallax_one_plus_number_of_products',
 
 					// Blog section
-					'hestia_blog_title' => 'parallax_one_latest_news_title',
+					'hestia_blog_title'           => 'parallax_one_latest_news_title',
 
 				);
 				$this->simple_theme_mods = array_merge( $this->simple_theme_mods, $theme_exceptions );
@@ -203,15 +203,15 @@ final class Hestia_Content_Import {
 					'hestia_big_title_background' => 'header_image',
 
 					// Ribbon background
-					'hestia_ribbon_background' => 'llorix_one_lite_ribbon_background',
+					'hestia_ribbon_background'    => 'llorix_one_lite_ribbon_background',
 
 					// Shop section
-					'hestia_shop_title' => 'llorix_one_plus_shop_section_title',
-					'hestia_shop_subtitle' => 'llorix_one_plus_shop_section_subtitle',
-					'hestia_shop_items' => 'llorix_one_plus_number_of_products',
+					'hestia_shop_title'           => 'llorix_one_plus_shop_section_title',
+					'hestia_shop_subtitle'        => 'llorix_one_plus_shop_section_subtitle',
+					'hestia_shop_items'           => 'llorix_one_plus_number_of_products',
 
 					// Blog section
-					'hestia_blog_title' => 'llorix_one_lite_latest_news_title',
+					'hestia_blog_title'           => 'llorix_one_lite_latest_news_title',
 
 				);
 				$this->simple_theme_mods = array_merge( $this->simple_theme_mods, $theme_exceptions );
@@ -367,19 +367,19 @@ final class Hestia_Content_Import {
 		/**
 		 * Update sections order
 		 */
-		$section_match = array(
-			'hestia_clients_bar' => $prefix . 'logos_settings_section',
-			'hestia_features' => $prefix . 'services_section',
-			'hestia_about' => $prefix . 'about_section',
-			'hestia_shop' => $prefix . 'shop_section',
-			'hestia_team' => $prefix . 'team_section',
-			'hestia_portfolio' => $prefix . 'portfolio_section',
+		$section_match  = array(
+			'hestia_clients_bar'  => $prefix . 'logos_settings_section',
+			'hestia_features'     => $prefix . 'services_section',
+			'hestia_about'        => $prefix . 'about_section',
+			'hestia_shop'         => $prefix . 'shop_section',
+			'hestia_team'         => $prefix . 'team_section',
+			'hestia_portfolio'    => $prefix . 'portfolio_section',
 			'hestia_testimonials' => $prefix . 'testimonials_section',
-			'hestia_ribbon' => $prefix . 'ribbon_section',
-			'hestia_blog' => $prefix . 'latest_news_section',
-			'hestia_contact' => $prefix . 'contact_section',
+			'hestia_ribbon'       => $prefix . 'ribbon_section',
+			'hestia_blog'         => $prefix . 'latest_news_section',
+			'hestia_contact'      => $prefix . 'contact_section',
 		);
-		$sections_order = ( ! empty( $this->previous_theme_content['sections_order'] ) ? $this->previous_theme_content['sections_order'] : '');
+		$sections_order = ( ! empty( $this->previous_theme_content['sections_order'] ) ? $this->previous_theme_content['sections_order'] : '' );
 		$utilities->update_sections_order( $sections_order, $section_match );
 
 		/**
@@ -431,7 +431,7 @@ final class Hestia_Content_Import {
 	 * @since 1.1.49
 	 */
 	private final function set_hestia_mod( $hestia_mod_id, $imported_mod_id ) {
-		$hestia_mod   = get_theme_mod( $hestia_mod_id );
+		$hestia_mod = get_theme_mod( $hestia_mod_id );
 		if ( ! empty( $this->previous_theme_content[ $imported_mod_id ] ) ) {
 			$imported_mod = $this->previous_theme_content[ $imported_mod_id ];
 			if ( ! empty( $imported_mod ) && empty( $hestia_mod ) ) {
@@ -483,15 +483,15 @@ final class Hestia_Content_Import {
 		/* Static front page settings */
 		if ( 'page' === get_option( 'show_on_front' ) ) {
 			$about_content = get_theme_mod( 'hestia_page_editor' );
-			$page_content = ! empty( $about_content ) ? $about_content : '';
-			$page = array(
-				'post_type'     => 'page',
-				'post_title'    => 'Front page',
-				'post_content'  => wp_kses_post( $page_content ),
-				'post_status'   => 'publish',
-				'post_author'   => 1,
+			$page_content  = ! empty( $about_content ) ? $about_content : '';
+			$page          = array(
+				'post_type'    => 'page',
+				'post_title'   => 'Front page',
+				'post_content' => wp_kses_post( $page_content ),
+				'post_status'  => 'publish',
+				'post_author'  => 1,
 			);
-			$pid = wp_insert_post( $page );
+			$pid           = wp_insert_post( $page );
 			update_option( 'page_on_front', $pid );
 		}
 	}
@@ -508,7 +508,7 @@ final class Hestia_Content_Import {
 		set_theme_mod( 'hestia_body_font', 'Cabin' );
 
 		/* Set default color */
-		set_theme_mod( 'accent_color','#008ed6' );
+		set_theme_mod( 'accent_color', '#008ed6' );
 
 		/* Shop section visibility */
 		if ( ! empty( $previous_theme_content['parallax_one_shop_section_show'] ) ) {
@@ -520,15 +520,15 @@ final class Hestia_Content_Import {
 		/* Static front page settings */
 		if ( 'posts' === get_option( 'show_on_front' ) ) {
 			$about_content = get_theme_mod( 'hestia_page_editor' );
-			$page_content = ! empty( $about_content ) ? $about_content : '';
-			$page = array(
-				'post_type'     => 'page',
-				'post_title'    => 'Front page',
-				'post_content'  => wp_kses_post( $page_content ),
-				'post_status'   => 'publish',
-				'post_author'   => 1,
+			$page_content  = ! empty( $about_content ) ? $about_content : '';
+			$page          = array(
+				'post_type'    => 'page',
+				'post_title'   => 'Front page',
+				'post_content' => wp_kses_post( $page_content ),
+				'post_status'  => 'publish',
+				'post_author'  => 1,
 			);
-			$pid = wp_insert_post( $page );
+			$pid           = wp_insert_post( $page );
 			update_option( 'show_on_front', 'page' );
 			update_option( 'page_on_front', $pid );
 		}

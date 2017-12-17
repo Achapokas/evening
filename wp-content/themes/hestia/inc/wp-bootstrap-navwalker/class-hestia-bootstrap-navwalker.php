@@ -1,4 +1,9 @@
 <?php
+/**
+ * Bootstrap navwalker
+ *
+ * @package Hestia
+ */
 
 /**
  * Class Name: hestia_bootstrap_navwalker
@@ -13,30 +18,33 @@
  *
  * @since Hestia 1.0
  */
-
-class hestia_bootstrap_navwalker extends Walker_Nav_Menu {
+class Hestia_Bootstrap_Navwalker extends Walker_Nav_Menu {
 
 	/**
+	 * Start_lvl
+	 *
 	 * @see Walker::start_lvl()
 	 * @since 3.0.0
 	 *
 	 * @param string $output Passed by reference. Used to append additional content.
-	 * @param int $depth Depth of page. Used for padding.
+	 * @param int    $depth Depth of page. Used for padding.
 	 */
 	public function start_lvl( &$output, $depth = 0, $args = array() ) {
-		$indent = str_repeat( "\t", $depth );
+		$indent  = str_repeat( "\t", $depth );
 		$output .= "\n$indent<ul role=\"menu\" class=\"dropdown-menu\">\n";
 	}
 
 	/**
+	 * Start_el
+	 *
 	 * @see Walker::start_el()
 	 * @since 3.0.0
 	 *
-	 * @param string $output
-	 * @param WP_Post $item
-	 * @param int $depth
-	 * @param array $args
-	 * @param int $id
+	 * @param string  $output Output.
+	 * @param WP_Post $item Item.
+	 * @param int     $depth Depth.
+	 * @param array   $args Args.
+	 * @param int     $id id.
 	 */
 	public function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
 		$indent = ( $depth ) ? str_repeat( "\t", $depth ) : '';
@@ -52,48 +60,51 @@ class hestia_bootstrap_navwalker extends Walker_Nav_Menu {
 
 		if ( strcasecmp( $item->attr_title, 'divider' ) == 0 && $depth >= 1 ) {
 			$output .= $indent . '<li role="presentation" class="divider">';
-		} elseif ( strcasecmp( $item->title, 'divider') == 0 && $depth >= 1 ) {
+		} elseif ( strcasecmp( $item->title, 'divider' ) == 0 && $depth >= 1 ) {
 			$output .= $indent . '<li role="presentation" class="divider">';
 		} else {
 
-			$class_names = $value = '';
+			$class_names = '';
+			$value       = '';
 
-			$classes = empty( $item->classes ) ? array() : (array) $item->classes;
+			$classes   = empty( $item->classes ) ? array() : (array) $item->classes;
 			$classes[] = 'menu-item-' . $item->ID;
 
 			$class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args ) );
 
-			if($args->has_children && $depth === 0) {
+			if ( $args->has_children && $depth === 0 ) {
 				$class_names .= ' dropdown';
-			} elseif($args->has_children && $depth > 0) {
+			} elseif ( $args->has_children && $depth > 0 ) {
 				$class_names .= ' dropdown dropdown-submenu';
 			}
 
-			if ( in_array( 'current-menu-item', $classes ) )
+			if ( in_array( 'current-menu-item', $classes ) ) {
 				$class_names .= ' active';
+			}
 
 			$class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : '';
 
-			$id = apply_filters( 'nav_menu_item_id', 'menu-item-'. $item->ID, $item, $args );
+			$id = apply_filters( 'nav_menu_item_id', 'menu-item-' . $item->ID, $item, $args );
 			$id = $id ? ' id="' . esc_attr( $id ) . '"' : '';
 
-			$output .= $indent . '<li' . $id . $value . $class_names .'>';
+			$output .= $indent . '<li' . $id . $value . $class_names . '>';
 
-		$atts = array();
-			$atts['title']  = ! empty( $item->title )	? sanitize_text_field( $item->title )	: '';
-			$atts['target'] = ! empty( $item->target )	? $item->target	: '';
-			$atts['rel']    = ! empty( $item->xfn )		? $item->xfn	: '';
+			$atts           = array();
+			$atts['title']  = ! empty( $item->title ) ? sanitize_text_field( $item->title ) : '';
+			$atts['target'] = ! empty( $item->target ) ? $item->target : '';
+			$atts['rel']    = ! empty( $item->xfn ) ? $item->xfn : '';
 
 			// Remove the title if the menu has 'social-item' as class.
-			if ( in_array( 'social-item', $classes ) )
-				$item->title  = '';
+			if ( in_array( 'social-item', $classes ) ) {
+				$item->title = '';
+			}
 
 			// If item has_children add atts to a.
 			if ( $args->has_children ) {
-				$atts['href']           = ! empty( $item->url ) ? $item->url : '';
-				$atts['data-toggle']    = 'dropdown';
-				$atts['class']          = 'dropdown-toggle';
-				$atts['aria-haspopup']  = 'true';
+				$atts['href']          = ! empty( $item->url ) ? $item->url : '';
+				$atts['data-toggle']   = 'dropdown';
+				$atts['class']         = 'dropdown-toggle';
+				$atts['aria-haspopup'] = 'true';
 			} else {
 				$atts['href'] = ! empty( $item->url ) ? $item->url : '';
 			}
@@ -103,15 +114,16 @@ class hestia_bootstrap_navwalker extends Walker_Nav_Menu {
 			$attributes = '';
 			foreach ( $atts as $attr => $value ) {
 				if ( ! empty( $value ) ) {
-					$value = ( 'href' === $attr ) ? esc_url( $value ) : esc_attr( $value );
+					$value       = ( 'href' === $attr ) ? esc_url( $value ) : esc_attr( $value );
 					$attributes .= ' ' . $attr . '="' . $value . '"';
 				}
 			}
 
 			$item_output = $args->before;
 
-            $is_wpml_item = ! empty( $item->type ) && $item->type === 'wpml_ls_menu_item';
-            /*
+			$is_wpml_item = ! empty( $item->type ) && $item->type === 'wpml_ls_menu_item';
+
+			/*
              * Glyphicons
              * ===========
              * Since the the menu item is NOT a Divider or Header we check the see
@@ -119,24 +131,23 @@ class hestia_bootstrap_navwalker extends Walker_Nav_Menu {
              * property is NOT null we apply it as the class name for the glyphicon.
              */
 
-            if ( ! empty( $item->attr_title ) && ! $is_wpml_item ) {
-	            $item_output .= '<a' . $attributes . '><i class="fa ' . esc_attr( $item->attr_title ) . ' "></i>&nbsp;';
-            } elseif( in_array( 'hestia-mm-heading', $item->classes ) && ( $item->url === '#' ) ) {
-            	$item_output .= '<span class="mm-heading-wrapper">';
-            } elseif( in_array( 'hestia-mm-heading', $item->classes ) ) {
-            	$item_output .= '<span class="mm-heading-wrapper"><a' . $attributes . '>';
-            } else {
-	            $item_output .= '<a' . $attributes . '>';
-            }
+			if ( ! empty( $item->attr_title ) && ! $is_wpml_item ) {
+				$item_output .= '<a' . $attributes . '><i class="fa ' . esc_attr( $item->attr_title ) . ' "></i>&nbsp;';
+			} elseif ( in_array( 'hestia-mm-heading', $item->classes ) && ( $item->url === '#' ) ) {
+				$item_output .= '<span class="mm-heading-wrapper">';
+			} elseif ( in_array( 'hestia-mm-heading', $item->classes ) ) {
+				$item_output .= '<span class="mm-heading-wrapper"><a' . $attributes . '>';
+			} else {
+				$item_output .= '<a' . $attributes . '>';
+			}
 			$item_output .= $args->link_before . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after;
 			$item_output .= ( $args->has_children ) ? ' <span class="caret"></span></a>' : '</a></li>';
 
-			if( ! empty( $item->description ) && ( $item->description !== ' ' ) && $depth >= 1 ) {
+			if ( ! empty( $item->description ) && ( $item->description !== ' ' ) && $depth >= 1 ) {
 				$item_output .= '<li class="hestia-mm-description">' . $item->description;
 			}
 
 			$item_output .= $args->after;
-
 
 			$output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
 
@@ -155,26 +166,28 @@ class hestia_bootstrap_navwalker extends Walker_Nav_Menu {
 	 * @see Walker::start_el()
 	 * @since 2.5.0
 	 *
-	 * @param object $element Data object
-	 * @param array $children_elements List of elements to continue traversing.
-	 * @param int $max_depth Max depth to traverse.
-	 * @param int $depth Depth of current element.
-	 * @param array $args
+	 * @param object $element Data object.
+	 * @param array  $children_elements List of elements to continue traversing.
+	 * @param int    $max_depth Max depth to traverse.
+	 * @param int    $depth Depth of current element.
+	 * @param array  $args Args.
 	 * @param string $output Passed by reference. Used to append additional content.
 	 * @return null Null on failure with no changes to parameters.
 	 */
 	public function display_element( $element, &$children_elements, $max_depth, $depth, $args, &$output ) {
-        if ( ! $element )
-            return;
+		if ( ! $element ) {
+			return;
+		}
 
-        $id_field = $this->db_fields['id'];
+		$id_field = $this->db_fields['id'];
 
-        // Display this element.
-        if ( is_object( $args[0] ) )
-           $args[0]->has_children = ! empty( $children_elements[ $element->$id_field ] );
+		// Display this element.
+		if ( is_object( $args[0] ) ) {
+			$args[0]->has_children = ! empty( $children_elements[ $element->$id_field ] );
+		}
 
-        parent::display_element( $element, $children_elements, $max_depth, $depth, $args, $output );
-    }
+		parent::display_element( $element, $children_elements, $max_depth, $depth, $args, $output );
+	}
 
 	/**
 	 * Menu Fallback
@@ -185,47 +198,52 @@ class hestia_bootstrap_navwalker extends Walker_Nav_Menu {
 	 * and will add a link to the WordPress menu manager if logged in as an admin.
 	 *
 	 * @param array $args passed from the wp_nav_menu function.
-	 *
 	 */
 	public static function fallback( $args ) {
 		if ( current_user_can( 'manage_options' ) ) {
 
-			extract( $args );
-
 			$fb_output = null;
 
-			if ( $container ) {
-				$fb_output = '<' . $container;
+			if ( $args['container'] ) {
+				$fb_output = '<' . $args['container'];
 
-				if ( $container_id )
-					$fb_output .= ' id="' . $container_id . '"';
+				if ( $args['container_id'] ) {
+					$fb_output .= ' id="' . $args['container_id'] . '"';
+				}
 
-				if ( $container_class )
-					$fb_output .= ' class="' . $container_class . '"';
+				if ( $args['container_class'] ) {
+					$fb_output .= ' class="' . $args['container_class'] . '"';
+				}
 
 				$fb_output .= '>';
 			}
 
 			$fb_output .= '<ul';
 
-			if ( $menu_id )
-				$fb_output .= ' id="' . $menu_id . '"';
+			if ( $args['menu_id'] ) {
+				$fb_output .= ' id="' . $args['menu_id'] . '"';
+			}
 
-			if ( $menu_class )
-				$fb_output .= ' class="' . $menu_class . '"';
+			if ( $args['menu_class'] ) {
+				$fb_output .= ' class="' . $args['menu_class'] . '"';
+			}
 
 			$fb_output .= '>';
 			$fb_output .= '<li><a href="' . esc_url( admin_url( 'nav-menus.php' ) ) . '">Add a menu</a></li>';
 			$fb_output .= '</ul>';
 
-			if ( $container )
-				$fb_output .= '</' . $container . '>';
+			if ( $args['container'] ) {
+				$fb_output .= '</' . $args['container'] . '>';
+			}
 
 			$allowed_html = array(
-				'a' => array( 'href' => array(), ),
-				'div' => array( 'id' => array(), 'class' => array(), ),
-				'ul' => array( 'class' => array() ),
-				'li' => array(),
+				'a'   => array( 'href' => array() ),
+				'div' => array(
+					'id'    => array(),
+					'class' => array(),
+				),
+				'ul'  => array( 'class' => array() ),
+				'li'  => array(),
 			);
 
 			echo wp_kses( $fb_output, $allowed_html );

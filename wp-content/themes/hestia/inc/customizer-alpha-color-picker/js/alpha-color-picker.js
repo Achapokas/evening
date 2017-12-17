@@ -2,6 +2,8 @@
  * Alpha Color Picker JS
  *
  * This file includes several helper functions and the core control JS.
+ *
+ * @package Hestia
  */
 
 /**
@@ -59,7 +61,7 @@ function acp_get_alpha_value_from_color( value ) {
 function acp_update_alpha_value_on_color_control( alpha, $control, $alphaSlider, update_slider ) {
 	var iris, colorPicker, color;
 
-	iris = $control.data( 'a8cIris' );
+	iris        = $control.data( 'a8cIris' );
 	colorPicker = $control.data( 'wpWpColorPicker' );
 
 	// Set the alpha value on the Iris object.
@@ -134,7 +136,7 @@ jQuery( document ).ready(
 						change: function( event, ui ) {
 							var key, value, alpha, $transparency;
 
-							key = $control.attr( 'data-customize-setting-link' );
+							key   = $control.attr( 'data-customize-setting-link' );
 							value = $control.wpColorPicker( 'color' );
 
 							// Set the opacity value on the slider handle when the default color button is clicked.

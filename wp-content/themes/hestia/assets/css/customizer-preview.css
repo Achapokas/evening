@@ -90,6 +90,10 @@
 	right: 10px;
 }
 
+.customize-partial-edit-shortcut-custom_header {
+	z-index: 9999;
+}
+
 .customize-partial-edit-shortcut-hestia_big_title_background {
 	top: 80px;
 	right: 80px;

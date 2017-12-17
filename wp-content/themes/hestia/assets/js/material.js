@@ -1,4 +1,9 @@
-/* Credits: https://github.com/FezVrasta/bootstrap-material-design */
+/**
+ *  Credits: https://github.com/FezVrasta/bootstrap-material-design
+ *
+ *  @package Hestia
+ */
+
 jQuery( document ).ready(
 	function($) {
 		// Selector to select only not already processed elements
@@ -53,7 +58,7 @@ jQuery( document ).ready(
 			}
 			$input.closest( 'label' ).hover(
 				function() {
-					var $i = $( this ).find( 'input' );
+					var $i         = $( this ).find( 'input' );
 					var isDisabled = $i.prop( 'disabled' ); // hack because the _addFormGroupFocus() wasn't identifying the property on chrome
 					if (disabledToggleType) {
 						_toggleDisabledState( $( this ), isDisabled );
@@ -134,10 +139,18 @@ jQuery( document ).ready(
 						var $input = $( this );
 
 						// Requires form-group standard markup (will add it if necessary)
-						var $formGroup = $input.closest( '.form-group' ); // note that form-group may be grandparent in the case of an input-group
-						if ($formGroup.length === 0 && $input.attr( 'type' ) !== 'hidden' && ! $input.attr( 'hidden' )) {
+							var $formGroup = $input.closest( '.form-group' ); // note that form-group may be grandparent in the case of an input-group
+						if ($formGroup.length === 0 && $input.attr( 'type' ) !== 'hidden' && ! $input.attr( 'hidden' ) && ! $input.parents( '.pirate_forms' ).length ) {
 							$input.wrap( '<div class="form-group"></div>' );
 							$formGroup = $input.closest( '.form-group' ); // find node after attached (otherwise additional attachments don't work)
+						}
+
+						// Pirate Forms compatibility
+						if ($formGroup.length === 0 && $input.attr( 'type' ) !== 'hidden' && ! $input.attr( 'hidden' ) && $input.parents( '.pirate_forms' ).length ) {
+							var $labelControl = $input.prev();
+
+							$input.add( $labelControl ).wrapAll( '<div class="form-group label-floating"></div>' );
+							$formGroup = $input.closest( '.form-group' );
 						}
 
 						// Legacy - Add hint label if using the old shorthand data-hint attribute on the input
@@ -164,7 +177,7 @@ jQuery( document ).ready(
 						if ($input.hasClass( 'floating-label' )) {
 							var placeholder = $input.attr( 'placeholder' );
 							$input.attr( 'placeholder', null ).removeClass( 'floating-label' );
-							var id = $input.attr( 'id' );
+							var id           = $input.attr( 'id' );
 							var forAttribute = '';
 							if (id) {
 								forAttribute = 'for="' + id + '"';
@@ -198,9 +211,9 @@ jQuery( document ).ready(
 				)
 				.on(
 					'keyup change', '.form-control', function() {
-						var $input = $( this );
+						var $input     = $( this );
 						var $formGroup = $input.closest( '.form-group' );
-						var isValid = (typeof $input[0].checkValidity === 'undefined' || $input[0].checkValidity());
+						var isValid    = (typeof $input[0].checkValidity === 'undefined' || $input[0].checkValidity());
 
 						if ($input.val() === '') {
 							$formGroup.addClass( 'is-empty' );
@@ -243,7 +256,7 @@ jQuery( document ).ready(
 						}
 
 						var $formGroup = $input.closest( '.form-group' );
-						var value = $input.val();
+						var value      = $input.val();
 						if (value) {
 							$formGroup.removeClass( 'is-empty' );
 						} else {
@@ -254,9 +267,9 @@ jQuery( document ).ready(
 				// set the fileinput readonly field with the name of the file
 				.on(
 					'change', '.form-group.is-fileinput input[type="file"]', function() {
-						var $input = $( this );
+						var $input     = $( this );
 						var $formGroup = $input.closest( '.form-group' );
-						var value = '';
+						var value      = '';
 						$.each(
 							this.files, function(i, file) {
 								value += file.name + ', ';
@@ -304,7 +317,7 @@ jQuery( document ).ready(
 				.on(
 					'focus', 'input', function() {
 						var $inputs = $( this ).parents( 'form' ).find( 'input' ).not( '[type=file]' );
-						focused = setInterval(
+						focused     = setInterval(
 							function() {
 								$inputs.each(
 									function() {
@@ -325,7 +338,7 @@ jQuery( document ).ready(
 				);
 			},
 			'init': function(options) {
-				this.options = $.extend( {}, this.options, options );
+				this.options  = $.extend( {}, this.options, options );
 				var $document = $( document );
 
 				if ($.fn.ripples && this.options.ripples) {

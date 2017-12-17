@@ -56,7 +56,7 @@ if ( post_password_required() ) {
 								<?php comment_form( hestia_comments_template() ); ?>
 								<?php if ( ! comments_open() && get_comments_number() ) : ?>
 									<?php if ( is_single() ) : ?>
-										<h4 class="no-comments hestia-title text-center"><?php esc_html_e( 'Comments are closed.' , 'hestia' ); ?></h4>
+										<h4 class="no-comments hestia-title text-center"><?php esc_html_e( 'Comments are closed.', 'hestia' ); ?></h4>
 									<?php endif; ?>
 								<?php endif; ?>
 								</div>

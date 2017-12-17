@@ -7,12 +7,12 @@
  * @modified 1.1.30
  */
 
-$class_to_add = '';
+$class_to_add          = '';
 $hestia_sidebar_layout = '';
 
-$default_blog_layout = hestia_sidebar_on_single_post_get_default();
+$default_blog_layout   = hestia_sidebar_on_single_post_get_default();
 $hestia_sidebar_layout = get_theme_mod( 'hestia_blog_sidebar_layout', $default_blog_layout );
-$hestia_sidebar_width = get_theme_mod( 'hestia_sidebar_width',25 );
+$hestia_sidebar_width  = get_theme_mod( 'hestia_sidebar_width', 25 );
 if ( $hestia_sidebar_layout === 'sidebar-right' && $hestia_sidebar_width > 3 && $hestia_sidebar_width < 80 && ! is_page() ) {
 	$class_to_add = 'col-md-offset-1';
 }

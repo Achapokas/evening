@@ -1,3 +1,10 @@
+/**
+ * Main customize js file
+ *
+ * @package Hestia
+ */
+
+/* global initializeAllElements */
 ( function( $ ) {
 
 	// Site Identity > Site Title
@@ -76,7 +83,7 @@
 
 							if (newval <= 3 || newval >= 80) {
 								hestia_content_width = 100;
-								newval = 100;
+								newval               = 100;
 							}
 							content_width = hestia_content_width - 8.33333333;
 
@@ -90,7 +97,7 @@
 
 							if (newval <= 3 || newval >= 80) {
 								hestia_content_width = 100;
-								newval = 100;
+								newval               = 100;
 								if (layout === 'sidebar-left') {
 									$( '.blog-posts-wrap, .archive-post-wrap' ).removeClass( 'col-md-offset-1' );
 								} else {
@@ -339,57 +346,73 @@
 	);
 
 	// Colors > Accent Color
-	wp.customize( 'accent_color', function( value ) {
-		value.bind( function( newval ) {
-			$( '.main section:not(.hestia-blogs) a:not(.btn):not(.blog-item-title-link):not(.shop-item-title-link):not(.moretag):not(.button), .hestia-blogs article:nth-child(6n+1) .category a, .card-product .category a, .navbar.navbar-color-on-scroll:not(.navbar-transparent) li.active a').css('color', newval );
-			$( '.btn.btn-primary:not(.no-js-color), .card .header-primary, input#searchsubmit, .woocommerce nav.woocommerce-pagination ul li span.current, .woocommerce ul.products li.product .onsale, .woocommerce span.onsale, article .section-text a, .woocommerce .button:not(.btn-just-icon), .woocommerce div.product .woocommerce-tabs ul.tabs.wc-tabs li.active a, .hestia-work .portfolio-item:nth-child(6n+1) .label, .pagination span.current').css('background-color', newval);
+	wp.customize(
+		'accent_color', function( value ) {
+			value.bind(
+				function( newval ) {
+					$( '.main section:not(.hestia-blogs) a:not(.btn):not(.blog-item-title-link):not(.shop-item-title-link):not(.moretag):not(.button), .hestia-blogs article:nth-child(6n+1) .category a, .card-product .category a, .navbar.navbar-color-on-scroll:not(.navbar-transparent) li.active a' ).css( 'color', newval );
+					$( '.btn.btn-primary:not(.no-js-color), .card .header-primary, input#searchsubmit, .woocommerce nav.woocommerce-pagination ul li span.current, .woocommerce ul.products li.product .onsale, .woocommerce span.onsale, article .section-text a, .woocommerce .button:not(.btn-just-icon), .woocommerce div.product .woocommerce-tabs ul.tabs.wc-tabs li.active a, .hestia-work .portfolio-item:nth-child(6n+1) .label, .pagination span.current' ).css( 'background-color', newval );
 
-			var accentColorVariation1 = convertHex(newval, 14);
-			var accentColorVariation2 = convertHex(newval, 20);
-			var accentColorVariation3 = convertHex(newval, 42);
+					var accentColorVariation2 = convertHex( newval, 20 );
+					var accentColorVariation3 = convertHex( newval, 42 );
 
-			var materialsButton = $( 'input[type="submit"], .btn.btn-primary, .added_to_cart.wc-forward, .woocommerce .single-product div.product form.cart .button, .woocommerce #respond input#submit, .woocommerce button.button, .woocommerce input.button, #add_payment_method .wc-proceed-to-checkout a.checkout-button, .woocommerce-cart .wc-proceed-to-checkout a.checkout-button, .woocommerce-checkout .wc-proceed-to-checkout a.checkout-button, .woocommerce #respond input#submit.alt, .woocommerce a.button.alt, .woocommerce button.button.alt, .woocommerce input.button.alt, .woocommerce input.button:disabled, .woocommerce input.button:disabled[disabled], .woocommerce-message a.button, .woocommerce a.button.wc-backward ' );
+					// LINKS HOVER STYLE
+					var style = '<style class="hover-styles">', el;
 
-			materialsButton.css( '-webkit-box-shadow', '0 2px 2px 0 ' + accentColorVariation1 + ',0 3px 1px -2px ' + accentColorVariation2 + ',0 1px 5px 0 ' + accentColorVariation1 );
-			materialsButton.css( 'box-shadow', '0 2px 2px 0 ' + accentColorVariation1 + ',0 3px 1px -2px ' + accentColorVariation2 + ',0 1px 5px 0 ' + accentColorVariation1 );
+					style += '.card-blog a.moretag:hover, aside .widget a:hover' +
+					'{ color: ' + newval + '!important; }';
 
-      var gradientColor1 = convertHex(newval, 88);
-      var gradientColor2 = convertHex(newval, 31);
+					style += '.card-blog a.moretag:hover, aside .widget a:hover' +
+					'{ color: ' + newval + '!important; }';
 
-			//LINKS HOVER STYLE
-			var style='<style class="hover-styles">', el;
+					style += '.dropdown-menu li > a:hover' +
+					'{ background-color:' + newval + '!important; }';
 
-			style += '.header-filter-gradient { background: linear-gradient(45deg, ' + gradientColor1 + ' 0%, ' + gradientColor2 + ' 100%); }';
+					// BUTTONS BOX SHADOW
+					style += 'input#searchsubmit:hover, .pagination span.current, .btn.btn-primary:hover, .btn.btn-primary:focus, .btn.btn-primary:active, .btn.btn-primary.active, .btn.btn-primary:active:focus, .btn.btn-primary:active:hover, .woocommerce nav.woocommerce-pagination ul li span.current, .added_to_cart.wc-forward:hover, .woocommerce .single-product div.product form.cart .button:hover, .woocommerce #respond input#submit:hover, .woocommerce button.button:hover, .woocommerce input.button:hover, #add_payment_method .wc-proceed-to-checkout a.checkout-button:hover, .woocommerce-cart .wc-proceed-to-checkout a.checkout-button:hover, .woocommerce-checkout .wc-proceed-to-checkout a.checkout-button:hover, .woocommerce #respond input#submit.alt:hover, .woocommerce a.button.alt:hover, .woocommerce button.button.alt:hover, .woocommerce input.button.alt:hover, .woocommerce input.button:disabled:hover, .woocommerce input.button:disabled[disabled]:hover, .woocommerce div.product .woocommerce-tabs ul.tabs.wc-tabs li.active a, .woocommerce div.product .woocommerce-tabs ul.tabs.wc-tabs li.active a:hover, .woocommerce-message a.button:hover, .woocommerce a.button.wc-backward:hover, .hestia-sidebar-open.btn.btn-rose:hover, .hestia-sidebar-close.btn.btn-rose:hover' +
+					'{	' +
+					'-webkit-box-shadow: 0 14px 26px -12px' + accentColorVariation3 + ',0 4px 23px 0 rgba(0,0,0,0.12),0 8px 10px -5px ' + accentColorVariation2 + '!important;' +
+					'box-shadow: 0 14px 26px -12px ' + accentColorVariation3 + ',0 4px 23px 0 rgba(0,0,0,0.12),0 8px 10px -5px ' + accentColorVariation2 + '!important;' +
+					'}	';
 
-			style += 	'.card-blog a.moretag:hover, aside .widget a:hover' +
-				'{ color: ' + newval + '!important; }';
+					style += '.form-group.is-focused .form-control, div.wpforms-container .wpforms-form .form-group.is-focused .form-control, .nf-form-cont input:not([type=button]):focus, .nf-form-cont select:focus, .nf-form-cont textarea:focus, .woocommerce-cart .shop_table .actions .coupon .input-text:focus, .woocommerce-checkout #customer_details .input-text:focus, .woocommerce-checkout #customer_details select:focus, .woocommerce-checkout #order_review .input-text:focus, .woocommerce-checkout #order_review select:focus, .woocommerce-checkout .woocommerce-form .input-text:focus, .woocommerce-checkout .woocommerce-form select:focus, .woocommerce div.product form.cart .variations select:focus, .woocommerce .woocommerce-ordering select:focus {' +
+					'background-image: -webkit-gradient(linear,left top, left bottom,from(' + newval + '),to(' + newval + ')),-webkit-gradient(linear,left top, left bottom,from(#d2d2d2),to(#d2d2d2));' +
+					'background-image: -webkit-linear-gradient(' + newval + '),to(' + newval + '),-webkit-linear-gradient(#d2d2d2,#d2d2d2);' +
+					'background-image: linear-gradient(' + newval + '),to(' + newval + '),linear-gradient(#d2d2d2,#d2d2d2);' +
+					'}';
 
-			style +=	'.dropdown-menu li > a:hover ' +
-				'{ background-color:' + newval + '!important; }';
+					style += '</style>';
+					el     = $( '.hover-styles' ); // look for a matching style element that might already be there
+					if ( el.length ) {
+						el.replaceWith( style ); // style element already exists, so replace it
+					} else {
+						$( 'head' ).append( style ); // style element doesn't exist so add it
+					}
+				}
+			);
+		}
+	);
 
-			//BUTTONS BOX SHADOW
+	// Colors > Gradient Color
+	wp.customize(
+		'hestia_header_gradient_color', function( value ) {
+			value.bind(
+				function( newval ) {
 
-			style += 	'input#searchsubmit:hover, .pagination span.current, .btn.btn-primary:hover, .btn.btn-primary:focus, .btn.btn-primary:active, .btn.btn-primary.active, .btn.btn-primary:active:focus, .btn.btn-primary:active:hover, .woocommerce nav.woocommerce-pagination ul li span.current, .added_to_cart.wc-forward:hover, .woocommerce .single-product div.product form.cart .button:hover, .woocommerce #respond input#submit:hover, .woocommerce button.button:hover, .woocommerce input.button:hover, #add_payment_method .wc-proceed-to-checkout a.checkout-button:hover, .woocommerce-cart .wc-proceed-to-checkout a.checkout-button:hover, .woocommerce-checkout .wc-proceed-to-checkout a.checkout-button:hover, .woocommerce #respond input#submit.alt:hover, .woocommerce a.button.alt:hover, .woocommerce button.button.alt:hover, .woocommerce input.button.alt:hover, .woocommerce input.button:disabled:hover, .woocommerce input.button:disabled[disabled]:hover, .woocommerce div.product .woocommerce-tabs ul.tabs.wc-tabs li.active a, .woocommerce div.product .woocommerce-tabs ul.tabs.wc-tabs li.active a:hover, .woocommerce-message a.button:hover, .woocommerce a.button.wc-backward:hover, .hestia-sidebar-open.btn.btn-rose:hover, .hestia-sidebar-close.btn.btn-rose:hover' +
-				'{	' +
-				'-webkit-box-shadow: 0 14px 26px -12px' + accentColorVariation3 + ',0 4px 23px 0 rgba(0,0,0,0.12),0 8px 10px -5px ' + accentColorVariation2 + '!important;' +
-				'box-shadow: 0 14px 26px -12px ' + accentColorVariation3 + ',0 4px 23px 0 rgba(0,0,0,0.12),0 8px 10px -5px ' + accentColorVariation2 + '!important;'+
-				'}	';
+					var gradientColor1 = convertHex( newval, 100 );
+					var gradientColor2 = generateGradientSecondColor( newval, 100 );
 
-			style += '.form-group.is-focused .form-control, div.wpforms-container .wpforms-form .form-group.is-focused .form-control, .nf-form-cont input:not([type=button]):focus, .nf-form-cont select:focus, .nf-form-cont textarea:focus, .woocommerce-cart .shop_table .actions .coupon .input-text:focus, .woocommerce-checkout #customer_details .input-text:focus, .woocommerce-checkout #customer_details select:focus, .woocommerce-checkout #order_review .input-text:focus, .woocommerce-checkout #order_review select:focus, .woocommerce-checkout .woocommerce-form .input-text:focus, .woocommerce-checkout .woocommerce-form select:focus, .woocommerce div.product form.cart .variations select:focus, .woocommerce .woocommerce-ordering select:focus {'+
-				'background-image: -webkit-gradient(linear,left top, left bottom,from(' + newval + '),to(' + newval + ')),-webkit-gradient(linear,left top, left bottom,from(#d2d2d2),to(#d2d2d2));'+
-				'background-image: -webkit-linear-gradient(' + newval + '),to(' + newval + '),-webkit-linear-gradient(#d2d2d2,#d2d2d2);'+
-				'background-image: linear-gradient(' + newval + '),to(' + newval + '),linear-gradient(#d2d2d2,#d2d2d2);'+
-			'}';
+					var style = '<style class="gradient-styles">';
 
-			style += '</style>';
-			el =  $( '.hover-styles' ); // look for a matching style element that might already be there
-			if ( el.length ) {
-				el.replaceWith( style ); // style element already exists, so replace it
-			} else {
-				$( 'head' ).append( style ); // style element doesn't exist so add it
-			}
-		} );
-	} );
+					style += '.header-filter-gradient { background: linear-gradient(45deg, ' + gradientColor1 + ' 0%, ' + gradientColor2 + ' 100%); }';
+
+					style += '</style>';
+
+					$( 'head' ).append( style );
+				}
+			);
+		}
+	);
 
 	// Colors > Secondary Color
 	wp.customize(
@@ -477,8 +500,77 @@
 		}
 	);
 
+	if ( 'undefined' !== typeof wp && 'undefined' !== typeof wp.customize && 'undefined' !== typeof wp.customize.selectiveRefresh ) {
+		wp.customize.selectiveRefresh.bind(
+			'partial-content-rendered', function( placement ) {
+				initializeAllElements( $( placement.container ) );
+			}
+		);
+	}
+
+	wp.customize(
+		'header_video', function( value ) {
+			value.bind(
+				function( newval ) {
+					var linkedControl = wp.customize._value.external_header_video();
+					trigger_slider_selective( newval, linkedControl );
+				}
+			);
+		}
+	);
+
+	wp.customize(
+		'external_header_video', function( value ) {
+			value.bind(
+				function( newval ) {
+					var linkedControl = wp.customize._value.header_video();
+					trigger_slider_selective( newval, linkedControl );
+				}
+			);
+		}
+	);
+
+	function trigger_slider_selective( newval, linkedControl ){
+		if ( newval || linkedControl ) {
+			return;
+		}
+		var partial        = wp.customize.selectiveRefresh.partial( 'hestia_slider_content' );
+		var refreshPromise = wp.customize.selectiveRefresh.requestPartial( partial );
+		if ( ! partial._pendingRefreshPromise ) {
+			_.each(
+				partial.placements(), function( placement ) {
+					partial.preparePlacement( placement );
+				}
+			);
+
+			refreshPromise.done(
+				function( placements ) {
+						_.each(
+							placements, function( placement ) {
+								partial.renderContent( placement );
+							}
+						);
+				}
+			);
+
+			refreshPromise.fail(
+				function( data, placements ) {
+						partial.fallback( data, placements );
+				}
+			);
+
+			// Allow new request when this one finishes.
+			partial._pendingRefreshPromise = refreshPromise;
+			refreshPromise.always(
+				function() {
+						partial._pendingRefreshPromise = null;
+				}
+			);
+		}
+	}
+
 	function convertHex(hex,opacity){
-		hex = hex.replace( '#','' );
+		hex   = hex.replace( '#','' );
 		var r = parseInt( hex.substring( 0,2 ), 16 );
 		var g = parseInt( hex.substring( 2,4 ), 16 );
 		var b = parseInt( hex.substring( 4,6 ), 16 );
@@ -487,15 +579,39 @@
 		return result;
 	}
 
-    $( document ).on( 'DOMNodeInserted', '.customize-partial-edit-shortcut', function () {
-        $(this).on('click', function(){
-            if( $(this).hasClass('customize-partial-edit-shortcut-hestia_page_editor') ) {
-                wp.customize.preview.send('trigger-close-editor', false );
-            } else {
-                wp.customize.preview.send('trigger-close-editor', true );
-			}
-        });
-    });
+	function generateGradientSecondColor(hex, opacity){
+		hex   = hex.replace( '#','' );
+		var r = parseInt( hex.substring( 0,2 ), 16 );
+		var g = parseInt( hex.substring( 2,4 ), 16 );
+		var b = parseInt( hex.substring( 4,6 ), 16 );
 
+		var x = r + 66;
+		var y = g + 28;
+		var z = b - 21;
+
+		if ( x >= 255 ) {
+			x = 255; }
+		if ( y >= 255 ) {
+			y = 255; }
+		if ( z <= 0 ) {
+			z = 0; }
+
+		var result = 'rgba(' + x + ',' + y + ',' + z + ',' + opacity / 100 + ')';
+		return result;
+	}
+
+	$( document ).on(
+		'DOMNodeInserted', '.customize-partial-edit-shortcut', function () {
+			$( this ).on(
+				'click', function(){
+					if ( $( this ).hasClass( 'customize-partial-edit-shortcut-hestia_page_editor' ) ) {
+						wp.customize.preview.send( 'trigger-close-editor', false );
+					} else {
+						wp.customize.preview.send( 'trigger-close-editor', true );
+					}
+				}
+			);
+		}
+	);
 
 } )( jQuery );

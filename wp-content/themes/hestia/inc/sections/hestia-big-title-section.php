@@ -22,7 +22,7 @@ if ( ! function_exists( 'hestia_big_title' ) ) :
 
 					$section_content = hestia_get_big_title_content();
 
-					$hestia_big_title_background  = get_theme_mod( 'hestia_big_title_background', get_template_directory_uri() . '/assets/img/slider2.jpg' );
+					$hestia_big_title_background = get_theme_mod( 'hestia_big_title_background', apply_filters( 'hestia_big_title_background_default', get_template_directory_uri() . '/assets/img/slider2.jpg' ) );
 
 					if ( ! empty( $hestia_big_title_background ) || ! empty( $section_content ) ) {
 					?>
@@ -86,8 +86,7 @@ function hestia_show_big_title_content( $content ) {
 		<?php } ?>
 		<?php if ( ! empty( $content['button_link'] ) && ! empty( $content['button_text'] ) ) { ?>
 			<div class="buttons">
-				<a href="<?php echo esc_url( $content['button_link'] ); ?>" title="<?php echo esc_html( $content['button_text'] ); ?>"
-				   class="btn btn-primary btn-lg" <?php echo hestia_is_external_url( $content['button_link'] ); ?>><?php echo esc_html( $content['button_text'] ); ?></a>
+				<a href="<?php echo esc_url( $content['button_link'] ); ?>" title="<?php echo esc_html( $content['button_text'] ); ?>" class="btn btn-primary btn-lg" <?php echo hestia_is_external_url( $content['button_link'] ); ?>><?php echo esc_html( $content['button_text'] ); ?></a>
 			</div>
 		<?php } ?>
 	</div>
@@ -103,32 +102,32 @@ function hestia_get_big_title_content() {
 	$section_content = array();
 
 	$hestia_slider_alignment = get_theme_mod( 'hestia_slider_alignment', 'center' );
-	$class_to_add = ( ! empty( $hestia_slider_alignment ) ? 'text-' . $hestia_slider_alignment : 'text-center' );
+	$class_to_add            = ( ! empty( $hestia_slider_alignment ) ? 'text-' . $hestia_slider_alignment : 'text-center' );
 	if ( ! empty( $class_to_add ) ) {
 		$section_content['class_to_add'] = $class_to_add;
 	}
 
 	/* translators: 1 - link to customizer setting. 2 - 'customizer' */
-	$title_default = current_user_can( 'edit_theme_options' ) ? sprintf( esc_html__( 'Change in the %s','hestia' ), sprintf( '<a href="%1$s" class="default-link">%2$s</a>', esc_url( admin_url( 'customize.php?autofocus&#91;control&#93;=hestia_big_title_title' ) ), __( 'Customizer','hestia' ) ) ) : false;
+	$title_default          = current_user_can( 'edit_theme_options' ) ? sprintf( esc_html__( 'Change in the %s', 'hestia' ), sprintf( '<a href="%1$s" class="default-link">%2$s</a>', esc_url( admin_url( 'customize.php?autofocus&#91;control&#93;=hestia_big_title_title' ) ), __( 'Customizer', 'hestia' ) ) ) : false;
 	$hestia_big_title_title = get_theme_mod( 'hestia_big_title_title', $title_default );
 	if ( ! empty( $hestia_big_title_title ) ) {
 		$section_content['title'] = $hestia_big_title_title;
 	}
 
 	/* translators: 1 - link to customizer setting. 2 - 'customizer' */
-	$text_default = current_user_can( 'edit_theme_options' ) ? sprintf( esc_html__( 'Change in the %s','hestia' ), sprintf( '<a href="%1$s" class="default-link">%2$s</a>', esc_url( admin_url( 'customize.php?autofocus&#91;control&#93;=hestia_big_title_text' ) ), __( 'Customizer','hestia' ) ) ) : false;
+	$text_default          = current_user_can( 'edit_theme_options' ) ? sprintf( esc_html__( 'Change in the %s', 'hestia' ), sprintf( '<a href="%1$s" class="default-link">%2$s</a>', esc_url( admin_url( 'customize.php?autofocus&#91;control&#93;=hestia_big_title_text' ) ), __( 'Customizer', 'hestia' ) ) ) : false;
 	$hestia_big_title_text = get_theme_mod( 'hestia_big_title_text', $text_default );
 	if ( ! empty( $hestia_big_title_text ) ) {
 		$section_content['text'] = $hestia_big_title_text;
 	}
 
-	$button_text_default = current_user_can( 'edit_theme_options' ) ? esc_html__( 'Change in the Customizer', 'hestia' ) : false;
+	$button_text_default          = current_user_can( 'edit_theme_options' ) ? esc_html__( 'Change in the Customizer', 'hestia' ) : false;
 	$hestia_big_title_button_text = get_theme_mod( 'hestia_big_title_button_text', $button_text_default );
 	if ( ! empty( $hestia_big_title_button_text ) ) {
 		$section_content['button_text'] = $hestia_big_title_button_text;
 	}
 
-	$button_link_default = current_user_can( 'edit_theme_options' ) ? esc_url( admin_url( 'customize.php?autofocus&#91;control&#93;=hestia_big_title_button_text' ) ) : false;
+	$button_link_default          = current_user_can( 'edit_theme_options' ) ? esc_url( admin_url( 'customize.php?autofocus&#91;control&#93;=hestia_big_title_button_text' ) ) : false;
 	$hestia_big_title_button_link = get_theme_mod( 'hestia_big_title_button_link', $button_link_default );
 	if ( ! empty( $hestia_big_title_button_link ) ) {
 		$section_content['button_link'] = $hestia_big_title_button_link;

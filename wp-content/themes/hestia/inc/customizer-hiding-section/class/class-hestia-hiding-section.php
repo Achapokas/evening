@@ -65,10 +65,10 @@ class Hestia_Hiding_Section extends WP_Customize_Section {
 	 * @access public
 	 */
 	public function json() {
-		$json = parent::json();
-		$json['visible']   = $this->visible;
+		$json                   = parent::json();
+		$json['visible']        = $this->visible;
 		$json['hiding_control'] = $this->hiding_control;
-		 return $json;
+		return $json;
 	}
 
 

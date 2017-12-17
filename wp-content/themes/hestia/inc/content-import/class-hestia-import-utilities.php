@@ -54,9 +54,9 @@ class Hestia_Import_Utilities {
 	 */
 	private function get_attachment_id( $url ) {
 		$attachment_id = 0;
-		$dir = wp_upload_dir();
+		$dir           = wp_upload_dir();
 		if ( false !== strpos( $url, $dir['baseurl'] . '/' ) ) { // Is URL in uploads directory?
-			$file = basename( $url );
+			$file       = basename( $url );
 			$query_args = array(
 				'post_type'   => 'attachment',
 				'post_status' => 'inherit',
@@ -69,10 +69,10 @@ class Hestia_Import_Utilities {
 					),
 				),
 			);
-			$query = new WP_Query( $query_args );
+			$query      = new WP_Query( $query_args );
 			if ( $query->have_posts() ) {
 				foreach ( $query->posts as $post_id ) {
-					$meta = wp_get_attachment_metadata( $post_id );
+					$meta                = wp_get_attachment_metadata( $post_id );
 					$original_file       = basename( $meta['file'] );
 					$cropped_image_files = wp_list_pluck( $meta['sizes'], 'file' );
 					if ( $original_file === $file || in_array( $file, $cropped_image_files ) ) {
@@ -96,16 +96,16 @@ class Hestia_Import_Utilities {
 	 */
 	public function update_sections_order( $previous_theme_content, $section_match ) {
 		$result_order = array(
-			'hestia_clients_bar' => 10,
-			'hestia_features' => 15,
-			'hestia_about' => 20,
-			'hestia_shop' => 25,
-			'hestia_team' => 30,
-			'hestia_testimonials' => 35,
-			'hestia_ribbon' => 40,
-			'hestia_blog' => 45,
-			'hestia_contact' => 50,
-			'hestia_pricing' => 55,
+			'hestia_clients_bar'                => 10,
+			'hestia_features'                   => 15,
+			'hestia_about'                      => 20,
+			'hestia_shop'                       => 25,
+			'hestia_team'                       => 30,
+			'hestia_testimonials'               => 35,
+			'hestia_ribbon'                     => 40,
+			'hestia_blog'                       => 45,
+			'hestia_contact'                    => 50,
+			'hestia_pricing'                    => 55,
 			'sidebar-widgets-subscribe-widgets' => 60,
 		);
 
@@ -160,20 +160,20 @@ class Hestia_Import_Utilities {
 	 */
 	public function about_to_html( $about_content ) {
 
-		$title = ! empty( $about_content['title'] ) ? $about_content['title'] : '' ;
-		$text = ! empty( $about_content['text'] ) ? $about_content['text'] : '';
-		$image = ! empty( $about_content['image'] ) ? $about_content['image'] : '';
+		$title  = ! empty( $about_content['title'] ) ? $about_content['title'] : '';
+		$text   = ! empty( $about_content['text'] ) ? $about_content['text'] : '';
+		$image  = ! empty( $about_content['image'] ) ? $about_content['image'] : '';
 		$layout = ! empty( $about_content['layout'] ) ? $about_content['layout'] : '';
 
 		$page_editor = get_theme_mod( 'hestia_page_editor' );
-		$about_html = ( ! empty( $page_editor ) ? $page_editor : '' );
+		$about_html  = ( ! empty( $page_editor ) ? $page_editor : '' );
 		if ( ! empty( $title ) ) {
 			$about_html .= '<h2>' . wp_kses_post( $title ) . '</h2>';
 		}
 		if ( ! empty( $text ) || ! empty( $image ) ) {
 
 			$class_to_add = ( empty( $image ) ? 'col-md-12' : 'col-md-8' );
-			$about_html .= '<div class="row">';
+			$about_html  .= '<div class="row">';
 			if ( $layout === 'about_layout2' ) {
 				if ( ! empty( $image ) ) {
 					$about_html .= '<div class="col-md-4 col-xs-12"><img src="' . esc_url( $image ) . '"/></div>';
@@ -319,15 +319,15 @@ class Hestia_Import_Utilities {
 
 		$section_content = json_decode( $features_ribbon_content );
 		if ( ! empty( $section_content ) ) {
-			$i = 1;
+			$i            = 1;
 			$ribbon_html .= '<div class="row text-center" style="padding: 75px 0 55px;">';
 			foreach ( $section_content as $ribbon_item ) {
-				$choice   = ! empty( $ribbon_item->choice ) ? $ribbon_item->choice : 'parallax_icon';
-				$icon     = ! empty( $ribbon_item->icon_value ) ? $ribbon_item->icon_value : '';
-				$image    = ! empty( $ribbon_item->image_url ) ? $ribbon_item->image_url : '';
-				$title    = ! empty( $ribbon_item->title ) ? $ribbon_item->title : '';
-				$link     = ! empty( $ribbon_item->link ) ? $ribbon_item->link : '';
-				$subtitle = ! empty( $ribbon_item->subtitle ) ? $ribbon_item->subtitle : '';
+				$choice       = ! empty( $ribbon_item->choice ) ? $ribbon_item->choice : 'parallax_icon';
+				$icon         = ! empty( $ribbon_item->icon_value ) ? $ribbon_item->icon_value : '';
+				$image        = ! empty( $ribbon_item->image_url ) ? $ribbon_item->image_url : '';
+				$title        = ! empty( $ribbon_item->title ) ? $ribbon_item->title : '';
+				$link         = ! empty( $ribbon_item->link ) ? $ribbon_item->link : '';
+				$subtitle     = ! empty( $ribbon_item->subtitle ) ? $ribbon_item->subtitle : '';
 				$ribbon_html .= '<div class="col-md-4"><div class="info hestia-info">';
 				if ( ! empty( $link ) ) {
 					$ribbon_html .= '<a href="' . esc_url( $link ) . '">';
@@ -379,13 +379,13 @@ class Hestia_Import_Utilities {
 		if ( empty( $shortcodes_content ) ) {
 			return;
 		}
-		$page_editor = get_theme_mod( 'hestia_page_editor' );
-		$shortcode_html = ( ! empty( $page_editor ) ? $page_editor : '' );
+		$page_editor     = get_theme_mod( 'hestia_page_editor' );
+		$shortcode_html  = ( ! empty( $page_editor ) ? $page_editor : '' );
 		$section_content = json_decode( $shortcodes_content );
 		if ( ! empty( $section_content ) && is_array( $section_content ) ) {
 			foreach ( $section_content as $shortcode_section ) {
-				$title = ( ! empty( $shortcode_section->title ) ? $shortcode_section->title : '' );
-				$subtitle = ( ! empty( $shortcode_section->subtitle ) ? $shortcode_section->subtitle : '' );
+				$title     = ( ! empty( $shortcode_section->title ) ? $shortcode_section->title : '' );
+				$subtitle  = ( ! empty( $shortcode_section->subtitle ) ? $shortcode_section->subtitle : '' );
 				$shortcode = ( ! empty( $shortcode_section->shortcode ) ? $shortcode_section->shortcode : '' );
 
 				$shortcode_html .= '<section class="shortcode">';
@@ -454,15 +454,15 @@ class Hestia_Import_Utilities {
 			$menu_name   = 'Header socials menu';
 			$menu_exists = wp_get_nav_menu_object( $menu_name );
 			if ( ! $menu_exists ) {
-				$menu_id = wp_create_nav_menu( $menu_name );
+				$menu_id     = wp_create_nav_menu( $menu_name );
 				$icons_array = json_decode( $footer_socials_content );
 				if ( ! empty( $icons_array ) && is_array( $icons_array ) ) {
 					foreach ( $icons_array as $social ) {
 						if ( ! empty( $social->link ) ) {
 							wp_update_nav_menu_item(
 								$menu_id, 0, array(
-									'menu-item-title' => 'Custom Page',
-									'menu-item-url' => $social->link,
+									'menu-item-title'  => 'Custom Page',
+									'menu-item-url'    => $social->link,
 									'menu-item-status' => 'publish',
 								)
 							);
@@ -484,7 +484,7 @@ class Hestia_Import_Utilities {
 	 */
 	public function update_sidebars() {
 		$widgets_from_old_theme = wp_get_sidebars_widgets();
-		$new_widget_array = array();
+		$new_widget_array       = array();
 
 		if ( ! empty( $widgets_from_old_theme['sidebar-1'] ) ) {
 			$new_widget_array['sidebar-1'] = $widgets_from_old_theme['sidebar-1'];
@@ -501,10 +501,10 @@ class Hestia_Import_Utilities {
 		if ( ! empty( $widgets_from_old_theme['footer-area-3'] ) || ! empty( $widgets_from_old_theme['footer-area-4'] ) ) {
 			$footer_3_content = array();
 			if ( ! empty( $widgets_from_old_theme['footer-area-3'] ) ) {
-				$footer_3_content = array_merge( $footer_3_content,  $widgets_from_old_theme['footer-area-3'] );
+				$footer_3_content = array_merge( $footer_3_content, $widgets_from_old_theme['footer-area-3'] );
 			}
 			if ( ! empty( $widgets_from_old_theme['footer-area-4'] ) ) {
-				$footer_3_content = array_merge( $footer_3_content,  $widgets_from_old_theme['footer-area-4'] );
+				$footer_3_content = array_merge( $footer_3_content, $widgets_from_old_theme['footer-area-4'] );
 			}
 			$new_widget_array['footer-three-widgets'] = $footer_3_content;
 		}

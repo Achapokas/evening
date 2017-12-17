@@ -6,15 +6,15 @@
         "source": {
             "type": "git",
             "url": "https://github.com/Codeinwp/themeisle-sdk.git",
-            "reference": "1a64ea86e864d07a99c0f6fe89d3a1370df47c35"
+            "reference": "1933233168091b9e72df9df60b234b7650d6b00b"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/Codeinwp/themeisle-sdk/zipball/1a64ea86e864d07a99c0f6fe89d3a1370df47c35",
-            "reference": "1a64ea86e864d07a99c0f6fe89d3a1370df47c35",
+            "url": "https://api.github.com/repos/Codeinwp/themeisle-sdk/zipball/1933233168091b9e72df9df60b234b7650d6b00b",
+            "reference": "1933233168091b9e72df9df60b234b7650d6b00b",
             "shasum": ""
         },
-        "time": "2017-09-27 13:25:43",
+        "time": "2017-11-23 13:26:34",
         "type": "library",
         "installation-source": "dist",
         "autoload": {

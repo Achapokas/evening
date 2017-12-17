@@ -79,8 +79,8 @@ final class Hestia_Customizer_Theme_Info {
 				new Hestia_Customizer_Theme_Info_Main(
 					$manager, 'hestia-theme-info', array(
 						'theme_info_title' => esc_html__( 'Hestia', 'hestia' ),
-						'label_url'    => esc_url( 'http://docs.themeisle.com/article/569-hestia-documentation' ),
-						'label_text'   => esc_html__( 'Documentation', 'hestia' ),
+						'label_url'        => esc_url( 'http://docs.themeisle.com/article/569-hestia-documentation' ),
+						'label_text'       => esc_html__( 'Documentation', 'hestia' ),
 					)
 				)
 			);
@@ -94,16 +94,16 @@ final class Hestia_Customizer_Theme_Info {
 			$manager->add_section(
 				new Hestia_Customizer_Theme_Info_Section(
 					$manager, 'hestia-theme-info-section', array(
-						'panel'       => 'hestia_frontpage_sections',
-						'priority'    => 500,
-						'options'     => array(
+						'panel'              => 'hestia_frontpage_sections',
+						'priority'           => 500,
+						'options'            => array(
 							esc_html__( 'Jetpack Portfolio', 'hestia' ),
 							esc_html__( 'Pricing Plans Section', 'hestia' ),
 							esc_html__( 'Section Reordering', 'hestia' ),
 						),
 
-						'button_url'  => esc_url( 'https://themeisle.com/themes/hestia-pro/upgrade/' ),
-						'button_text' => esc_html__( 'Get the PRO version!', 'hestia' ),
+						'button_url'         => esc_url( 'https://themeisle.com/themes/hestia-pro/upgrade/' ),
+						'button_text'        => esc_html__( 'Get the PRO version!', 'hestia' ),
 						'explained_features' => array(
 							esc_html__( 'Portfolio section with two possible layouts.', 'hestia' ),
 							esc_html__( 'A fully customizable pricing plans section.', 'hestia' ),

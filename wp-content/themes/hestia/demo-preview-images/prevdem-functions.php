@@ -26,7 +26,7 @@ function hestia_get_prevdem_img_src( $i = 0 ) {
 
 	// Build or re-build the global dem img array
 	if ( ! isset( $GLOBALS['prevdem_img'] ) || empty( $GLOBALS['prevdem_img'] ) ) {
-		$imgs = array( '1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg', '7.jpg', '8.jpg', '9.jpg', '10.jpg' );
+		$imgs       = array( '1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg', '7.jpg', '8.jpg', '9.jpg', '10.jpg' );
 		$candidates = array();
 
 		foreach ( $imgs as $img ) {
@@ -49,7 +49,7 @@ function hestia_get_prevdem_img_src( $i = 0 ) {
 	// unset all sizes of the img found and update the global
 	$new_candidates = $candidates;
 	foreach ( $candidates as $_key => $_img ) {
-		if ( substr( $_img , 0, strlen( "{$img_name}" ) ) === "{$img_name}" ) {
+		if ( substr( $_img, 0, strlen( "{$img_name}" ) ) === "{$img_name}" ) {
 			unset( $new_candidates[ $_key ] );
 		}
 	}

@@ -46,7 +46,7 @@ class Hestia_Plugin_Install_Helper {
 
 			switch ( $state ) {
 				case 'install':
-					$nonce  = wp_nonce_url(
+					$nonce   = wp_nonce_url(
 						add_query_arg(
 							array(
 								'action' => 'install-plugin',

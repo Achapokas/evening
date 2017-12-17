@@ -86,13 +86,13 @@ class Hestia_Customize_Alpha_Color_Control extends WP_Customize_Control {
 		}
 		// Support passing show_opacity as string or boolean. Default to true.
 		$show_opacity = ( false === $this->show_opacity || 'false' === $this->show_opacity ) ? 'false' : 'true';
-		// Begin the output. ?>
+		// Output the label and description if they were passed in.
+		if ( isset( $this->label ) && '' !== $this->label ) {
+			echo '<span class="customize-control-title">' . sanitize_text_field( $this->label ) . '</span>';
+		}
+		?>
 		<label>
 			<?php
-			// Output the label and description if they were passed in.
-			if ( isset( $this->label ) && '' !== $this->label ) {
-				echo '<span class="customize-control-title">' . sanitize_text_field( $this->label ) . '</span>';
-			}
 			if ( isset( $this->description ) && '' !== $this->description ) {
 				echo '<span class="description customize-control-description">' . sanitize_text_field( $this->description ) . '</span>';
 			}

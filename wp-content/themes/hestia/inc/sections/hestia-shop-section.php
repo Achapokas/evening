@@ -44,7 +44,7 @@ if ( ! function_exists( 'hestia_shop' ) ) :
 
 			$hestia_shop_title = get_theme_mod( 'hestia_shop_title', esc_html__( 'Products', 'hestia' ) );
 
-			$wrapper_class = $is_shortcode === true ? 'is-shortcode' : '';
+			$wrapper_class   = $is_shortcode === true ? 'is-shortcode' : '';
 			$container_class = $is_shortcode === true ? '' : 'container';
 
 			hestia_before_shop_section_trigger();
@@ -101,7 +101,7 @@ function hestia_shop_content() {
 		}
 		$hestia_shop_items = get_theme_mod( 'hestia_shop_items', 4 );
 
-		$args = array(
+		$args                   = array(
 			'post_type' => 'product',
 		);
 		$args['posts_per_page'] = ! empty( $hestia_shop_items ) ? absint( $hestia_shop_items ) : 4;
@@ -111,8 +111,8 @@ function hestia_shop_content() {
 			$args['tax_query'] = array(
 				array(
 					'taxonomy' => 'product_cat',
-					'field' => 'term_id',
-					'terms' => $hestia_shop_categories,
+					'field'    => 'term_id',
+					'terms'    => $hestia_shop_categories,
 				),
 			);
 		}
@@ -142,8 +142,7 @@ function hestia_shop_content() {
 						if ( ! empty( $thumbnail ) ) {
 						?>
 							<div class="card-image">
-								<a href="<?php echo esc_url( get_permalink() ); ?>"
-								   title="<?php the_title_attribute(); ?>">
+								<a href="<?php echo esc_url( get_permalink() ); ?>" title="<?php the_title_attribute(); ?>">
 									<?php echo $thumbnail; ?>
 								</a>
 								<div class="ripple-container"></div>
@@ -179,8 +178,7 @@ function hestia_shop_content() {
 
 							<h4 class="card-title">
 
-								<a class="shop-item-title-link" href="<?php the_permalink(); ?>"
-								   title="<?php the_title_attribute(); ?>"><?php esc_html( the_title() ); ?></a>
+								<a class="shop-item-title-link" href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>"><?php esc_html( the_title() ); ?></a>
 
 							</h4>
 

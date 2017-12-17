@@ -6,7 +6,7 @@
  */
 
 $display_upsells = hestia_check_passed_time( '43200' );
-$define_classs = class_exists( 'WP_Customize_Control' ) && $display_upsells === true && ! class_exists( 'Hestia_Control_Upsell_Theme_Info' );
+$define_classs   = class_exists( 'WP_Customize_Control' ) && $display_upsells === true && ! class_exists( 'Hestia_Control_Upsell_Theme_Info' );
 if ( $define_classs ) :
 
 	/**
@@ -65,7 +65,7 @@ if ( $define_classs ) :
 		 */
 		public function __construct( WP_Customize_Manager $manager, $id, array $args ) {
 			$this->button_text;
-			$this->pro_label   = esc_html__( 'PRO', 'hestia' );
+			$this->pro_label = esc_html__( 'PRO', 'hestia' );
 			$manager->register_control_type( 'Hestia_Control_Upsell_Theme_Info' );
 			parent::__construct( $manager, $id, $args );
 
@@ -82,11 +82,11 @@ if ( $define_classs ) :
 		 */
 		public function to_json() {
 			parent::to_json();
-			$this->json['button_text']  = $this->button_text;
-			$this->json['button_url']   = $this->button_url;
-			$this->json['options']      = $this->options;
+			$this->json['button_text']        = $this->button_text;
+			$this->json['button_url']         = $this->button_url;
+			$this->json['options']            = $this->options;
 			$this->json['explained_features'] = $this->explained_features;
-			$this->json['pro_label'] = $this->pro_label;
+			$this->json['pro_label']          = $this->pro_label;
 		}
 
 		/**

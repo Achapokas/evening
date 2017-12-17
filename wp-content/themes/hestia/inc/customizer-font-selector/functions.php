@@ -71,8 +71,8 @@ function hestia_enqueue_google_font( $font ) {
 
 	$base_url = '//fonts.googleapis.com/css';
 
-	$subsets        = '';
-	$get_subsets    = get_theme_mod( 'hestia_font_subsets', array( 'latin' ) );
+	$subsets     = '';
+	$get_subsets = get_theme_mod( 'hestia_font_subsets', array( 'latin' ) );
 	if ( ! empty( $get_subsets ) ) {
 		$font_subsets = array();
 		foreach ( $get_subsets as $get_subset ) {

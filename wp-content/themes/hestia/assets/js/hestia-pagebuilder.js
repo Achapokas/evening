@@ -1,3 +1,9 @@
+/**
+ * Script for page builders integration
+ *
+ * @package Hestia
+ */
+
 /* global hestiaBuilderIntegration */
 
 jQuery( document ).ready(
@@ -14,7 +20,7 @@ jQuery( document ).ready(
 			jQuery( '.hestia-pagebuilder-section-remove' ).on(
 				'click', function() {
 					var clickedSection = jQuery( this ).parent().parent();
-					var sectionId = jQuery( clickedSection ).attr( 'id' );
+					var sectionId      = jQuery( clickedSection ).attr( 'id' );
 
 					jQuery.ajax(
 						{

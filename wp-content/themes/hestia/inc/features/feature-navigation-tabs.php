@@ -36,7 +36,7 @@ function hestia_tabs_customize_register( $wp_customize ) {
 								'hestia_font_subsets',
 							),
 						),
-						'font_sizes'   => array(
+						'font_sizes'  => array(
 							'nicename' => esc_html__( 'font size', 'hestia' ),
 							'icon'     => 'text-height',
 							'controls' => array(
@@ -64,7 +64,7 @@ function hestia_tabs_customize_register( $wp_customize ) {
 				$wp_customize, 'hestia_very_top_bar_tabs', array(
 					'section' => 'hestia_top_bar',
 					'tabs'    => array(
-						'general' => array(
+						'general'    => array(
 							'nicename' => esc_html__( 'General Settings', 'hestia' ),
 							'controls' => array(
 								'hestia_top_bar_hide',
@@ -73,7 +73,7 @@ function hestia_tabs_customize_register( $wp_customize ) {
 								'widgets',
 							),
 						),
-						'appearance'   => array(
+						'appearance' => array(
 							'nicename' => esc_html__( 'Appearance Settings', 'hestia' ),
 							'controls' => array(
 								'hestia_top_bar_text_color',
@@ -99,7 +99,7 @@ function hestia_tabs_customize_register( $wp_customize ) {
 				$wp_customize, 'hestia_subscribe_tabs', array(
 					'section' => 'hestia_subscribe',
 					'tabs'    => array(
-						'general' => array(
+						'general'    => array(
 							'nicename' => esc_html__( 'General Settings', 'hestia' ),
 							'controls' => array(
 								'hestia_subscribe_hide',
@@ -109,7 +109,7 @@ function hestia_tabs_customize_register( $wp_customize ) {
 								'widgets',
 							),
 						),
-						'sendinblue'   => array(
+						'sendinblue' => array(
 							'nicename' => esc_html__( 'SendinBlue plugin', 'hestia' ),
 							'controls' => array(
 								'hestia_subscribe_info',
@@ -143,7 +143,7 @@ function hestia_tabs_customize_register( $wp_customize ) {
 								'hestia_contact_area_title',
 							),
 						),
-						'contact'   => array(
+						'contact' => array(
 							'nicename' => esc_html__( 'Contact Content', 'hestia' ),
 							'icon'     => 'newspaper-o',
 							'controls' => array(
@@ -180,7 +180,7 @@ function hestia_tabs_customize_register( $wp_customize ) {
 								'hestia_shop_categories',
 							),
 						),
-						'contact'   => array(
+						'contact' => array(
 							'nicename' => esc_html__( 'Products', 'hestia' ),
 							'icon'     => 'gift',
 							'controls' => array(
@@ -195,12 +195,12 @@ function hestia_tabs_customize_register( $wp_customize ) {
 
 		$control_handle = $wp_customize->get_control( 'hestia_very_top_bar_tabs' );
 		if ( ! empty( $control_handle ) ) {
-			$control_handle->section = 'sidebar-widgets-sidebar-top-bar';
+			$control_handle->section  = 'sidebar-widgets-sidebar-top-bar';
 			$control_handle->priority = -100;
 		}
 		$control_handle = $wp_customize->get_control( 'hestia_subscribe_tabs' );
 		if ( ! empty( $control_handle ) ) {
-			$control_handle->section = 'sidebar-widgets-subscribe-widgets';
+			$control_handle->section  = 'sidebar-widgets-subscribe-widgets';
 			$control_handle->priority = -100;
 		}
 	}

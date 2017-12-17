@@ -46,7 +46,7 @@ function hestia_about_customize_register( $wp_customize ) {
 		'hestia_about_hide', array(
 			'sanitize_callback' => 'hestia_sanitize_checkbox',
 			'default'           => false,
-			'transport' => $selective_refresh,
+			'transport'         => $selective_refresh,
 		)
 	);
 
@@ -61,23 +61,23 @@ function hestia_about_customize_register( $wp_customize ) {
 
 	if ( class_exists( 'Hestia_Page_Editor' ) ) {
 		$frontpage_id = get_option( 'page_on_front' );
-		$default = '';
+		$default      = '';
 		if ( ! empty( $frontpage_id ) ) {
 			$default = get_post_field( 'post_content', $frontpage_id );
 		}
 		$wp_customize->add_setting(
 			'hestia_page_editor', array(
-				'default' => $default,
+				'default'           => $default,
 				'sanitize_callback' => 'wp_kses_post',
-				'transport' => $selective_refresh,
+				'transport'         => $selective_refresh,
 			)
 		);
 
 		$wp_customize->add_control(
 			new Hestia_Page_Editor(
 				$wp_customize, 'hestia_page_editor', array(
-					'label' => esc_html__( 'About Content', 'hestia' ),
-					'section' => 'hestia_about',
+					'label'    => esc_html__( 'About Content', 'hestia' ),
+					'section'  => 'hestia_about',
 					'priority' => 10,
 					'needsync' => true,
 				)
@@ -130,24 +130,24 @@ function hestia_register_about_partials( $wp_customize ) {
 
 	$wp_customize->selective_refresh->add_partial(
 		'hestia_about_hide', array(
-			'selector' => '.hestia-about',
+			'selector'            => '.hestia-about',
 			'container_inclusive' => true,
-			'render_callback' => 'hestia_about',
+			'render_callback'     => 'hestia_about',
 		)
 	);
 
 	$wp_customize->selective_refresh->add_partial(
 		'hestia_page_editor', array(
-			'selector' => '.hestia-about-content',
-			'settings' => 'hestia_page_editor',
+			'selector'        => '.hestia-about-content',
+			'settings'        => 'hestia_page_editor',
 			'render_callback' => 'hestia_about_content_callback',
 		)
 	);
 
 	$wp_customize->selective_refresh->add_partial(
 		'hestia_feature_thumbnail', array(
-			'selector' => '.hestia-about-image',
-			'settings' => 'hestia_feature_thumbnail',
+			'selector'        => '.hestia-about-image',
+			'settings'        => 'hestia_feature_thumbnail',
 			'render_callback' => 'hestia_about_image_callback',
 		)
 	);

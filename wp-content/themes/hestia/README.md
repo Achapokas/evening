@@ -33,38 +33,35 @@ Copyright 2011-2017, Jorik Tangelder (Eight Media), MIT License, http://www.open
 
 ## Images ##
 
-License: All unsplash.com images are licensed under the terms of the Creative Commons Zero, http://creativecommons.org/publicdomain/zero/1.0/
+License: All mystock.photos images are licensed under the terms of the Creative Commons Zero, http://creativecommons.org/publicdomain/zero/1.0/, http://mystock.photos/license/
+License: All pexels.com images are licensed under the terms of the Creative Commons Zero, http://creativecommons.org/publicdomain/zero/1.0/, https://www.pexels.com/photo-license/	
 
+assets/img/slider1.jpg and image used in the screenshot - https://www.pexels.com/photo/mountains-nature-sky-sunset-109243/ 
+assets/img/slider2.jpg - http://mystock.photos/teddy/
+assets/img/slider3.jpg - http://mystock.photos/new-york-cityscape/
 
-assets/img/slider1.jpg - https://unsplash.com/photos/nOVQ8Gj1i8E  
-assets/img/slider2.jpg - https://unsplash.com/photos/S2YssLw97l4  
-assets/img/slider3.jpg - https://unsplash.com/photos/pTcupZdhwOU  
-assets/img/1.jpg - https://hd.unsplash.com/photo-1463085154687-27abe97620ab  
-assets/img/2.jpg - https://unsplash.com/photos/IcypwC_7QrU  
-assets/img/3.jpg - https://unsplash.com/photos/0jOeEH7ZRSs  
-assets/img/4.jpg - https://unsplash.com/photos/ja7HXtegW2Y  
-assets/img/5.jpg - https://unsplash.com/photos/6anudmpILw4  
-assets/img/6.jpg - https://unsplash.com/photos/n19qtMX3nNY  
-assets/img/7.jpg - https://unsplash.com/photos/vPagbp9n3FI  
-assets/img/header.jpg - https://unsplash.com/photos/He8-FZl-o10  
-assets/img/contact.jpg - https://unsplash.com/search/city-night-black?photo=uMH-d3WWJhM
-assets/img/about.jpg - https://www.pexels.com/photo/woman-phone-call-working-work-space-29594/
+assets/img/1.jpg - http://mystock.photos/girl/
+assets/img/2.jpg - http://mystock.photos/winter-hat/
+assets/img/3.jpg - http://mystock.photos/growing-old-together/
+assets/img/4.jpg - http://mystock.photos/thinking-time/
 
-demo-preview-images/img/1.jpg - https://unsplash.com/photos/JgOeRuGD_Y4  
-demo-preview-images/img/2.jpg - https://unsplash.com/photos/iPum7Ket2jo  
-demo-preview-images/img/3.jpg - https://unsplash.com/photos/ICE__bo2Vws  
-demo-preview-images/img/4.jpg - https://unsplash.com/photos/RFgO9B_OR4g  
-demo-preview-images/img/5.jpg - https://unsplash.com/photos/uwQlgl4NbSg  
-demo-preview-images/img/6.jpg - https://unsplash.com/?photo=z0nVqfrOqWA  
-demo-preview-images/img/7.jpg - https://unsplash.com/photos/ouPVsS0cFjk  
-demo-preview-images/img/8.jpg - https://unsplash.com/photos/5rKPeFcsSTY  
-demo-preview-images/img/9.jpg - http://mystock.photos/on-bicycle/  
-demo-preview-images/img/10.jpg - https://unsplash.com/?photo=Dg-T1LF-CwE  
+assets/img/5.jpg - http://mystock.photos/growing-old-together/
+assets/img/6.jpg - http://mystock.photos/mysterious-man-2/
+assets/img/7.jpg - http://mystock.photos/sun-hat/
 
+assets/img/about.jpg - http://mystock.photos/street-blur/
+assets/img/contact.jpg - http://mystock.photos/city/
 
-
-License: All pexels.com images are licensed under the terms of the Creative Commons Zero, http://creativecommons.org/publicdomain/zero/1.0/	
-
+demo-preview-images/img/1.jpg - http://mystock.photos/teddy/
+demo-preview-images/img/2.jpg - http://mystock.photos/seascape/
+demo-preview-images/img/3.jpg - http://mystock.photos/winter-lights/
+demo-preview-images/img/4.jpg - http://mystock.photos/big-ben-perspective/
+demo-preview-images/img/5.jpg - http://mystock.photos/street-blur/
+demo-preview-images/img/6.jpg - http://mystock.photos/branch-macro/
+demo-preview-images/img/7.jpg - http://mystock.photos/urban-flowers/
+demo-preview-images/img/8.jpg - http://mystock.photos/pidgeons/
+demo-preview-images/img/9.jpg - http://mystock.photos/thinking-time/
+demo-preview-images/img/10.jpg - http://mystock.photos/london-eye-2/
 
 
 # Changelog  #

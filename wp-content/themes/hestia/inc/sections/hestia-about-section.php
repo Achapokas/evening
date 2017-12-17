@@ -29,7 +29,7 @@ if ( ! function_exists( 'hestia_about' ) ) :
 		/**
 		 * Display overlay (section-image class) on about section only if section have a background
 		 */
-		$class_to_add = '';
+		$class_to_add              = '';
 		$hestia_frontpage_featured = '';
 		if ( is_customize_preview() ) {
 			$hestia_frontpage_featured = get_theme_mod( 'hestia_feature_thumbnail' );
@@ -38,7 +38,7 @@ if ( ! function_exists( 'hestia_about' ) ) :
 			}
 		} else {
 			if ( has_post_thumbnail() ) {
-				$class_to_add = 'section-image';
+				$class_to_add              = 'section-image';
 				$hestia_frontpage_featured = get_the_post_thumbnail_url();
 			}
 		}

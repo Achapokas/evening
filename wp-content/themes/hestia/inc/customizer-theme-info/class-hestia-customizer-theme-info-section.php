@@ -8,7 +8,7 @@
  */
 
 $display_upsells = hestia_check_passed_time( '43200' );
-$define_classs = class_exists( 'WP_Customize_Control' ) && $display_upsells === true && ! class_exists( 'Hestia_Customizer_Theme_Info_Section' );
+$define_classs   = class_exists( 'WP_Customize_Control' ) && $display_upsells === true && ! class_exists( 'Hestia_Customizer_Theme_Info_Section' );
 if ( $define_classs ) :
 	/**
 	 * Class Themeisle_Section_Upsell

@@ -16,7 +16,7 @@ function hestia_header_customize_register( $wp_customize ) {
 	$wp_customize->add_panel(
 		'hestia_header_options', array(
 			'priority' => 35,
-			'title' => esc_html__( 'Header Options', 'hestia' ),
+			'title'    => esc_html__( 'Header Options', 'hestia' ),
 		)
 	);
 
@@ -26,7 +26,7 @@ function hestia_header_customize_register( $wp_customize ) {
 	// Move Header Image section to Header Options panel
 	$header_image_section = $wp_customize->get_section( 'header_image' );
 	if ( ! empty( $header_image_section ) ) {
-		$header_image_section->panel = 'hestia_header_options';
+		$header_image_section->panel    = 'hestia_header_options';
 		$header_image_section->priority = 20;
 	}
 
@@ -44,15 +44,15 @@ function hestia_header_customize_register( $wp_customize ) {
 	$wp_customize->add_setting(
 		'hestia_top_bar_hide', array(
 			'sanitize_callback' => 'hestia_sanitize_checkbox',
-			'default' => true,
+			'default'           => true,
 		)
 	);
 
 	$wp_customize->add_control(
 		'hestia_top_bar_hide', array(
-			'type' => 'checkbox',
-			'label' => esc_html__( 'Disable section','hestia' ),
-			'section' => 'hestia_top_bar',
+			'type'     => 'checkbox',
+			'label'    => esc_html__( 'Disable section', 'hestia' ),
+			'section'  => 'hestia_top_bar',
 			'priority' => 1,
 		)
 	);
@@ -66,11 +66,11 @@ function hestia_header_customize_register( $wp_customize ) {
 		$wp_customize->add_control(
 			new Hestia_Display_Text(
 				$wp_customize, 'hestia_link_to_top_menu', array(
-					'priority' => 25,
-					'section' => 'hestia_top_bar',
-					'button_text' => esc_html__( 'Very Top Bar', 'hestia' ) . ' ' . esc_html__( 'Menu', 'hestia' ),
+					'priority'     => 25,
+					'section'      => 'hestia_top_bar',
+					'button_text'  => esc_html__( 'Very Top Bar', 'hestia' ) . ' ' . esc_html__( 'Menu', 'hestia' ),
 					'button_class' => 'hestia-link-to-top-menu',
-					'icon_class' => 'fa-bars',
+					'icon_class'   => 'fa-bars',
 				)
 			)
 		);
@@ -81,28 +81,28 @@ function hestia_header_customize_register( $wp_customize ) {
 	$wp_customize->add_setting(
 		'hestia_top_menu_hidden', array(
 			'sanitize_callback' => 'sanitize_text_field',
-			'transport' => $selective_refresh,
+			'transport'         => $selective_refresh,
 		)
 	);
 	$wp_customize->add_control(
 		'hestia_top_menu_hidden', array(
 			'priority' => 25,
-			'type' => 'hidden',
-			'section' => 'menu_locations',
+			'type'     => 'hidden',
+			'section'  => 'menu_locations',
 		)
 	);
 
 	$top_bar_sidebar = $wp_customize->get_section( 'sidebar-widgets-sidebar-top-bar' );
 	if ( ! empty( $top_bar_sidebar ) ) {
 		$top_bar_sidebar->panel = 'hestia_header_options';
-		$controls_to_move = array(
+		$controls_to_move       = array(
 			'hestia_top_bar_hide',
 			'hestia_link_to_top_menu',
 		);
 		foreach ( $controls_to_move as $control ) {
 			$hestia_control = $wp_customize->get_control( $control );
 			if ( ! empty( $hestia_control ) ) {
-				$hestia_control->section = 'sidebar-widgets-sidebar-top-bar';
+				$hestia_control->section  = 'sidebar-widgets-sidebar-top-bar';
 				$hestia_control->priority = -2;
 			}
 		}
@@ -119,10 +119,29 @@ function hestia_header_customize_register( $wp_customize ) {
 		)
 	);
 
+	/**
+	 * Search in menu.
+	 */
+	$wp_customize->add_setting(
+		'hestia_search_in_menu', array(
+			'sanitize_callback' => 'hestia_sanitize_checkbox',
+			'default'           => false,
+		)
+	);
+
+	$wp_customize->add_control(
+		'hestia_search_in_menu', array(
+			'type'     => 'checkbox',
+			'label'    => esc_html__( 'Enable Search in Menu', 'hestia' ),
+			'section'  => 'hestia_navigation',
+			'priority' => 5,
+		)
+	);
+
 	if ( class_exists( 'Hestia_Customize_Control_Radio_Image' ) ) {
 		$wp_customize->add_setting(
 			'hestia_header_alignment', array(
-				'default' => 'left',
+				'default'           => 'left',
 				'sanitize_callback' => 'hestia_sanitize_alignment_options',
 			)
 		);
@@ -132,15 +151,15 @@ function hestia_header_customize_register( $wp_customize ) {
 				$wp_customize, 'hestia_header_alignment', array(
 					'label'    => esc_html__( 'Layout', 'hestia' ),
 					'priority' => 25,
-					'section' => 'hestia_navigation',
-					'choices' => array(
-						'left' => array(
+					'section'  => 'hestia_navigation',
+					'choices'  => array(
+						'left'   => array(
 							'url' => trailingslashit( get_template_directory_uri() ) . 'inc/customizer-radio-image/img/default-header.png',
 						),
 						'center' => array(
 							'url' => trailingslashit( get_template_directory_uri() ) . 'inc/customizer-radio-image/img/center-header.png',
 						),
-						'right' => array(
+						'right'  => array(
 							'url' => trailingslashit( get_template_directory_uri() ) . 'inc/customizer-radio-image/img/widget-header.png',
 						),
 					),
@@ -152,10 +171,15 @@ function hestia_header_customize_register( $wp_customize ) {
 	$navigation_sidebar = $wp_customize->get_section( 'sidebar-widgets-header-sidebar' );
 	if ( ! empty( $navigation_sidebar ) ) {
 		$navigation_sidebar->panel = 'hestia_header_options';
-		$hestia_header_alignment = $wp_customize->get_control( 'hestia_header_alignment' );
+		$hestia_header_alignment   = $wp_customize->get_control( 'hestia_header_alignment' );
 		if ( ! empty( $hestia_header_alignment ) ) {
-			$hestia_header_alignment->section = 'sidebar-widgets-header-sidebar';
+			$hestia_header_alignment->section  = 'sidebar-widgets-header-sidebar';
 			$hestia_header_alignment->priority = -1;
+		}
+		$hestia_search_in_menu = $wp_customize->get_control( 'hestia_search_in_menu' );
+		if ( ! empty( $hestia_search_in_menu ) ) {
+			$hestia_search_in_menu->section  = 'sidebar-widgets-header-sidebar';
+			$hestia_search_in_menu->priority = -1;
 		}
 	}
 
@@ -173,16 +197,16 @@ add_action( 'customize_register', 'hestia_header_customize_register' );
 function hestia_register_header_partials( $wp_customize ) {
 	$wp_customize->selective_refresh->add_partial(
 		'hestia_top_bar_alignment', array(
-			'selector' => '.hestia-top-bar',
-			'settings' => 'hestia_top_bar_alignment',
+			'selector'        => '.hestia-top-bar',
+			'settings'        => 'hestia_top_bar_alignment',
 			'render_callback' => 'hestia_top_bar_callback',
 		)
 	);
 
 	$wp_customize->selective_refresh->add_partial(
 		'hestia_top_menu_hidden', array(
-			'selector' => '.top-bar-nav',
-			'settings' => 'hestia_top_menu_hidden',
+			'selector'        => '.top-bar-nav',
+			'settings'        => 'hestia_top_menu_hidden',
 			'render_callback' => 'hestia_top_bar_callback',
 		)
 	);

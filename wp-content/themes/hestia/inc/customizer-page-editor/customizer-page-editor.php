@@ -38,6 +38,9 @@ add_action( 'customize_controls_print_footer_scripts', 'hestia_customize_editor'
  * @return mixed
  */
 function hestia_sync_content_from_control( $value, $old_value = '' ) {
+	if ( ! is_customize_preview() ) {
+		return '';
+	}
 	$frontpage_id = get_option( 'page_on_front' );
 	if ( ! empty( $frontpage_id ) && ! empty( $value ) ) {
 		if ( ! wp_is_post_revision( $frontpage_id ) ) {
@@ -55,7 +58,7 @@ function hestia_sync_content_from_control( $value, $old_value = '' ) {
 
 	return $value;
 }
-add_filter( 'pre_set_theme_mod_hestia_page_editor', 'hestia_sync_content_from_control', 10,2 );
+add_filter( 'pre_set_theme_mod_hestia_page_editor', 'hestia_sync_content_from_control', 10, 2 );
 
 
 /**
@@ -104,7 +107,7 @@ function hestia_trigger_sync( $post_id ) {
 	}
 
 	if ( intval( $post_id ) === intval( $frontpage_id ) ) {
-		update_option( 'hestia_sync_needed' , true );
+		update_option( 'hestia_sync_needed', true );
 	};
 }
 add_action( 'save_post', 'hestia_trigger_sync', 10 );
@@ -164,8 +167,8 @@ add_action( 'wp_ajax_hestia_ajax_call', 'hestia_ajax_call' );
  * @return array
  */
 function hestia_override_mce_options( $init_array ) {
-	$opts = '*[*]';
-	$init_array['valid_elements'] = $opts;
+	$opts                                  = '*[*]';
+	$init_array['valid_elements']          = $opts;
 	$init_array['extended_valid_elements'] = $opts;
 	return $init_array;
 }

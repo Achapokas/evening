@@ -28,7 +28,7 @@ if ( ! function_exists( 'hestia_add_to_cart' ) ) :
 		}
 
 		if ( $product ) {
-			$args = array();
+			$args     = array();
 			$defaults = array(
 				'quantity' => 1,
 				'class'    => implode(
@@ -63,12 +63,9 @@ function hestia_woocommerce_header_add_to_cart_fragment( $fragments ) {
 	<a class="cart-contents btn btn-white pull-right" href="<?php echo esc_url( wc_get_cart_url() ); ?>" title="<?php esc_attr_e( 'View your shopping cart', 'hestia' ); ?>">
 		<i class="fa fa-shopping-cart"></i>
 		<?php
-		echo
 		/* translators: %d is number of items */
-		sprintf( _n( '%d item', '%d items', absint( $woocommerce->cart->cart_contents_count ), 'hestia' ), absint( $woocommerce->cart->cart_contents_count ) );
-		?>
-		 -
-		<?php
+		printf( _n( '%d item', '%d items', absint( $woocommerce->cart->cart_contents_count ), 'hestia' ), absint( $woocommerce->cart->cart_contents_count ) );
+		echo ' - ';
 		echo wp_kses(
 			$woocommerce->cart->get_cart_total(), array(
 				'span' => array(
@@ -90,11 +87,11 @@ function hestia_woocommerce_before_main_content() {
 
 	$hestia_page_sidebar_layout = get_theme_mod( 'hestia_page_sidebar_layout', 'full-width' );
 
-	$args = array(
+	$args         = array(
 		'sidebar-right' => 'content-sidebar-right col-md-9',
-		'sidebar-left' => 'content-sidebar-left col-md-9',
-		'full-width' => 'content-full col-md-12',
-		'is_shop'   => true,
+		'sidebar-left'  => 'content-sidebar-left col-md-9',
+		'full-width'    => 'content-full col-md-12',
+		'is_shop'       => true,
 	);
 	$class_to_add = hestia_get_content_classes( $hestia_page_sidebar_layout, 'sidebar-woocommerce', $args );
 
@@ -107,9 +104,15 @@ function hestia_woocommerce_before_main_content() {
 				<div class="col-md-10 col-md-offset-1">
 						<h1 class="hestia-title"><?php woocommerce_page_title(); ?></h1>
 				</div>
-				<?php } ?>
+				<?php
+}
 
-				<div class="cart-contents-content"><a class="cart-contents btn btn-white pull-right" href="<?php echo esc_url( wc_get_cart_url() ); ?>" title="<?php esc_attr_e( 'View your shopping cart', 'hestia' ); ?>"><i class="fa fa-shopping-cart"></i></a></div>
+				$enable_cart = apply_filters( 'hestia_enable_header_cart', '' );
+
+if ( ! empty( $enable_cart ) ) {
+?>
+<div class="cart-contents-content"><a class="cart-contents btn btn-white pull-right" href="<?php echo esc_url( wc_get_cart_url() ); ?>" title="<?php esc_attr_e( 'View your shopping cart', 'hestia' ); ?>"><i class="fa fa-shopping-cart"></i></a></div>
+<?php } ?>
 			</div>
 		</div>
 		<?php
@@ -124,16 +127,16 @@ function hestia_woocommerce_before_main_content() {
 				<?php if ( is_shop() || is_product_category() ) { ?>
 				<div class="before-shop-main">
 					<div class="row">
-						<div class="col-xs-12
 						<?php
+						echo '<div class="col-xs-12 ';
 						if ( is_active_sidebar( 'sidebar-woocommerce' ) && ! is_singular( 'product' ) && $hestia_page_sidebar_layout !== 'full-width' ) {
 							echo 'col-sm-12';
 						} else {
 							echo 'col-sm-9';
 						}
-?>
- col-md-9" >
-							<?php do_action( 'hestia_woocommerce_custom_reposition_left_shop_elements' ); ?>
+						echo ' col-md-9" >';
+						do_action( 'hestia_woocommerce_custom_reposition_left_shop_elements' );
+						?>
 						</div>
 						<?php
 						$shop_ordering_class = 'col-xs-12 col-sm-3';
@@ -205,7 +208,7 @@ function hestia_woocommerce_after_shop_loop_item() {
  * Change the layout of the thumbnail on single product listing
  */
 function hestia_woocommerce_template_loop_product_thumbnail() {
-	 $thumbnail = get_the_post_thumbnail( null, 'hestia-shop' );
+	$thumbnail = get_the_post_thumbnail( null, 'hestia-shop' );
 	if ( empty( $thumbnail ) && function_exists( 'wc_placeholder_img' ) ) {
 		$thumbnail = wc_placeholder_img();
 	}
@@ -226,16 +229,16 @@ function hestia_woocommerce_template_loop_product_thumbnail() {
  */
 function hestia_woocommerce_template_loop_product_title() {
 		global $post;
-		$current_product = wc_get_product( get_the_ID() );
+		$current_product        = wc_get_product( get_the_ID() );
 		?>
 		<div class="content">
 			<?php
 			$product_categories = get_the_terms( $post->ID, 'product_cat' );
-			$i = false;
+			$i                  = false;
 			if ( ! empty( $product_categories ) ) {
 				echo '<h6 class="category">';
 				foreach ( $product_categories as $product_category ) {
-					$product_cat_id = $product_category->term_id;
+					$product_cat_id   = $product_category->term_id;
 					$product_cat_name = $product_category->name;
 					if ( ! empty( $product_cat_id ) && ! empty( $product_cat_name ) ) {
 						if ( $i ) {
@@ -266,7 +269,7 @@ function hestia_woocommerce_template_loop_product_title() {
 									'span' => array(
 										'class' => array(),
 									),
-									'del' => array(),
+									'del'  => array(),
 								)
 							);
 
@@ -385,7 +388,7 @@ if ( ! function_exists( 'hestia_cart_link_after_primary_navigation' ) ) {
 	 */
 	function hestia_cart_link_after_primary_navigation() {
 		?>
-		<a href="<?php echo esc_url( wc_get_cart_url() ); ?>" title="<?php esc_attr_e( 'View cart','hestia' ); ?>" class="nav-cart-icon">
+		<a href="<?php echo esc_url( wc_get_cart_url() ); ?>" title="<?php esc_attr_e( 'View cart', 'hestia' ); ?>" class="nav-cart-icon">
 			<i class="fa fa-shopping-cart"></i><?php echo trim( ( WC()->cart->get_cart_contents_count() > 0 ) ? '<span>' . WC()->cart->get_cart_contents_count() . '</span>' : '' ); ?></span>
 		</a>
 		<?php
@@ -418,4 +421,18 @@ if ( ! function_exists( 'hestia_always_show_live_cart' ) ) {
 	function hestia_always_show_live_cart() {
 		return false;
 	}
+}
+
+/**
+ * Add before cart totals code for card.
+ */
+function hestia_woocommerce_before_cart_totals() {
+	echo '<div class="card card-raised"><div class="content">';
+}
+
+/**
+ * Add after cart totals code for card.
+ */
+function hestia_woocommerce_after_cart_totals() {
+	echo '</div></div>';
 }

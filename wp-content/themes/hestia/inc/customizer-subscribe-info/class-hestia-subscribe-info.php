@@ -52,7 +52,7 @@ class Hestia_Subscribe_Info extends WP_Customize_Control {
 		$path    = '';
 		$filenme = '';
 		if ( $this->id === 'hestia_subscribe_info' ) {
-			$path    =
+			$path =
 				/* translators: %s is Path */
 				sprintf(
 					'<b>%s</b>',
@@ -61,7 +61,7 @@ class Hestia_Subscribe_Info extends WP_Customize_Control {
 			$filenme = 'blog-subscribe-textarea-content.php';
 		}
 		if ( $this->id === 'hestia_blog_subscribe_info' ) {
-			$path    =
+			$path =
 				/* translators: %s is Path */
 				sprintf(
 					'<b>%s</b>',

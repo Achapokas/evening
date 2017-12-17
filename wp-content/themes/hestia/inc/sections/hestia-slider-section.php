@@ -14,47 +14,49 @@ if ( ! function_exists( 'hestia_slider' ) ) :
 	 * @modified 1.1.30
 	 */
 	function hestia_slider( $is_callback = false ) {
-		?>
-		<?php
+
 		if ( ! $is_callback ) {
-			hestia_before_big_title_section_trigger();
-		?>
+			hestia_before_big_title_section_trigger(); ?>
 			<div id="carousel-hestia-generic" class="carousel slide" data-ride="carousel">
 			<?php
 		}
 		?>
 		<div class="carousel slide" data-ride="carousel">
+			<?php
+			if ( has_header_video() ) {
+				the_custom_header_markup();
+			}
+			?>
 			<div class="carousel-inner">
 				<?php
 				$hestia_slider_alignment = get_theme_mod( 'hestia_slider_alignment', 'center' );
-				$class_to_add = ( ! empty( $hestia_slider_alignment ) ? 'text-' . $hestia_slider_alignment : 'text-center' );
-				$slider_default = hestia_get_slider_default();
-				$hestia_slider_content = get_theme_mod( 'hestia_slider_content', json_encode( $slider_default ) );
-				$i = 0;
+				$class_to_add            = ( ! empty( $hestia_slider_alignment ) ? 'text-' . $hestia_slider_alignment : 'text-center' );
+				$slider_default          = hestia_get_slider_default();
+				$hestia_slider_content   = get_theme_mod( 'hestia_slider_content', json_encode( $slider_default ) );
+				$i                       = 0;
 				if ( ! empty( $hestia_slider_content ) ) :
 					$hestia_slider_content = json_decode( $hestia_slider_content );
 					if ( ! empty( $hestia_slider_content ) ) {
 						foreach ( $hestia_slider_content as $slider_item ) :
-							$title = ! empty( $slider_item->title ) ? apply_filters( 'hestia_translate_single_string', $slider_item->title, 'Slider section' ) : '';
+							$title    = ! empty( $slider_item->title ) ? apply_filters( 'hestia_translate_single_string', $slider_item->title, 'Slider section' ) : '';
 							$subtitle = ! empty( $slider_item->subtitle ) ? apply_filters( 'hestia_translate_single_string', $slider_item->subtitle, 'Slider section' ) : '';
-							$button = ! empty( $slider_item->text ) ? apply_filters( 'hestia_translate_single_string', $slider_item->text, 'Slider section' ) : '';
-							$link = ! empty( $slider_item->link ) ? apply_filters( 'hestia_translate_single_string', $slider_item->link, 'Slider section' ) : '';
-							$button2 = ! empty( $slider_item->text2 ) ? apply_filters( 'hestia_translate_single_string', $slider_item->text2, 'Slider section' ) : '';
-							$link2 = ! empty( $slider_item->link2 ) ? apply_filters( 'hestia_translate_single_string', $slider_item->link2, 'Slider section' ) : '';
-							$image = ! empty( $slider_item->image_url ) ? apply_filters( 'hestia_translate_single_string', $slider_item->image_url, 'Slider section' ) : '';
-							$color = ! empty( $slider_item->color ) ? apply_filters( 'hestia_translate_single_string', $slider_item->color, 'Slider section' ) : '';
-							$color2 = ! empty( $slider_item->color2 ) ? apply_filters( 'hestia_translate_single_string', $slider_item->color2, 'Slider section' ) : '';
-							?>
-							<div class="item 
-							<?php
+							$button   = ! empty( $slider_item->text ) ? apply_filters( 'hestia_translate_single_string', $slider_item->text, 'Slider section' ) : '';
+							$link     = ! empty( $slider_item->link ) ? apply_filters( 'hestia_translate_single_string', $slider_item->link, 'Slider section' ) : '';
+							$button2  = ! empty( $slider_item->text2 ) ? apply_filters( 'hestia_translate_single_string', $slider_item->text2, 'Slider section' ) : '';
+							$link2    = ! empty( $slider_item->link2 ) ? apply_filters( 'hestia_translate_single_string', $slider_item->link2, 'Slider section' ) : '';
+							$image    = ! empty( $slider_item->image_url ) && ! has_header_video() ? apply_filters( 'hestia_translate_single_string', $slider_item->image_url, 'Slider section' ) : '';
+							$color    = ! empty( $slider_item->color ) ? apply_filters( 'hestia_translate_single_string', $slider_item->color, 'Slider section' ) : '';
+							$color2   = ! empty( $slider_item->color2 ) ? apply_filters( 'hestia_translate_single_string', $slider_item->color2, 'Slider section' ) : '';
+
+							echo '<div class="item';
 							$i ++;
 							if ( $i == 1 ) {
 								echo ' active ';
 							}
+							echo ' item-' . esc_attr( $i ) . '">';
+
+							echo hestia_set_button_style( $color, $color2, $i );
 							?>
-							 item-<?php echo esc_attr( $i ); ?>
-							">
-							<?php echo hestia_set_button_style( $color, $color2, $i ); ?>
 								<div class="page-header">
 										<?php hestia_before_big_title_section_content_trigger(); ?>
 										<div class="container">
@@ -75,16 +77,14 @@ if ( ! function_exists( 'hestia_slider' ) ) :
 													<?php endif; ?>
 													<?php if ( ! empty( $link ) || ! empty( $button ) || ! empty( $link2 ) || ! empty( $button2 ) ) : ?>
 														<div class="buttons">
-															<?php if ( ! empty( $link ) || ! empty( $button ) ) { ?>
-															<a href="<?php echo esc_url( $link ); ?>"
-															   style="<?php echo 'background-color:' . $color; ?>"
-															   title="<?php echo esc_html( $button ); ?>" class="btn btn-primary btn-lg btn-left no-js-color" <?php echo hestia_is_external_url( $link ); ?>><?php echo esc_html( $button ); ?></a>
-															<?php } ?>
-															<?php if ( ! empty( $link2 ) || ! empty( $button2 ) ) { ?>
-															<a href="<?php echo esc_url( $link2 ); ?>"
-															   style="<?php echo 'background-color:' . $color2; ?>"
-															   title="<?php echo esc_html( $button2 ); ?>" class="btn btn-primary btn-lg btn-right no-js-color" <?php echo hestia_is_external_url( $link2 ); ?>><?php echo esc_html( $button2 ); ?></a>
-															<?php } ?>
+															<?php
+															if ( ! empty( $link ) || ! empty( $button ) ) {
+																echo '<a href="' . esc_url( $link ) . '" style="background-color:' . $color . '" title="' . esc_html( $button ) . '" class="btn btn-primary btn-lg btn-left no-js-color" ' . hestia_is_external_url( $link ) . '>' . esc_html( $button ) . '</a>';
+															}
+															if ( ! empty( $link2 ) || ! empty( $button2 ) ) {
+																echo '<a href="' . esc_url( $link2 ) . '" style="background-color:' . $color2 . '" title="' . esc_html( $button2 ) . '" class="btn btn-primary btn-lg btn-right no-js-color" ' . hestia_is_external_url( $link2 ) . '>' . esc_html( $button2 ) . '</a>';
+															}
+															?>
 														</div>
 													<?php endif; ?>
 												</div>
@@ -122,6 +122,23 @@ if ( ! function_exists( 'hestia_slider' ) ) :
 	}
 
 endif;
+
+if ( ! function_exists( 'hestia_video_settings' ) ) {
+	/**
+	 * Function to change video settings.
+	 *
+	 * @param array $settings Video settings.
+	 *
+	 * @since 1.1.52
+	 * @return array
+	 */
+	function hestia_video_settings( $settings ) {
+		$settings['width']  = 1920;
+		$settings['height'] = 1080;
+		return $settings;
+	}
+	add_filter( 'header_video_settings', 'hestia_video_settings' );
+}
 
 /**
  * Import lite content to slider
@@ -163,11 +180,11 @@ function hestia_get_slider_default() {
 
 	if ( $lite_content ) {
 
-		$hestia_big_title_title = '';
-		$hestia_big_title_text = '';
+		$hestia_big_title_title       = '';
+		$hestia_big_title_text        = '';
 		$hestia_big_title_button_text = '';
 		$hestia_big_title_button_link = '';
-		$hestia_big_title_background = '';
+		$hestia_big_title_background  = '';
 		if ( array_key_exists( 'hestia_big_title_title', $lite_content ) ) {
 			$hestia_big_title_title = $lite_content['hestia_big_title_title'];
 		}
@@ -186,12 +203,12 @@ function hestia_get_slider_default() {
 		if ( ! empty( $hestia_big_title_title ) || ! empty( $hestia_big_title_text ) || ! empty( $hestia_big_title_button_text ) || ! empty( $hestia_big_title_button_link ) || ! empty( $hestia_big_title_background ) ) {
 			array_unshift(
 				$default, array(
-					'id'          => 'customizer_repeater_56d7ea7f40a56',
-					'title'       => $hestia_big_title_title,
-					'subtitle'        => $hestia_big_title_text,
-					'text' => $hestia_big_title_button_text,
-					'link'        => $hestia_big_title_button_link,
-					'image_url'   => $hestia_big_title_background,
+					'id'        => 'customizer_repeater_56d7ea7f40a56',
+					'title'     => $hestia_big_title_title,
+					'subtitle'  => $hestia_big_title_text,
+					'text'      => $hestia_big_title_button_text,
+					'link'      => $hestia_big_title_button_link,
+					'image_url' => $hestia_big_title_background,
 				)
 			);
 		}
@@ -213,7 +230,7 @@ function hestia_set_button_style( $color1, $color2, $item_number ) {
 		$color1 => '.btn-left',
 		$color2 => '.btn-right',
 	);
-	$style = '';
+	$style  = '';
 	if ( ! empty( $colors ) ) {
 		if ( ! empty( $item_number ) ) {
 			$style .= '<style>';

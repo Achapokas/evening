@@ -60,7 +60,7 @@ if ( ! function_exists( 'hestia_featured_header' ) ) :
 
 		// Default header image
 		$thumbnail = get_header_image();
-		$shop_id = get_option( 'woocommerce_shop_page_id' );
+		$shop_id   = get_option( 'woocommerce_shop_page_id' );
 
 		if ( class_exists( 'WooCommerce' ) && is_woocommerce() ) {
 
@@ -174,7 +174,7 @@ if ( ! function_exists( 'hestia_output_wrapper_header_background' ) ) :
 		}
 		$header_filter_div .= '></div>';
 
-		echo $header_filter_div;
+		echo apply_filters( 'hestia_header_wrapper_background_filter', $header_filter_div );
 	}
 endif;
 
@@ -204,9 +204,8 @@ if ( ! function_exists( 'hestia_category' ) ) :
 	function hestia_category() {
 		$category = get_the_category();
 		if ( $category ) {
-			echo '<a href="' . esc_url( get_category_link( $category[0]->term_id ) ) . '" title="' .
-				 /* translators: %s is Category name */
-				 esc_attr( sprintf( __( 'View all posts in %s', 'hestia' ), $category[0]->name ) ) . '" ' . '>' . esc_html( $category[0]->name ) . '</a> ';
+			/* translators: %s is Category name */
+			echo '<a href="' . esc_url( get_category_link( $category[0]->term_id ) ) . '" title="' . esc_attr( sprintf( __( 'View all posts in %s', 'hestia' ), $category[0]->name ) ) . '" ' . '>' . esc_html( $category[0]->name ) . '</a> ';
 		}
 	}
 endif;
@@ -238,8 +237,7 @@ if ( ! function_exists( 'hestia_author_box' ) ) :
 			<div class="row">
 				<div class="col-md-2">
 					<div class="card-avatar">
-						<a href="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ); ?>"
-						   title="<?php the_author(); ?>"><?php echo get_avatar( get_the_author_meta( 'ID' ), 100 ); ?></a>
+						<a href="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ); ?>" title="<?php the_author(); ?>"><?php echo get_avatar( get_the_author_meta( 'ID' ), 100 ); ?></a>
 					</div>
 				</div>
 				<div class="col-md-10">
@@ -281,7 +279,7 @@ if ( ! function_exists( 'hestia_wp_link_pages' ) ) :
 			if ( 'number' == $r['next_or_number'] ) {
 				$output .= $r['before'];
 				for ( $i = 1; $i < ( $numpages + 1 ); $i = $i + 1 ) {
-					$j = str_replace( '%', $i, $r['pagelink'] );
+					$j       = str_replace( '%', $i, $r['pagelink'] );
 					$output .= ' ';
 					$output .= $r['link_before'];
 					if ( $i != $page || ( ( ! $more ) && ( $page == 1 ) ) ) {
@@ -301,7 +299,7 @@ if ( ! function_exists( 'hestia_wp_link_pages' ) ) :
 			} else {
 				if ( $more ) {
 					$output .= $r['before'];
-					$i = $page - 1;
+					$i       = $page - 1;
 					if ( $i && $more ) {
 						$output .= _wp_link_page( $i );
 						$output .= $r['link_before'] . $r['previouspagelink'] . $r['link_after'] . '</a>';
@@ -472,12 +470,12 @@ if ( ! function_exists( 'hestia_related_posts' ) ) :
 	 */
 	function hestia_related_posts() {
 		global $post;
-		$cats = wp_get_object_terms(
+		$cats         = wp_get_object_terms(
 			$post->ID, 'category', array(
 				'fields' => 'ids',
 			)
 		);
-		$args = array(
+		$args         = array(
 			'posts_per_page'      => 3,
 			'cat'                 => $cats,
 			'orderby'             => 'date',
@@ -485,13 +483,13 @@ if ( ! function_exists( 'hestia_related_posts' ) ) :
 			'post__not_in'        => array( $post->ID ),
 		);
 		$allowed_html = array(
-			'br' => array(),
-			'em' => array(),
+			'br'     => array(),
+			'em'     => array(),
 			'strong' => array(),
-			'i' => array(
+			'i'      => array(
 				'class' => array(),
 			),
-			'span' => array(),
+			'span'   => array(),
 		);
 
 		$loop = new WP_Query( $args );
@@ -547,8 +545,8 @@ if ( ! function_exists( 'hestia_social_icons' ) ) :
 	 */
 	function hestia_social_icons() {
 		$enabled_socials = get_theme_mod( 'hestia_enable_sharing_icons', true );
-		$post_link = get_the_permalink();
-		$post_title = get_the_title();
+		$post_link       = get_the_permalink();
+		$post_title      = get_the_title();
 
 		$social_links = '';
 		$allowed_tags = array(
@@ -679,10 +677,10 @@ if ( ! function_exists( 'hestia_the_footer_content' ) ) :
 		/**
 		 * Array holding all registered footer widgets areas
 		 */
-		$hestia_footer_widgets_ids = array( 'footer-one-widgets', 'footer-two-widgets', 'footer-three-widgets' );
-		$hestia_footer_class = 'col-md-4';
-		$footer_has_widgets = false;
-		$hestia_nr_footer_widgets = get_theme_mod( 'hestia_nr_footer_widgets','3' );
+		$hestia_footer_widgets_ids = array( 'footer-one-widgets', 'footer-two-widgets', 'footer-three-widgets', 'footer-four-widgets' );
+		$hestia_footer_class       = 'col-md-4';
+		$footer_has_widgets        = false;
+		$hestia_nr_footer_widgets  = get_theme_mod( 'hestia_nr_footer_widgets', '3' );
 
 		/**
 		 *  Enabling alternative footer style
@@ -783,7 +781,7 @@ if ( ! function_exists( 'hesta_bottom_footer_content' ) ) :
 			<div class="hestia-bottom-footer-content">
 			<?php
 		}
-		$hestia_general_credits     = get_theme_mod(
+		$hestia_general_credits = get_theme_mod(
 			'hestia_general_credits',
 			sprintf(
 				/* translators: %1$s is Theme Name, %2$s is WordPress */
@@ -851,11 +849,11 @@ if ( ! function_exists( 'hestia_the_header_top_bar' ) ) :
 			return;
 		}
 
-		$hestia_top_bar_alignment = get_theme_mod( 'hestia_top_bar_alignment','right' );
-		$menu_class                 = 'pull-right';
+		$hestia_top_bar_alignment = get_theme_mod( 'hestia_top_bar_alignment', apply_filters( 'hestia_top_bar_alignment_default', 'right' ) );
+		$menu_class               = 'pull-right';
 		$sidebar_class            = 'pull-left';
 		if ( ! empty( $hestia_top_bar_alignment ) && $hestia_top_bar_alignment === 'left' ) {
-			$menu_class = 'pull-left';
+			$menu_class    = 'pull-left';
 			$sidebar_class = 'pull-right';
 		}
 		?>
@@ -898,13 +896,13 @@ if ( ! function_exists( 'hestia_the_header_top_bar' ) ) :
 						 */
 						wp_nav_menu(
 							array(
-								'theme_location'  => 'top-bar-menu',
+								'theme_location' => 'top-bar-menu',
 								'depth'          => 1,
-								'container'       => 'div',
-								'container_id'    => 'top-bar-navigation',
-								'menu_class'      => 'nav top-bar-nav',
-								'fallback_cb'     => 'hestia_bootstrap_navwalker::fallback',
-								'walker'          => new hestia_bootstrap_navwalker(),
+								'container'      => 'div',
+								'container_id'   => 'top-bar-navigation',
+								'menu_class'     => 'nav top-bar-nav',
+								'fallback_cb'    => 'hestia_bootstrap_navwalker::fallback',
+								'walker'         => new hestia_bootstrap_navwalker(),
 							)
 						);
 						?>
@@ -933,7 +931,7 @@ if ( ! function_exists( 'hestia_the_header_content' ) ) :
 		$navbar_class = '';
 
 		if ( get_option( 'show_on_front' ) === 'page' && is_front_page() && ! is_page_template() ) {
-			$navbar_class = 'navbar-color-on-scroll';
+			$navbar_class = 'navbar-color-on-scroll navbar-transparent';
 		}
 
 		hestia_before_header_trigger();
@@ -944,7 +942,7 @@ if ( ! function_exists( 'hestia_the_header_content' ) ) :
 		}
 
 		$hestia_full_screen_menu = get_theme_mod( 'hestia_full_screen_menu', false );
-		$navbar_class .= (bool) $hestia_full_screen_menu === true ? ' full-screen-menu' : '';
+		$navbar_class           .= (bool) $hestia_full_screen_menu === true ? ' full-screen-menu' : '';
 
 		$hide_top_bar = get_theme_mod( 'hestia_top_bar_hide', true );
 		if ( (bool) $hide_top_bar === false ) {
@@ -964,8 +962,7 @@ if ( ! function_exists( 'hestia_the_header_content' ) ) :
 			<div class="container">
 				<div class="navbar-header">
 					<div class="title-logo-wrapper">
-						<a class="navbar-brand" href="<?php echo esc_url( home_url( '/' ) ); ?>"
-						   title="<?php bloginfo( 'name' ); ?>"><?php echo hestia_logo(); ?></a>
+						<a class="navbar-brand" href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php bloginfo( 'name' ); ?>"><?php echo hestia_logo(); ?></a>
 					</div>
 				</div>
 				<?php
@@ -1127,4 +1124,71 @@ if ( ! function_exists( 'hestia_hidden_sidebars' ) ) :
 		<?php
 	}
 endif;
-add_action( 'hestia_do_footer','hestia_hidden_sidebars' );
+add_action( 'hestia_do_footer', 'hestia_hidden_sidebars' );
+
+/**
+ * Changing Pirate Forms output.
+ *
+ * @package Hestia
+ * @since Hestia 1.0
+ */
+add_filter(
+	'pirate_forms_public_controls', function( $elements ) {
+
+		foreach ( $elements as $key => $element ) {
+			// Name field
+			if ( $element['id'] === 'pirate-forms-contact-name' ) {
+				$elements[ $key ]['wrap']['class']  = 'col-xs-12 col-sm-6 contact_name_wrap pirate_forms_three_inputs form_field_wrap';
+				$elements[ $key ]['label']['html']  = $elements[ $key ]['placeholder'];
+				$elements[ $key ]['label']['class'] = 'control-label';
+				$elements[ $key ]['placeholder']    = '';
+			}
+
+			// E-mail field
+			if ( $element['id'] === 'pirate-forms-contact-email' ) {
+				$elements[ $key ]['wrap']['class']  = 'col-xs-12 col-sm-6 contact_email_wrap pirate_forms_three_inputs form_field_wrap';
+				$elements[ $key ]['label']['html']  = $elements[ $key ]['placeholder'];
+				$elements[ $key ]['label']['class'] = 'control-label';
+				$elements[ $key ]['placeholder']    = '';
+			}
+
+			// Subject field
+			if ( $element['id'] === 'pirate-forms-contact-subject' ) {
+				$elements[ $key ]['wrap']['class']  = 'col-xs-12 contact_subject_wrap pirate_forms_three_inputs form_field_wrap';
+				$elements[ $key ]['label']['html']  = $elements[ $key ]['placeholder'];
+				$elements[ $key ]['label']['class'] = 'control-label';
+				$elements[ $key ]['placeholder']    = '';
+			}
+
+			// Message field
+			if ( $element['id'] === 'pirate-forms-contact-message' ) {
+				$elements[ $key ]['wrap']['class']  = 'col-xs-12 form_field_wrap contact_message_wrap';
+				$elements[ $key ]['label']['html']  = $elements[ $key ]['placeholder'];
+				$elements[ $key ]['label']['class'] = 'control-label';
+				$elements[ $key ]['placeholder']    = '';
+			}
+		}
+
+		return $elements;
+	}, 20
+);
+
+if ( ! function_exists( 'hestia_scroll_to_top' ) ) :
+	/**
+	 * Display scroll to top button.
+	 *
+	 * @since 1.1.54
+	 */
+	function hestia_scroll_to_top() {
+		$hestia_enable_scroll_to_top = get_theme_mod( 'hestia_enable_scroll_to_top' );
+		if ( empty( $hestia_enable_scroll_to_top ) ) {
+			return;
+		}
+		?>
+		<button class="hestia-scroll-to-top">
+			<i class="fa fa-angle-double-up" aria-hidden="true"></i>
+		</button>
+		<?php
+	}
+	add_action( 'wp_footer', 'hestia_scroll_to_top' );
+endif;

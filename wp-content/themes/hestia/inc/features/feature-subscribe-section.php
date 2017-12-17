@@ -112,10 +112,10 @@ function hestia_subscribe_customize_register( $wp_customize ) {
 		$wp_customize->add_control(
 			new Hestia_Subscribe_Info(
 				$wp_customize, 'hestia_subscribe_info', array(
-					'label' => esc_html__( 'Instructions', 'hestia' ),
-					'section' => 'hestia_subscribe',
+					'label'      => esc_html__( 'Instructions', 'hestia' ),
+					'section'    => 'hestia_subscribe',
 					'capability' => 'install_plugins',
-					'priority' => 20,
+					'priority'   => 20,
 				)
 			)
 		);
@@ -123,9 +123,9 @@ function hestia_subscribe_customize_register( $wp_customize ) {
 
 	$subscribe_widgets = $wp_customize->get_section( 'sidebar-widgets-subscribe-widgets' );
 	if ( ! empty( $subscribe_widgets ) ) {
-		$subscribe_widgets->panel = 'hestia_frontpage_sections';
-		$subscribe_widgets->priority = apply_filters( 'hestia_section_priority', 45,'sidebar-widgets-subscribe-widgets' );
-		$controls_to_move = array(
+		$subscribe_widgets->panel    = 'hestia_frontpage_sections';
+		$subscribe_widgets->priority = apply_filters( 'hestia_section_priority', 45, 'sidebar-widgets-subscribe-widgets' );
+		$controls_to_move            = array(
 			'hestia_subscribe_hide',
 			'hestia_subscribe_background',
 			'hestia_subscribe_title',
@@ -135,7 +135,7 @@ function hestia_subscribe_customize_register( $wp_customize ) {
 		foreach ( $controls_to_move as $control_id ) {
 			$control = $wp_customize->get_control( $control_id );
 			if ( ! empty( $control ) ) {
-				$control->section = 'sidebar-widgets-subscribe-widgets';
+				$control->section  = 'sidebar-widgets-subscribe-widgets';
 				$control->priority = -1;
 			}
 		}
@@ -160,10 +160,10 @@ function hestia_register_subscribe_partials( $wp_customize ) {
 
 	$wp_customize->selective_refresh->add_partial(
 		'hestia_subscribe_hide', array(
-			'selector'        => '.subscribe-line:not(.is-shortcode)',
-			'render_callback' => 'hestia_subscribe',
+			'selector'            => '.subscribe-line:not(.is-shortcode)',
+			'render_callback'     => 'hestia_subscribe',
 			'container_inclusive' => true,
-			'fallback_refresh' => false,
+			'fallback_refresh'    => false,
 		)
 	);
 
@@ -185,8 +185,8 @@ function hestia_register_subscribe_partials( $wp_customize ) {
 
 	$wp_customize->selective_refresh->add_partial(
 		'hestia_subscribe_background', array(
-			'selector' => '.hestia-subscribe-image',
-			'settings' => 'hestia_subscribe_background',
+			'selector'        => '.hestia-subscribe-image',
+			'settings'        => 'hestia_subscribe_background',
 			'render_callback' => 'hestia_subscribe_image_callback',
 		)
 	);

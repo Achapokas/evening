@@ -17,16 +17,16 @@
 $hestia_alternative_blog_layout = get_theme_mod( 'hestia_alternative_blog_layout', false );
 $hestia_remove_sidebar_on_index = get_theme_mod( 'hestia_sidebar_on_index', false );
 
-$default_blog_layout = hestia_sidebar_on_single_post_get_default();
+$default_blog_layout        = hestia_sidebar_on_single_post_get_default();
 $hestia_blog_sidebar_layout = get_theme_mod( 'hestia_blog_sidebar_layout', $default_blog_layout );
 
 $args = array(
 	'sidebar-right' => 'col-md-8 blog-posts-wrap',
-	'sidebar-left' => 'col-md-8 blog-posts-wrap',
-	'full-width' => 'col-md-10 col-md-offset-1 blog-posts-wrap',
+	'sidebar-left'  => 'col-md-8 blog-posts-wrap',
+	'full-width'    => 'col-md-10 col-md-offset-1 blog-posts-wrap',
 );
 
-$hestia_sidebar_width = get_theme_mod( 'hestia_sidebar_width',25 );
+$hestia_sidebar_width = get_theme_mod( 'hestia_sidebar_width', 25 );
 if ( $hestia_sidebar_width > 3 && $hestia_sidebar_width < 80 ) {
 	$args['sidebar-left'] .= ' col-md-offset-1';
 }

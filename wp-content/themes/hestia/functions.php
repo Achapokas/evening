@@ -28,7 +28,7 @@ if ( ! defined( 'ELEMENTOR_PARTNER_ID' ) ) {
 	define( 'ELEMENTOR_PARTNER_ID', 2112 );
 }
 
-define( 'HESTIA_VERSION', '1.1.51' );
+define( 'HESTIA_VERSION', '1.1.56' );
 
 define( 'HESTIA_VENDOR_VERSION', '1.0.1' );
 
@@ -48,7 +48,7 @@ add_filter(
 
 require_once( HESTIA_PHP_INCLUDE . 'template-tags.php' );
 require_once( HESTIA_PHP_INCLUDE . 'hooks.php' );
-require_once( HESTIA_PHP_INCLUDE . 'wp-bootstrap-navwalker/wp_bootstrap_navwalker.php' );
+require_once( HESTIA_PHP_INCLUDE . 'wp-bootstrap-navwalker/class-hestia-bootstrap-navwalker.php' );
 require_once( HESTIA_PHP_INCLUDE . 'customizer.php' );
 require_once( HESTIA_PHP_INCLUDE . 'page-builder-extras.php' );
 require_once( get_template_directory() . '/demo-preview-images/init-prevdem.php' );
@@ -89,6 +89,7 @@ if ( ! function_exists( 'hestia_setup_theme' ) ) {
 		add_theme_support(
 			'custom-logo', array(
 				'flex-width'  => true,
+				'flex-height' => true,
 				'height'      => 100,
 			)
 		);
@@ -105,21 +106,21 @@ if ( ! function_exists( 'hestia_setup_theme' ) ) {
 		// Add custom background support. https://codex.wordpress.org/Custom_Backgrounds
 		add_theme_support(
 			'custom-background', array(
-				'default-color' => apply_filters( 'hestia_default_background_color','E5E5E5' ),
+				'default-color' => apply_filters( 'hestia_default_background_color', 'E5E5E5' ),
 			)
 		);
 
 		// Add custom header support. https://codex.wordpress.org/Custom_Headers
-		add_theme_support(
-			'custom-header', array(
-				// Height
-				'height'        => 2000,
+		$header_settings = apply_filters(
+			'hestia_custom_header_settings', array(// Height
+				'height'      => 2000,
 				// Flex height
-				'flex-height'   => true,
+				'flex-height' => true,
 				// Header text
-				'header-text'   => false,
+				'header-text' => false,
 			)
 		);
+		add_theme_support( 'custom-header', $header_settings );
 
 		// Add selective Widget refresh support
 		add_theme_support( 'customize-selective-refresh-widgets' );
@@ -130,8 +131,8 @@ if ( ! function_exists( 'hestia_setup_theme' ) ) {
 		// This theme uses wp_nav_menu(). https://codex.wordpress.org/Function_Reference/register_nav_menu
 		register_nav_menus(
 			array(
-				'primary' => esc_html__( 'Primary Menu', 'hestia' ),
-				'footer'  => esc_html__( 'Footer Menu', 'hestia' ),
+				'primary'      => esc_html__( 'Primary Menu', 'hestia' ),
+				'footer'       => esc_html__( 'Footer Menu', 'hestia' ),
 				'top-bar-menu' => esc_html__( 'Very Top Bar', 'hestia' ) . ' ' . esc_html__( 'Menu', 'hestia' ),
 			)
 		);
@@ -189,20 +190,39 @@ if ( ! function_exists( 'hestia_setup_theme' ) ) {
 function hestia_widgets_init() {
 
 	$sidebars_array = array(
-		'sidebar-1' => esc_html__( 'Sidebar', 'hestia' ),
-		'subscribe-widgets' => esc_html__( 'Subscribe', 'hestia' ),
+		'sidebar-1'              => esc_html__( 'Sidebar', 'hestia' ),
+		'subscribe-widgets'      => esc_html__( 'Subscribe', 'hestia' ),
 		'blog-subscribe-widgets' => esc_html__( 'Blog Subscribe Section', 'hestia' ),
-		'footer-one-widgets' => esc_html__( 'Footer One', 'hestia' ),
-		'footer-two-widgets' => esc_html__( 'Footer Two', 'hestia' ),
-		'footer-three-widgets' => esc_html__( 'Footer Three', 'hestia' ),
-		'sidebar-woocommerce' => esc_html__( 'WooCommerce Sidebar', 'hestia' ),
-		'sidebar-top-bar' => esc_html__( 'Very Top Bar', 'hestia' ),
-		'header-sidebar' => esc_html__( 'Navigation', 'hestia' ),
+		'sidebar-woocommerce'    => esc_html__( 'WooCommerce Sidebar', 'hestia' ),
+		'sidebar-top-bar'        => esc_html__( 'Very Top Bar', 'hestia' ),
+		'header-sidebar'         => esc_html__( 'Navigation', 'hestia' ),
 	);
+
+	$hestia_nr_footer_widgets = get_theme_mod( 'hestia_nr_footer_widgets', '3' );
+	switch ( $hestia_nr_footer_widgets ) {
+		case 1:
+			$sidebars_array['footer-one-widgets'] = esc_html__( 'Footer One', 'hestia' );
+			break;
+		case 2:
+			$sidebars_array['footer-one-widgets'] = esc_html__( 'Footer One', 'hestia' );
+			$sidebars_array['footer-two-widgets'] = esc_html__( 'Footer Two', 'hestia' );
+			break;
+		case 3:
+			$sidebars_array['footer-one-widgets']   = esc_html__( 'Footer One', 'hestia' );
+			$sidebars_array['footer-two-widgets']   = esc_html__( 'Footer Two', 'hestia' );
+			$sidebars_array['footer-three-widgets'] = esc_html__( 'Footer Three', 'hestia' );
+			break;
+		case 4:
+			$sidebars_array['footer-one-widgets']   = esc_html__( 'Footer One', 'hestia' );
+			$sidebars_array['footer-two-widgets']   = esc_html__( 'Footer Two', 'hestia' );
+			$sidebars_array['footer-three-widgets'] = esc_html__( 'Footer Three', 'hestia' );
+			$sidebars_array['footer-four-widgets']  = esc_html__( 'Footer Four', 'hestia' );
+			break;
+	}
 
 	foreach ( $sidebars_array as $sidebar_id => $sidebar_name ) {
 		$sidebar_settings = array(
-			'name'        => $sidebar_name,
+			'name'          => $sidebar_name,
 			'id'            => $sidebar_id,
 			'before_widget' => '<div id="%1$s" class="widget %2$s">',
 			'after_widget'  => '</div>',
@@ -211,7 +231,7 @@ function hestia_widgets_init() {
 		);
 		if ( $sidebar_id === 'subscribe-widgets' || $sidebar_id === 'blog-subscribe-widgets' ) {
 			$sidebar_settings['before_widget'] = '';
-			$sidebar_settings['after_widget'] = '';
+			$sidebar_settings['after_widget']  = '';
 		}
 
 		register_sidebar( $sidebar_settings );
@@ -228,13 +248,12 @@ add_action( 'widgets_init', 'hestia_widgets_init' );
  */
 function hestia_fonts_url() {
 	$fonts_url = '';
-
-	/*
-     Translators: If there are characters in your language that are not
-     * supported by Roboto or Roboto Slab, translate this to 'off'. Do not translate
-     * into your own language.
+	/**
+	 * Translators: If there are characters in your language that are not
+	 * supported by Roboto or Roboto Slab, translate this to 'off'. Do not translate
+	 * into your own language.
 	 */
-	$roboto = _x( 'on', 'Roboto font: on or off', 'hestia' );
+	$roboto      = _x( 'on', 'Roboto font: on or off', 'hestia' );
 	$roboto_slab = _x( 'on', 'Roboto Slab font: on or off', 'hestia' );
 
 	if ( 'off' !== $roboto || 'off' !== $roboto_slab ) {
@@ -252,7 +271,7 @@ function hestia_fonts_url() {
 			'family' => urlencode( implode( '|', $font_families ) ),
 			'subset' => urlencode( 'latin,latin-ext' ),
 		);
-		$fonts_url = add_query_arg( $query_args, 'https://fonts.googleapis.com/css' );
+		$fonts_url  = add_query_arg( $query_args, 'https://fonts.googleapis.com/css' );
 	}
 	return $fonts_url;
 }
@@ -273,7 +292,7 @@ function hestia_scripts() {
 	wp_enqueue_style( 'font-awesome', get_template_directory_uri() . '/assets/font-awesome/css/font-awesome.min.css', array(), HESTIA_VENDOR_VERSION );
 
 	// Main Stylesheet
-	wp_enqueue_style( 'hestia_style', get_stylesheet_uri(), array(), HESTIA_VERSION );
+	wp_enqueue_style( 'hestia_style', get_stylesheet_uri(), array(), apply_filters( 'hestia_version_filter', HESTIA_VERSION ) );
 	wp_style_add_data( 'hestia_style', 'rtl', 'replace' );
 
 	// WooCommerce Style loaded only if WooCommerce exists on page.
@@ -287,7 +306,7 @@ function hestia_scripts() {
 
 	// Fonts
 	$hestia_headings_font = get_theme_mod( 'hestia_headings_font' );
-	$hestia_body_font = get_theme_mod( 'hestia_body_font' );
+	$hestia_body_font     = get_theme_mod( 'hestia_body_font' );
 	if ( empty( $hestia_headings_font ) || empty( $hestia_body_font ) ) {
 		wp_enqueue_style( 'hestia_fonts', hestia_fonts_url(), array(), HESTIA_VERSION );
 	}
@@ -302,7 +321,7 @@ function hestia_scripts() {
 	}
 	wp_enqueue_script( 'jquery-bootstrap', get_template_directory_uri() . '/assets/bootstrap/js/bootstrap.min.js', array( 'jquery' ), HESTIA_VENDOR_VERSION, true );
 	wp_enqueue_script( 'jquery-hestia-material', get_template_directory_uri() . '/assets/js/material.js', array( 'jquery' ), HESTIA_VENDOR_VERSION, true );
-	wp_enqueue_script( 'hestia_scripts', get_template_directory_uri() . '/assets/js/scripts.js', array( 'jquery-hestia-material', 'jquery-ui-core' ),HESTIA_VERSION, true );
+	wp_enqueue_script( 'hestia_scripts', get_template_directory_uri() . '/assets/js/scripts.js', array( 'jquery-hestia-material', 'jquery-ui-core' ), HESTIA_VERSION, true );
 
 	$hestia_cart_url = '';
 	if ( class_exists( 'WooCommerce' ) ) {
@@ -314,7 +333,7 @@ function hestia_scripts() {
 	wp_localize_script(
 		'hestia_scripts', 'hestiaViewcart', array(
 			'view_cart_label' => esc_html__( 'View cart', 'hestia' ), // label of View cart button,
-			'view_cart_link' => esc_url( $hestia_cart_url ), // link of View cart button
+			'view_cart_link'  => esc_url( $hestia_cart_url ), // link of View cart button
 		)
 	);
 }
@@ -490,7 +509,7 @@ if ( version_compare( PHP_VERSION, '5.4', '>=' ) ) {
  */
 function hestia_include_features() {
 	$hestia_allowed_phps = array();
-	$hestia_allowed_phps = apply_filters( 'hestia_filter_features',$hestia_allowed_phps );
+	$hestia_allowed_phps = apply_filters( 'hestia_filter_features', $hestia_allowed_phps );
 
 	foreach ( $hestia_allowed_phps as $file ) {
 		$hestia_file_to_include = HESTIA_PHP_INCLUDE . $file . '.php';
@@ -500,7 +519,7 @@ function hestia_include_features() {
 	}
 }
 
-add_action( 'after_setup_theme','hestia_include_features', 0 );
+add_action( 'after_setup_theme', 'hestia_include_features', 0 );
 
 // Add Related Posts to Single Posts.
 add_action( 'hestia_blog_related_posts', 'hestia_related_posts' );
@@ -532,28 +551,28 @@ function hestia_repeater_labels( $string, $id, $control ) {
 
 	if ( $id === 'hestia_slider_content' ) {
 		if ( $control === 'customizer_repeater_text_control' ) {
-			return esc_html__( 'Button Text','hestia' );
+			return esc_html__( 'Button Text', 'hestia' );
 		}
 
 		if ( $control === 'customizer_repeater_color_control' ) {
-			return esc_html__( 'Button','hestia' ) . ' ' . esc_html__( 'Color','hestia' );
+			return esc_html__( 'Button', 'hestia' ) . ' ' . esc_html__( 'Color', 'hestia' );
 		}
 
 		if ( $control === 'customizer_repeater_color2_control' ) {
-			return esc_html__( 'Second','hestia' ) . ' ' . esc_html__( 'Button','hestia' ) . ' ' . esc_html__( 'Color','hestia' );
+			return esc_html__( 'Second', 'hestia' ) . ' ' . esc_html__( 'Button', 'hestia' ) . ' ' . esc_html__( 'Color', 'hestia' );
 		}
 
 		if ( $control === 'customizer_repeater_text2_control' ) {
-			return esc_html__( 'Second','hestia' ) . ' ' . esc_html__( 'Button text','hestia' );
+			return esc_html__( 'Second', 'hestia' ) . ' ' . esc_html__( 'Button text', 'hestia' );
 		}
 
 		if ( $control === 'customizer_repeater_link2_control' ) {
-			return esc_html__( 'Second','hestia' ) . ' ' . esc_html__( 'Link','hestia' );
+			return esc_html__( 'Second', 'hestia' ) . ' ' . esc_html__( 'Link', 'hestia' );
 		}
 	}
 	return $string;
 }
-add_filter( 'repeater_input_labels_filter','hestia_repeater_labels', 10 , 3 );
+add_filter( 'repeater_input_labels_filter', 'hestia_repeater_labels', 10, 3 );
 
 /**
  * Filter to modify input type in repeater control
@@ -582,7 +601,7 @@ function hestia_repeater_input_types( $string, $id, $control ) {
 	}
 	return $string;
 }
-add_filter( 'hestia_repeater_input_types_filter','hestia_repeater_input_types', 10 , 3 );
+add_filter( 'hestia_repeater_input_types_filter', 'hestia_repeater_input_types', 10, 3 );
 
 add_action( 'wp_ajax_nopriv_request_post', 'hestia_requestpost' );
 add_action( 'wp_ajax_request_post', 'hestia_requestpost' );
@@ -606,7 +625,7 @@ function hestia_requestpost() {
  * @modified 1.1.31
  */
 function hestia_starter_content() {
-	$default_home_content = '<div class="col-md-5"><h3>' . esc_html__( 'About Hestia', 'hestia' ) . '</h3>' . esc_html__( 'Need more details? Please check our full documentation for detailed information on how to use Hestia.', 'hestia' ) . '</div><div class="col-md-6 col-md-offset-1"><img class="size-medium alignright" src="' . esc_url( get_template_directory_uri() . '/assets/img/about-content.png' ) . '"/></div>';
+	$default_home_content        = '<div class="col-md-5"><h3>' . esc_html__( 'About Hestia', 'hestia' ) . '</h3>' . esc_html__( 'Need more details? Please check our full documentation for detailed information on how to use Hestia.', 'hestia' ) . '</div><div class="col-md-6 col-md-offset-1"><img class="size-medium alignright" src="' . esc_url( get_template_directory_uri() . '/assets/img/about-content.png' ) . '"/></div>';
 	$default_home_featured_image = get_template_directory_uri() . '/assets/img/contact.jpg';
 
 	/*
@@ -616,20 +635,20 @@ function hestia_starter_content() {
 		'starter-content', array(
 			'attachments' => array(
 				'featured-image-home' => array(
-					'post_title' => 'Featured Image Homepage',
+					'post_title'   => 'Featured Image Homepage',
 					'post_content' => 'The featured image for the front page.',
-					'file' => 'assets/img/contact.jpg',
+					'file'         => 'assets/img/contact.jpg',
 				),
 			),
-			'posts' => array(
+			'posts'       => array(
 				'home' => array(
 					'post_content' => $default_home_content,
-					'thumbnail' => '{{featured-image-home}}',
+					'thumbnail'    => '{{featured-image-home}}',
 				),
 				'blog',
 			),
 
-			'nav_menus' => array(
+			'nav_menus'   => array(
 				'primary' => array(
 					'name'  => esc_html__( 'Primary Menu', 'hestia' ),
 					'items' => array(
@@ -639,11 +658,11 @@ function hestia_starter_content() {
 				),
 			),
 
-			'options' => array(
-				'show_on_front'  => 'page',
-				'page_on_front'  => '{{home}}',
-				'page_for_posts' => '{{blog}}',
-				'hestia_page_editor' => $default_home_content,
+			'options'     => array(
+				'show_on_front'            => 'page',
+				'page_on_front'            => '{{home}}',
+				'page_for_posts'           => '{{blog}}',
+				'hestia_page_editor'       => $default_home_content,
 				'hestia_feature_thumbnail' => $default_home_featured_image,
 			),
 		)
@@ -737,7 +756,7 @@ if ( class_exists( 'woocommerce' ) ) {
 		$thumnail_id = get_post_thumbnail_id( $post_id );
 
 		if ( ! empty( $thumnail_id ) ) {
-			$thumbnail = '';
+			$thumbnail    = '';
 			$thumbnail_2x = '';
 
 			$thumbnail_tmp = wp_get_attachment_image_src( $thumnail_id, $size );
@@ -779,7 +798,7 @@ function hestia_get_wporg_plugin_description( $slug ) {
 
 		$call_api = plugins_api(
 			'plugin_information', array(
-				'slug' => $slug,
+				'slug'   => $slug,
 				'fields' => array(
 					'short_description' => true,
 				),
@@ -820,3 +839,107 @@ add_action( 'after_switch_theme', 'hestia_import_flagship_content', 0 );
  * Allow html tags in descriptions.
  */
 remove_filter( 'nav_menu_description', 'strip_tags' );
+
+
+if ( ! function_exists( 'hestia_after_primary_navigation' ) ) :
+	/**
+	 * Function to display cart icon after primary navigation.
+	 *
+	 * @since 1.1.24
+	 * @access public
+	 */
+	function hestia_after_primary_navigation() {
+
+		$nav  = '<ul id="%1$s" class="%2$s">';
+		$nav .= '%3$s';
+
+		// If WooCommerce exists
+		if ( class_exists( 'woocommerce' ) ) {
+			$is_in_topbar_sidebar = false;
+			$is_in_header_sidebar = false;
+			$nav_cart             = false;
+			$top_bar_hide         = get_theme_mod( 'hestia_top_bar_hide', true );
+			$header_alignment     = get_theme_mod( 'hestia_header_alignment', 'left' );
+
+			// Check if WooCommerce cart is in the top bar sidebar
+			if ( is_active_sidebar( 'sidebar-top-bar' ) ) {
+				$active_widgets = get_option( 'sidebars_widgets' );
+
+				// Check active widgets
+				if ( $active_widgets['sidebar-top-bar'] ) {
+					foreach ( $active_widgets['sidebar-top-bar'] as $item ) {
+
+						if ( strpos( $item, 'woocommerce_widget_cart' ) !== false ) {
+							$is_in_topbar_sidebar = true;
+							break;
+						}
+					}
+				}
+			}
+
+			// Check if WooCommerce cart is in the header sidebar
+			if ( is_active_sidebar( 'header-sidebar' ) ) {
+				$active_widgets = get_option( 'sidebars_widgets' );
+
+				// Check active widgets
+				if ( $active_widgets['header-sidebar'] ) {
+					foreach ( $active_widgets['header-sidebar'] as $item ) {
+
+						if ( strpos( $item, 'woocommerce_widget_cart' ) !== false ) {
+							$is_in_header_sidebar = true;
+							break;
+						}
+					}
+				}
+			}
+
+			// Check if top bar is hide OR Topbar sidebar is active but with no cart widget inside OR Header sidebar is active but with no cart widget inside
+			if ( ( ( ! $top_bar_hide && ! $is_in_topbar_sidebar ) || $top_bar_hide ) && ( $header_alignment !== 'right' || ( $header_alignment == 'right' && ! $is_in_header_sidebar ) ) ) {
+				$nav_cart = true;
+			}
+
+			// Add cart after nav
+			if ( $nav_cart && function_exists( 'hestia_cart_item' ) ) {
+				$nav .= hestia_cart_item();
+			}
+		}
+
+		// Add search after nav
+		$hestia_search_in_menu = get_theme_mod( 'hestia_search_in_menu', false );
+		if ( function_exists( 'hestia_search_in_menu' ) && $hestia_search_in_menu === true ) {
+			$nav .= hestia_search_in_menu();
+		}
+		$nav .= '</ul>';
+
+		return $nav;
+	}
+endif;
+
+
+if ( ! function_exists( 'hestia_search_in_menu' ) ) :
+	/**
+	 * Display search form in menu.
+	 */
+	function hestia_search_in_menu() {
+		$form = '
+		<li class="hestia-search-in-menu">
+			<form role="search" method="get" class="hestia-search-in-nav" action="' . esc_url( home_url( '/' ) ) . '">
+                <div class="hestia-nav-search">
+                    <span class="screen-reader-text">' . _x( 'Search for:', 'label', 'hestia' ) . '</span>
+                    <span class="search-field-wrapper">
+
+                    <input type="search" class="search-field" placeholder="' . esc_attr_x( 'Search &hellip;', 'placeholder', 'hestia' ) . '" value="' . get_search_query() . '" name="s" />
+					</span>
+                    <span class="search-submit-wrapper">
+                    <button type="submit" class="search-submit hestia-search-submit" ><i class="fa fa-search"></i></button>
+					</span>
+                </div>
+            </form>
+        	<div class="hestia-toggle-search">
+                <i class="fa fa-search"></i>
+            </div>
+        </li>';
+		return $form;
+	}
+endif;
+

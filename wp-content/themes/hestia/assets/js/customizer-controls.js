@@ -2,6 +2,8 @@
  * File customizer-controls.js
  *
  * The file for generic customizer controls.
+ *
+ * @package Hestia
  */
 
 jQuery( document ).ready(
@@ -21,7 +23,7 @@ jQuery( document ).ready(
 							jQuery( '#customize-control-hestia_team_content .customizer-repeater-general-control-repeater-container' ).each(
 								function () {
 									var title = jQuery( this ).find( '.customizer-repeater-title-control' ).val();
-									var id = jQuery( this ).find( '.social-repeater-box-id' ).val();
+									var id    = jQuery( this ).find( '.social-repeater-box-id' ).val();
 									if ( typeof (title) !== 'undefined' && title !== '' && typeof (id) !== 'undefined' && id !== '' ) {
 										result += '<option value="' + id + '" ';
 										if ( authors_values && authors_values !== 'undefined' ) {

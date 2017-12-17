@@ -120,8 +120,8 @@ class Hestia_Autoloader {
 
 		$directory = new RecursiveDirectoryIterator( static::$path_top . DIRECTORY_SEPARATOR, RecursiveDirectoryIterator::SKIP_DOTS );
 		if ( is_null( static::$file_iterator ) ) {
-			$iterator = new RecursiveIteratorIterator( $directory );
-			$regex = new RegexIterator( $iterator, '/^.+\.php$/i', RecursiveRegexIterator::MATCH );
+			$iterator              = new RecursiveIteratorIterator( $directory );
+			$regex                 = new RegexIterator( $iterator, '/^.+\.php$/i', RecursiveRegexIterator::MATCH );
 			static::$file_iterator = iterator_to_array( $regex, false );
 		}
 

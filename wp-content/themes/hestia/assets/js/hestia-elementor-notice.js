@@ -1,4 +1,11 @@
+/**
+ * Notice for Elementor
+ *
+ * @package Hestia
+ */
+
 /* global hestiaElementorNotice */
+
 jQuery( document ).ready(
 	function () {
 

@@ -5,7 +5,7 @@ Theme URI:      https://themeisle.com/themes/hestia-pro/
 Author:         ThemeIsle
 Author URI:     https://themeisle.com
 Description:    Hestia Pro is a modern WordPress theme for professionals. It fits creative business, small businesses (restaurants, wedding planners, sport/medical shops), startups, corporate businesses, online agencies and firms, portfolios, ecommerce (WooCommerce), and freelancers. It has a multipurpose one-page design, widgetized footer, blog/news page and a clean look, is compatible with: Flat Parallax Slider, Photo Gallery, Travel Map and Elementor Page Builder . The theme is responsive, WPML, Retina ready, SEO friendly, and uses Material Kit for design.
-Version:        1.1.51
+Version:        1.1.55
 License:        GNU General Public License v2 or later
 License URI:    http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain:    hestia-pro
@@ -59,6 +59,7 @@ a,
 .pagination a,
 .pagination span,
 .card-background:after,
+.authors-on-blog .footer a,
 .hestia-top-bar .widget.widget_search form:not(.form-group),
 .hestia-top-bar .widget.widget_product_search form:not(.form-group),
 .hestia-top-bar .widget.widget_shopping_cart .cart_list,
@@ -500,6 +501,31 @@ h2.hestia-title {
 	line-height: normal;
 	text-decoration: none;
 	/* Above WP toolbar. */
+}
+
+.container {
+	max-width: 100%;
+}
+
+@media (min-width: 749px) {
+	.container {
+		max-width: 748px;
+	}
+}
+@media (min-width: 768px) {
+	.container {
+		max-width: 750px;
+	}
+}
+@media (min-width: 992px) {
+	.container {
+		max-width: 970px;
+	}
+}
+@media (min-width: 1200px) {
+	.container {
+		max-width: 2000px;
+	}
 }
 
 
@@ -1477,20 +1503,15 @@ fieldset[disabled] .form-group .form-control {
 .form-control::-moz-placeholder,
 .form-group .form-control::-moz-placeholder,
 .form-control:-ms-input-placeholder,
-.form-group
-.form-control:-ms-input-placeholder,
+.form-group .form-control:-ms-input-placeholder,
 .form-control::-webkit-input-placeholder,
-.form-group
-.form-control::-webkit-input-placeholder,
+.form-group .form-control::-webkit-input-placeholder,
 .checkbox label,
-.form-group
-.checkbox label,
+.form-group .checkbox label,
 .radio label,
-.form-group
-.radio label,
+.form-group .radio label,
 label,
-.form-group
-label {
+.form-group label {
 	color: #aaa;
 	font-size: 14px;
 	font-weight: 400;
@@ -1816,7 +1837,8 @@ body:not(.home) .navbar-default .navbar-nav > .active > a:focus {
 .navbar .navbar-nav > li:hover > .dropdown-menu {
 	margin-top: 0;
 }
-.navbar .navbar-nav > li:not(.btn) > a:before {
+.navbar .navbar-nav > li:not(.btn) > a:before,
+.navbar .navbar-nav > li:not(.btn) .hestia-toggle-search:before {
 	position: absolute;
 	z-index: -1;
 	top: 0;
@@ -1835,7 +1857,8 @@ body:not(.home) .navbar-default .navbar-nav > .active > a:focus {
 	-ms-transform-origin: 50%;
 	transform-origin: 50%;
 }
-.navbar .navbar-nav > li:not(.btn):hover a:before {
+.navbar .navbar-nav > li:not(.btn):hover a:before,
+.navbar .navbar-nav > li:not(.btn):hover .hestia-toggle-search:before {
 	color: inherit;
 	-webkit-transform: scaleX(1);
 	-ms-transform: scaleX(1);
@@ -1915,7 +1938,7 @@ body:not(.home) .navbar-default .navbar-nav > .active > a:focus {
 	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
 }
 .navbar .dropdown-menu > .active > a {
-	color: #555;
+	color: #333;
 	background-color: transparent;
 }
 .navbar .dropdown-menu li {
@@ -1924,11 +1947,14 @@ body:not(.home) .navbar-default .navbar-nav > .active > a:focus {
 .navbar .dropdown-menu li:hover > a {
 	color: #e91e63;
 }
+.navbar .dropdown-menu li:hover > a > i {
+	opacity: 0.7;
+}
 .navbar .dropdown-menu li > a {
 	margin: 0 5px;
 	padding: 10px;
 	border-radius: 2px;
-	color: #555;
+	color: #333;
 	background-color: transparent;
 	font-size: 13px;
 	-webkit-transition: all 150ms linear;
@@ -1940,7 +1966,7 @@ body:not(.home) .navbar-default .navbar-nav > .active > a:focus {
 	min-width: 30px;
 	margin-left: 12px;
 	opacity: 0.5;
-	color: #555;
+	color: #333;
 	font-size: 20px;
 	text-align: center;
 }
@@ -2067,6 +2093,128 @@ body.admin-bar .navbar {
 	-webkit-transform-origin: right center;
 	-ms-transform-origin: right center;
 	transform-origin: right center;
+}
+
+#main-navigation ul.nav > li {
+	visibility: visible;
+	opacity: 1;
+	-webkit-transition: opacity 0.25s ease-in-out;
+	-moz-transition: opacity 0.25s ease-in-out;
+	transition: opacity 0.25s ease-in-out;
+}
+
+.search-submit-wrapper {
+	display: table-cell;
+	width: 50px;
+	padding: 0;
+	padding-right: 6px;
+	vertical-align: top;
+}
+
+.search-field-wrapper {
+	display: table-cell;
+	width: 100%;
+	padding: 0;
+	vertical-align: bottom;
+}
+
+.hestia-nav-search {
+	padding: 0 15px;
+}
+
+.full-screen-menu .hestia-nav-search {
+	display: table;
+	width: 100%;
+	padding: 15px 15px 0 0;
+}
+
+.hestia-toggle-search {
+	display: none;
+}
+
+.hestia-nav-search .hestia-search-submit {
+	padding: 10px 15px;
+}
+
+.full-screen-menu .hestia-nav-search .hestia-search-submit {
+	margin: 0;
+}
+
+.full-screen-menu .hestia-nav-search .form-control {
+	width: 100%;
+	margin: 0;
+	padding-left: 40px;
+	vertical-align: bottom;
+}
+
+@media (min-width: 769px) {
+	.navbar:not(.full-screen-menu) .hestia-nav-search .search-submit-wrapper {
+		display: none;
+	}
+
+	.hestia-search-in-menu {
+		display: inline-block;
+		position: relative;
+		z-index: 999;
+		vertical-align: middle;
+		cursor: pointer;
+	}
+	.hestia-search-in-menu form {
+		margin: 0;
+		padding: 0;
+	}
+
+	.navbar:not(.full-screen-menu) .hestia-search-in-nav {
+		position: absolute;
+		left: 40px;
+		box-sizing: border-box;
+		width: 200px;
+		max-width: 0;
+		padding: 5px;
+		opacity: 0;
+		-webkit-transition: all 0.5s ease;
+		transition: all 0.5s ease;
+	}
+
+	.navbar:not(.full-screen-menu).nav-searching .hestia-search-in-nav {
+		max-width: 200px;
+		opacity: 1;
+	}
+
+	.nav-searching #main-navigation ul.nav li:not(.hestia-search-in-menu) {
+		visibility: hidden;
+		opacity: 0;
+	}
+
+	.navbar:not(.full-screen-menu) .hestia-toggle-search {
+		display: block;
+		width: 38px;
+		padding: 12.5px;
+	}
+
+	.navbar-transparent:not(.full-screen-menu) .hestia-search-in-nav .search-field {
+		color: #fff;
+	}
+	.navbar-transparent:not(.full-screen-menu) .hestia-search-in-nav .search-field::-webkit-input-placeholder {
+		color: #fff;
+	}
+	.navbar-transparent:not(.full-screen-menu) .hestia-search-in-nav .search-field::-moz-placeholder {
+		color: #fff;
+	}
+	.navbar-transparent:not(.full-screen-menu) .hestia-search-in-nav .search-field:-ms-input-placeholder {
+		color: #fff;
+	}
+	.navbar-transparent:not(.full-screen-menu) .hestia-search-in-nav .search-field:-moz-placeholder {
+		color: #fff;
+	}
+
+	.navbar:not(.full-screen-menu) .search-field-wrapper {
+		float: left;
+	}
+
+	.hestia-nav-search {
+		padding: 0;
+	}
 }
 
 
@@ -2681,6 +2829,7 @@ body.admin-bar .navbar {
 
 .card-product {
 	margin-top: 30px;
+	vertical-align: top;
 }
 .card-product .btn-simple.btn-just-icon {
 	padding: 0;
@@ -2804,11 +2953,20 @@ table > tbody > tr:last-child {
 	text-shadow: none;
 }
 .carousel .carousel-control.left {
-	right: auto;
-	left: 0;
+	/**
+   * rtl:ignore
+   */
+	right: 0;
+	/**
+   * rtl:ignore
+   */
+	left: auto;
 }
 .carousel .carousel-control.right {
-	right: 0;
+	/**
+   * rtl:ignore
+   */
+	left: 0;
 }
 .carousel .carousel-control .fa {
 	display: inline-block;
@@ -2820,6 +2978,23 @@ table > tbody > tr:last-child {
 }
 .carousel .buttons .btn-left + .btn-right {
 	margin-right: 30px;
+}
+
+.wp-custom-header img,
+.wp-custom-header video,
+.wp-custom-header iframe {
+	position: fixed;
+	z-index: -1;
+	top: 50%;
+	right: 50%;
+	max-width: 1920px;
+	-webkit-transform: translateX(50%) translateY(-50%);
+	-ms-transform: translateX(50%) translateY(-50%);
+	transform: translateX(50%) translateY(-50%);
+}
+
+.wp-custom-header .wp-custom-header-video-button {
+	display: none;
 }
 
 
@@ -2947,7 +3122,7 @@ table > tbody > tr:last-child {
 	.home .hestia-work .col-md-4,
 	.home .hestia-testimonials .col-md-4,
 	.home .hestia-work .col-md-6,
-	.home .hestia-team .col-md-6,
+	.home .hestia-team .col-sm-6,
 	.home #blog.hestia-blogs .hestia-blog-item,
 	.home .hestia-clients-bar .col-md-3 {
 		display: inline-block;
@@ -2973,6 +3148,28 @@ table > tbody > tr:last-child {
 	}
 	.home section.products .row {
 		text-align: center;
+	}
+}
+@media (min-width: 480px) {
+	.home .hestia-features .row,
+	.home .hestia-work .row,
+	.home .hestia-team .row,
+	.home .hestia-testimonials .row,
+	.home #blog.hestia-blogs .row,
+	.home .hestia-clients-bar .row {
+		text-align: center;
+	}
+	.home .feature-box,
+	.home .hestia-work .portfolio-item,
+	.home .hestia-testimonials .col-sm-6,
+	.home .hestia-team .col-sm-6,
+	.home #blog.hestia-blogs .hestia-blog-item,
+	.home .hestia-clients-bar .col-md-3 {
+		display: inline-block;
+		float: none !important;
+		margin-right: -4px;
+		margin-left: -4px;
+		vertical-align: top;
 	}
 }
 
@@ -3025,7 +3222,8 @@ table > tbody > tr:last-child {
 	font-size: 10px;
 }
 
-.is-ios .hestia-about {
+.is-ios .hestia-about,
+.is-ios .hestia-ribbon {
 	background-attachment: scroll;
 }
 
@@ -3085,9 +3283,6 @@ table > tbody > tr:last-child {
 .contactus .form-group {
 	margin: 0;
 }
-.contactus .pirate_forms_wrap .form_field_wrap {
-	line-height: 0;
-}
 .contactus .card .content {
 	padding: 15px;
 }
@@ -3095,13 +3290,16 @@ table > tbody > tr:last-child {
 	float: none;
 }
 .contactus .pirate_forms_wrap .btn {
-	margin: 10px 0 15px;
+	margin: 0;
+}
+.contactus .pirate_forms_wrap .pirateform_wrap_classes_spam_wrap {
+	color: #aaa;
+	font-weight: 400;
 }
 .contactus .contact_message_wrap {
 	margin-bottom: 0;
 }
 .contactus .contact_submit_wrap {
-	width: 100%;
 	margin-bottom: 0;
 	text-align: left;
 }
@@ -3145,6 +3343,43 @@ table > tbody > tr:last-child {
 
 .contact_submit_wrap {
 	text-align: right;
+}
+
+.pirate-forms-maps-custom span:before,
+.pirate-forms-maps-custom span:after {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	margin: auto;
+	content: "";
+}
+.pirate-forms-maps-custom span:before {
+	right: 0;
+	width: 18px;
+	height: 18px;
+	border: 1px solid #787878;
+	border-radius: 3px;
+	background: transparent;
+}
+.pirate-forms-maps-custom span:after {
+	top: 1px;
+	right: 2px;
+	color: transparent;
+	font-family: "FontAwesome";
+	content: "\f00c";
+}
+.pirate-forms-maps-custom input[type="checkbox"] {
+	display: none;
+}
+.pirate-forms-maps-custom label {
+	position: relative;
+	margin: 8px 0;
+	padding-right: 20px;
+	color: #aaa;
+	font-weight: 400;
+}
+.pirate-forms-maps-custom input[type="checkbox"]:checked + label span:after {
+	color: #787878;
 }
 
 
@@ -3279,6 +3514,21 @@ table > tbody > tr:last-child {
 .hestia-team h5.description,
 .team h5.description {
 	margin-bottom: 70px;
+}
+
+.authors-on-blog {
+	background: #121417;
+	background: -webkit-gradient(right top, right bottom, color-stop(0%, #121417), color-stop(100%, #323437));
+	background: -webkit-linear-gradient(top, #121417 0%, #323437 100%);
+	background: linear-gradient(to bottom, #121417 0%, #323437 100%);
+
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#121417', endColorstr='#323437', GradientType=0 );
+}
+.authors-on-blog .card-title {
+	color: #fff;
+}
+.authors-on-blog .footer a:hover {
+	color: #fff;
 }
 
 .hestia-team .footer a[href*="facebook.com"],
@@ -3865,6 +4115,39 @@ table > tbody > tr:last-child {
 
 .footer-black .footer-menu li a[href*="vimeo.com"]:before {
 	color: #fff;
+}
+
+.hestia-scroll-to-top {
+	position: fixed;
+	z-index: 999;
+	bottom: 15px;
+	left: 15px;
+	width: 50px;
+	height: 50px;
+	margin: 0;
+	padding: 0;
+	border-radius: 50%;
+	opacity: 0;
+	background-color: #999;
+	box-shadow: none;
+	font-size: 20px;
+	line-height: 50px;
+	text-align: center;
+	-webkit-transition: opacity 0.25s ease-in-out;
+	-moz-transition: opacity 0.25s ease-in-out;
+	transition: opacity 0.25s ease-in-out;
+}
+.hestia-scroll-to-top:hover {
+	background-color: #999;
+	box-shadow: 0 14px 26px -12px rgba(49, 49, 49, 0.42), 0 4px 23px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(49, 49, 49, 0.2);
+}
+.hestia-scroll-to-top:focus {
+	background-color: #999;
+	box-shadow: 0 14px 26px -12px rgba(49, 49, 49, 0.42), 0 4px 23px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(49, 49, 49, 0.2);
+}
+
+.hestia-fade {
+	opacity: 1;
 }
 
 
@@ -4709,6 +4992,11 @@ aside .widget a {
 	line-height: 79.8px;
 }
 
+.header-filter-gradient {
+	background: -webkit-linear-gradient(135deg, #a81d84 0%, #ea396f 100%);
+	background: linear-gradient(-45deg, #a81d84 0%, #ea396f 100%);
+}
+
 .header-filter {
 	position: absolute;
 	z-index: -1;
@@ -4964,10 +5252,6 @@ aside .widget a {
 		padding: 0 10px;
 	}
 
-	.contactus .contact_submit_wrap {
-		text-align: center;
-	}
-
 	.single aside.blog-sidebar {
 		padding: 40px 30px;
 	}
@@ -5187,6 +5471,10 @@ aside .widget a {
 		float: none;
 	}
 
+	.navbar-nav > li.nav-cart-btn {
+		display: none;
+	}
+
 	.container > .navbar-header {
 		display: table-cell !important;
 		float: none;
@@ -5302,10 +5590,6 @@ aside .widget a {
 	.navbar.full-screen-menu.navbar-not-transparent .navbar-nav {
 		background-color: rgba(255, 255, 255, 0.9);
 	}
-	.navbar.full-screen-menu.navbar-transparent button.navbar-toggle,
-	.navbar.full-screen-menu.navbar-transparent button.navbar-toggle:hover {
-		color: #fff;
-	}
 
 	.navbar:not(.full-screen-menu).navbar-scroll-point.hestia_center .navbar-header {
 		display: none !important;
@@ -5316,6 +5600,15 @@ aside .widget a {
 	}
 	.navbar.full-screen-menu.navbar-scroll-point.hestia_center .navbar-header {
 		padding-bottom: 0;
+	}
+
+	body.menu-open .navbar.navbar-transparent.full-screen-menu button.navbar-toggle,
+	body.menu-open .navbar.navbar-transparent.full-screen-menu .nav-cart .nav-cart-icon {
+		color: #555;
+	}
+	body.menu-open .navbar.navbar-transparent.full-screen-menu .navbar-collapse.collapse.in .navbar-nav > .btn.active > a,
+	body.menu-open .navbar.navbar-transparent.full-screen-menu .navbar-collapse.collapse.in .navbar-nav > .btn.active > a:hover {
+		color: #fff;
 	}
 }
 @media (max-width: 768px) {
@@ -5953,6 +6246,14 @@ aside .widget a {
 	}
 	.carousel .carousel-control.right .fa {
 		left: 10px;
+	}
+
+	.nav-cart {
+		display: none !important;
+	}
+
+	.nav-cart-btn {
+		display: block !important;
 	}
 }
 @media (max-width: 600px) {
@@ -6611,11 +6912,6 @@ div.wpforms-container .wpforms-form select:focus {
 	text-align: center;
 	text-transform: uppercase;
 }
-.nav-cart .nav-cart-content .widget .buttons .button:hover,
-.nav-cart .nav-cart-content .widget .buttons .button:focus {
-	color: #fff;
-	background-color: #555;
-}
 .nav-cart .nav-cart-content .widget .buttons .button.checkout {
 	display: none;
 }
@@ -6642,17 +6938,14 @@ div.wpforms-container .wpforms-form select:focus {
 .nav-cart:hover .nav-cart-content,
 .nav-cart.hestia-anim-cart .nav-cart-content {
 	visibility: visible;
+	z-index: 9999;
 	opacity: 1;
 	-webkit-transform: translateY(0);
 	-ms-transform: translateY(0);
 	transform: translateY(0);
 }
 
-.nav-cart-btn {
-	display: none !important;
-}
-
-.navbar-transparent .nav-cart .nav-cart-icon {
+.navbar-transparent:not(.full-screen-menu) .nav-cart .nav-cart-icon {
 	color: #fff;
 }
 
@@ -6735,6 +7028,14 @@ div.wpforms-container .wpforms-form select:focus {
 /*--------------------------------------------------------------
 # Mega Menu
 --------------------------------------------------------------*/
+
+.hestia-mm-description {
+	display: none;
+}
+
+.hestia-mega-menu > .hestia-mm-description {
+	display: inherit;
+}
 
 .navbar .hestia-mega-menu > .dropdown-menu {
 	right: 0;

@@ -9,6 +9,9 @@
 get_header();
 ?>
 	<div id="primary" class="<?php echo hestia_boxed_layout_header(); ?> page-header header-small">
+		<?php
+		if ( ( class_exists( 'WooCommerce' ) && ! is_cart() && ! is_checkout() ) || ! class_exists( 'WooCommerce' ) ) {
+		?>
 		<div class="container">
 			<div class="row">
 				<div class="col-md-10 col-md-offset-1 text-center">
@@ -16,7 +19,10 @@ get_header();
 				</div>
 			</div>
 		</div>
-		<?php hestia_output_wrapper_header_background( false ); ?>
+		<?php
+		}
+		hestia_output_wrapper_header_background( false );
+		?>
 	</div>
 </header>
 <div class="<?php echo hestia_layout(); ?>">
@@ -29,6 +35,16 @@ get_header();
 	<div class="blog-post <?php esc_attr( $class_to_add ); ?>">
 		<div class="container">
 			<?php
+			if ( class_exists( 'WooCommerce' ) && ( is_cart() || is_checkout() ) ) {
+			?>
+			<div class="row">
+				<div class="col-sm-12">
+					<?php single_post_title( '<h1 class="hestia-title">', '</h1>' ); ?>
+				</div>
+			</div>
+			<?php
+			}
+
 			if ( have_posts() ) :
 				while ( have_posts() ) :
 					the_post();

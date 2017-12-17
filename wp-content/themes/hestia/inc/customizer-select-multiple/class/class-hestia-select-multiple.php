@@ -66,11 +66,11 @@ class Hestia_Select_Multiple extends WP_Customize_Control {
 	 * @return array
 	 */
 	public function json() {
-		$json = parent::json();
-		$json['choices'] = $this->choices;
-		$json['link']    = $this->get_link();
-		$json['value']   = (array) $this->value();
-		$json['id']      = $this->id;
+		$json                 = parent::json();
+		$json['choices']      = $this->choices;
+		$json['link']         = $this->get_link();
+		$json['value']        = (array) $this->value();
+		$json['id']           = $this->id;
 		$json['custom_class'] = $this->custom_class;
 
 		return $json;

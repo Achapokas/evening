@@ -29,7 +29,7 @@ if ( ! function_exists( 'hestia_pagebuilder_enqueue' ) ) {
 	 * Enqueue Pagebuilder Specific Script
 	 */
 	function hestia_pagebuilder_enqueue() {
-		$had_elementor        = get_option( 'hestia_had_elementor' );
+		$had_elementor = get_option( 'hestia_had_elementor' );
 
 		if ( ( hestia_is_beaver_preview() || hestia_is_elementor_preview() ) && is_front_page() ) {
 			wp_enqueue_script( 'hestia-builder-integration', get_template_directory_uri() . '/assets/js/hestia-pagebuilder.js', array(), HESTIA_VERSION );
@@ -62,7 +62,7 @@ if ( ! function_exists( 'hestia_elementor_default_styles' ) ) {
 	 * Enqueue default hestia styles for elementor.
 	 */
 	function hestia_elementor_default_styles() {
-		$disabled_color_schemes = get_option( 'elementor_disable_color_schemes' );
+		$disabled_color_schemes      = get_option( 'elementor_disable_color_schemes' );
 		$disabled_typography_schemes = get_option( 'elementor_disable_typography_schemes' );
 
 		if ( $disabled_color_schemes === 'yes' && $disabled_typography_schemes === 'yes' ) {

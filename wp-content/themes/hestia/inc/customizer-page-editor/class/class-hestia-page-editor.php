@@ -57,8 +57,8 @@ class Hestia_Page_Editor extends WP_Customize_Control {
 				'hestia_controls_script', 'requestpost', array(
 					'ajaxurl'           => admin_url( 'admin-ajax.php' ),
 					'thumbnail_control' => 'hestia_feature_thumbnail', // name of image control that needs sync
-				'editor_control'    => 'hestia_page_editor', // name of control (theme_mod) that needs sync
-				'thumbnail_label'   => esc_html__( 'About background', 'hestia' ), // name of thumbnail control
+					'editor_control'    => 'hestia_page_editor', // name of control (theme_mod) that needs sync
+					'thumbnail_label'   => esc_html__( 'About background', 'hestia' ), // name of thumbnail control
 				)
 			);
 		}

@@ -78,17 +78,17 @@ final class Hestia_Customizer_Info_Singleton {
 			$manager->add_section(
 				new Hestia_Customizer_Info(
 					$manager, 'hestia_info_woocommerce', array(
-						'section_text' =>
+						'section_text'        =>
 						sprintf(
 							/* translators: %1$s is Plugin Name */
 							esc_html__( 'To have access to a shop section please install and configure %1$s.', 'hestia' ),
 							esc_html__( 'WooCommerce plugin', 'hestia' )
 						),
-						'slug'         => 'woocommerce',
-						'panel'        => 'hestia_frontpage_sections',
-						'priority'     => 451,
-						'capability'   => 'install_plugins',
-						'hide_notice'  => (bool) get_option( 'dismissed-hestia_info_woocommerce', false ),
+						'slug'                => 'woocommerce',
+						'panel'               => 'hestia_frontpage_sections',
+						'priority'            => 451,
+						'capability'          => 'install_plugins',
+						'hide_notice'         => (bool) get_option( 'dismissed-hestia_info_woocommerce', false ),
 						'button_screenreader' => '',
 					)
 				)

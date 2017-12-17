@@ -32,8 +32,8 @@ function hestia_shop_customize_register( $wp_customize ) {
 	} else {
 		$wp_customize->add_section(
 			'hestia_shop', array(
-				'title' => esc_html__( 'Shop', 'hestia' ),
-				'panel' => 'hestia_frontpage_sections',
+				'title'    => esc_html__( 'Shop', 'hestia' ),
+				'panel'    => 'hestia_frontpage_sections',
 				'priority' => apply_filters( 'hestia_section_priority', 20, 'hestia_shop' ),
 			)
 		);
@@ -44,66 +44,66 @@ function hestia_shop_customize_register( $wp_customize ) {
 	$wp_customize->add_setting(
 		'hestia_shop_hide', array(
 			'sanitize_callback' => 'hestia_sanitize_checkbox',
-			'default' => false,
-			'transport' => $selective_refresh,
+			'default'           => false,
+			'transport'         => $selective_refresh,
 		)
 	);
 
 	$wp_customize->add_control(
 		'hestia_shop_hide', array(
-			'type' => 'checkbox',
-			'label' => esc_html__( 'Disable section','hestia' ),
-			'section' => 'hestia_shop',
+			'type'     => 'checkbox',
+			'label'    => esc_html__( 'Disable section', 'hestia' ),
+			'section'  => 'hestia_shop',
 			'priority' => 1,
 		)
 	);
 
 	$wp_customize->add_setting(
 		'hestia_shop_title', array(
-			'default' => esc_html__( 'Products', 'hestia' ),
+			'default'           => esc_html__( 'Products', 'hestia' ),
 			'sanitize_callback' => 'sanitize_text_field',
-			'transport' => $selective_refresh,
+			'transport'         => $selective_refresh,
 		)
 	);
 
 	$wp_customize->add_control(
 		'hestia_shop_title', array(
-			'label' => esc_html__( 'Section Title', 'hestia' ),
-			'section' => 'hestia_shop',
+			'label'    => esc_html__( 'Section Title', 'hestia' ),
+			'section'  => 'hestia_shop',
 			'priority' => 5,
 		)
 	);
 
 	$wp_customize->add_setting(
 		'hestia_shop_subtitle', array(
-			'default' => esc_html__( 'Change this subtitle in the Customizer', 'hestia' ),
+			'default'           => esc_html__( 'Change this subtitle in the Customizer', 'hestia' ),
 			'sanitize_callback' => 'sanitize_text_field',
-			'transport' => $selective_refresh,
+			'transport'         => $selective_refresh,
 		)
 	);
 
 	$wp_customize->add_control(
 		'hestia_shop_subtitle', array(
-			'label' => esc_html__( 'Section Subtitle', 'hestia' ),
-			'section' => 'hestia_shop',
+			'label'    => esc_html__( 'Section Subtitle', 'hestia' ),
+			'section'  => 'hestia_shop',
 			'priority' => 10,
 		)
 	);
 
 	$wp_customize->add_setting(
 		'hestia_shop_items', array(
-			'default' => 4,
+			'default'           => 4,
 			'sanitize_callback' => 'absint',
-			'transport' => $selective_refresh,
+			'transport'         => $selective_refresh,
 		)
 	);
 
 	$wp_customize->add_control(
 		'hestia_shop_items', array(
-			'label' => esc_html__( 'Number of Items', 'hestia' ),
-			'section' => 'hestia_shop',
+			'label'    => esc_html__( 'Number of Items', 'hestia' ),
+			'section'  => 'hestia_shop',
 			'priority' => 15,
-			'type' => 'number',
+			'type'     => 'number',
 		)
 	);
 
@@ -125,33 +125,33 @@ function hestia_register_shop_partials( $wp_customize ) {
 
 	$wp_customize->selective_refresh->add_partial(
 		'hestia_shop_hide', array(
-			'selector'        => '.products:not(.is-shortcode)',
-			'render_callback' => 'hestia_shop',
+			'selector'            => '.products:not(.is-shortcode)',
+			'render_callback'     => 'hestia_shop',
 			'container_inclusive' => true,
-			'fallback_refresh' => false,
+			'fallback_refresh'    => false,
 		)
 	);
 
 	$wp_customize->selective_refresh->add_partial(
 		'hestia_shop_title', array(
-			'selector'        => '.products .hestia-title',
-			'render_callback' => 'hestia_shop_title_callback',
+			'selector'         => '.products .hestia-title',
+			'render_callback'  => 'hestia_shop_title_callback',
 			'fallback_refresh' => false,
 		)
 	);
 
 	$wp_customize->selective_refresh->add_partial(
 		'hestia_shop_subtitle', array(
-			'selector'        => '.products .description',
-			'render_callback' => 'hestia_shop_subtitle_callback',
+			'selector'         => '.products .description',
+			'render_callback'  => 'hestia_shop_subtitle_callback',
 			'fallback_refresh' => false,
 		)
 	);
 
 	$wp_customize->selective_refresh->add_partial(
 		'hestia_shop_items', array(
-			'selector' => '.hestia-shop-content',
-			'render_callback' => 'hestia_shop_content',
+			'selector'            => '.hestia-shop-content',
+			'render_callback'     => 'hestia_shop_content',
 			'container_inclusive' => true,
 		)
 	);

@@ -259,6 +259,34 @@ h2.hestia-title {
 	/* Above WP toolbar. */
 }
 
+.container {
+	max-width: 100%;
+}
+
+@media (min-width: 749px) {
+	.container {
+		max-width: 748px;
+	}
+}
+
+@media (min-width: 768px) {
+	.container {
+		max-width: 750px;
+	}
+}
+
+@media (min-width: 992px) {
+	.container {
+		max-width: 970px;
+	}
+}
+
+@media (min-width: 1200px) {
+	.container {
+		max-width: 2000px;
+	}
+}
+
 table {
 	width: 100%;
 }

@@ -15,15 +15,15 @@ if ( is_active_sidebar( 'sidebar-1' ) && ( $hestia_remove_sidebar_on_single_post
 	$class_to_add = 'col-md-8 col-md-offset-2';
 }
 
-$default_blog_layout = hestia_sidebar_on_single_post_get_default();
+$default_blog_layout        = hestia_sidebar_on_single_post_get_default();
 $hestia_blog_sidebar_layout = get_theme_mod( 'hestia_blog_sidebar_layout', $default_blog_layout );
 
-$args = array(
+$args                 = array(
 	'sidebar-right' => 'col-md-8 single-post-wrap',
-	'sidebar-left' => 'col-md-8 single-post-wrap',
-	'full-width' => 'col-md-8 col-md-offset-2 single-post-wrap',
+	'sidebar-left'  => 'col-md-8 single-post-wrap',
+	'full-width'    => 'col-md-8 col-md-offset-2 single-post-wrap',
 );
-$hestia_sidebar_width = get_theme_mod( 'hestia_sidebar_width',25 );
+$hestia_sidebar_width = get_theme_mod( 'hestia_sidebar_width', 25 );
 if ( $hestia_sidebar_width > 3 && $hestia_sidebar_width < 80 ) {
 	$args['sidebar-left'] .= ' col-md-offset-1';
 }
@@ -44,10 +44,10 @@ $class_to_add = hestia_get_content_classes( $hestia_blog_sidebar_layout, 'sideba
 
 			hestia_wp_link_pages(
 				array(
-					'before' => '<div class="text-center"> <ul class="nav pagination pagination-primary">',
-					'after' => '</ul> </div>',
+					'before'      => '<div class="text-center"> <ul class="nav pagination pagination-primary">',
+					'after'       => '</ul> </div>',
 					'link_before' => '<li>',
-					'link_after' => '</li>',
+					'link_after'  => '</li>',
 				)
 			);
 			?>
