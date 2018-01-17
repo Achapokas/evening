@@ -8,16 +8,6 @@
 
 get_header();
 ?>
-  <div id="primary" class="page-header header-small">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-10 col-md-offset-1 text-center">
-        </div>
-      </div>
-    </div>
-    <?php hestia_output_wrapper_header_background( false ); ?>
-  </div>
-</header>
 <div class="<?php echo hestia_layout(); ?>">
   <?php
   $class_to_add = '';

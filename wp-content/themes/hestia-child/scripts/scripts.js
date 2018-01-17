@@ -112,23 +112,6 @@ jQuery(document).ready(function ($) {
         }
     });
 
-    if (window_width >= 768) {
-        var big_image = $('.header-filter[data-parallax="active"]');
-        if (big_image.length !== 0) {
-            $(window).on('scroll', debounce(function () {
-                if (isElementInViewport(big_image)) {
-                    var oVal = ($(window).scrollTop() / 3);
-                    big_image.css({
-                        'transform': 'translate3d(0,' + oVal + 'px,0)',
-                        '-webkit-transform': 'translate3d(0,' + oVal + 'px,0)',
-                        '-ms-transform': 'translate3d(0,' + oVal + 'px,0)',
-                        '-o-transform': 'translate3d(0,' + oVal + 'px,0)'
-                    });
-                }
-            }, 4));
-        }
-    }
-
     function debounce(func, wait, immediate) {
         var timeout;
         return function () {
