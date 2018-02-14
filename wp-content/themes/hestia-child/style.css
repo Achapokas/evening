@@ -56,6 +56,14 @@ button,
   margin: 80px 0 0 !important;
 }
 
+.navbar .dropdown-menu {
+  border-radius: 0 !important;
+}
+
+.navbar .navbar-nav > li:hover > .dropdown-menu {
+    margin-top: 6px;
+}
+
 .navbar .navbar-nav > li > a {
   padding: 0 16px;
   font-size: 14px;
@@ -67,6 +75,10 @@ button,
     letter-spacing: 1px;
 }
 
+.navbar .dropdown-menu li > a {
+  margin: 0;
+}
+
 .section {
     padding: 100px 0;
 }
@@ -75,12 +87,18 @@ button,
     max-height: 60px;
 }
 
-.navbar > .container {
-  padding-top: 0;
+.entry-social {
+  padding: 3px 0;
+  background: #fc5467;
 }
 
 .entry-social a {
   padding: 4px 8px;
+  color: #532eb7;
+}
+
+.entry-social a:hover {
+  color: #fff;
 }
 
 .main-raised {
@@ -114,4 +132,12 @@ button,
 .widget_archive,
 .widget_meta {
   display: none;
+}
+
+.footer {
+  background: #fc5467 !important;
+}
+
+.footer a {
+  color: #532eb7;
 }
