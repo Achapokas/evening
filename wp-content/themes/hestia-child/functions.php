@@ -60,8 +60,8 @@ function add_hestia_child_theme_the_header_content() {
   <nav class="navbar navbar-default navbar-fixed-top <?php echo esc_attr( $navbar_class ); ?>">
     <?php hestia_before_header_content_trigger(); ?>
     <div class="entry-social">
-      <a target="_blank" href="https://www.facebook.com/evehoyt"><i class="fa fa-lg fa-facebook"></i></a>
-      <a target="_blank" rel="tooltip" href="https://www.instagram.com/eveningneon/"><i class="fa fa-lg fa-instagram"></i></a>
+      <a target="_blank" href="https://www.facebook.com/evehoyt"><i class="fa fa-xlg fa-facebook"></i></a>
+      <a target="_blank" rel="tooltip" href="https://www.instagram.com/eveningneon/"><i class="fa fa-xlg fa-instagram"></i></a>
     </div>
     <div class="container">
       <div class="navbar-header">

@@ -35,6 +35,10 @@ ul {
   padding: 0 15px;
 }
 
+.fa-xlg {
+  font-size: 1.5em;
+}
+
 button,
 .btn {
   letter-spacing: 1px;
