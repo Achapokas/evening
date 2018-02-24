@@ -57,11 +57,21 @@ button,
 }
 
 .navbar .dropdown-menu {
+  padding: 0;
   border-radius: 0 !important;
+}
+
+body.admin-bar .navbar.navbar-default .navbar-collapse {
+  margin-top: 155px;
 }
 
 .navbar .navbar-nav > li:hover > .dropdown-menu {
     margin-top: 6px;
+}
+
+.dropdown-menu .active a:active,
+.dropdown-menu .active a:hover {
+  background: #f8f8f8;
 }
 
 .navbar .navbar-nav > li > a {
@@ -89,7 +99,7 @@ button,
 
 .entry-social {
   padding: 3px 0;
-  background: #fc5467;
+  background: #fff;
 }
 
 .entry-social a {
@@ -97,15 +107,31 @@ button,
   color: #532eb7;
 }
 
-.entry-social a:hover {
-  color: #fff;
-}
-
 .main-raised {
   margin: 0;
   border-radius: 0;
   box-shadow: 0;
 }
+
+  body.custom-background {
+    background-image: none !important;
+  }
+
+.page-child .page-content-wrap {
+  text-align: center;
+}
+
+.card-image {
+  border-radius: 0;
+}
+
+  .card .card-image {
+    box-shadow: none;
+  }
+
+  .card-plain .card-image img {
+    border-radius: 0;
+  }
 
 .hestia-title {
   text-transform: capitalize;
@@ -135,9 +161,13 @@ button,
 }
 
 .footer {
-  background: #fc5467 !important;
+  background: #f8f8f8 !important;
 }
 
 .footer a {
   color: #532eb7;
 }
+
+  .copyright {
+    display: none;
+  }

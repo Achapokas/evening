@@ -113,146 +113,105 @@ function add_hestia_child_theme_the_header_content() {
   hestia_after_header_trigger();
 }
 
-function hesta_bottom_footer_content( $is_callback = false ) {
-    if ( ! $is_callback ) {
-    ?>
-      <div class="hestia-bottom-footer-content">
-      <?php
+add_action( 'wp_head', 'remove_hestia_setup_theme', 100 );
+function remove_hestia_setup_theme(){
+  add_action( 'after_setup_theme', 'hestia_setup_theme' );
+}
+
+add_action( 'hestia_do_header', 'hestia_setup_child_theme' );
+
+  function hestia_setup_child_theme() {
+    // Using this feature you can set the maximum allowed width for any content in the theme, like oEmbeds and images added to posts.  https://codex.wordpress.org/Content_Width
+    global $content_width;
+    if ( ! isset( $content_width ) ) {
+      $content_width = 750;
     }
-    $menu_class                 = 'pull-left';
-    $copyright_class            = 'pull-right';
-    switch ( $hestia_copyright_alignment ) {
-      case 'left':
-        $menu_class      = 'pull-right';
-        $copyright_class = 'pull-left';
-        break;
-      case 'center':
-        $menu_class      = 'hestia-center';
-        $copyright_class = 'hestia-center';
-    }
-    wp_nav_menu(
-      array(
-        'theme_location' => 'footer',
-        'depth'          => 1,
-        'container'      => 'ul',
-        'menu_class'     => 'footer-menu ' . esc_attr( $menu_class ),
+
+    // Takes care of the <title> tag. https://codex.wordpress.org/Title_Tag
+    add_theme_support( 'title-tag' );
+
+    // Add theme support for custom logo. https://codex.wordpress.org/Theme_Logo
+    add_theme_support(
+      'custom-logo', array(
+        'flex-width'  => true,
+        'flex-height' => true,
+        'height'      => 100,
       )
     );
-      ?>
-    <?php if ( ! empty( $hestia_general_credits ) || is_customize_preview() ) : ?>
-    <?php endif; ?>
-    <?php
-    if ( ! $is_callback ) {
-    ?>
-      </div>
-      <?php
+
+    // Loads texdomain. https://codex.wordpress.org/Function_Reference/load_theme_textdomain
+    load_theme_textdomain( 'hestia', get_template_directory() . '/languages' );
+
+    // Add automatic feed links support. https://codex.wordpress.org/Automatic_Feed_Links
+    add_theme_support( 'automatic-feed-links' );
+
+    // Add post thumbnails support. https://codex.wordpress.org/Post_Thumbnails
+    add_theme_support( 'post-thumbnails' );
+
+    // Add custom header support. https://codex.wordpress.org/Custom_Headers
+    $header_settings = apply_filters(
+      'hestia_custom_header_settings', array(// Height
+        'height'      => 2000,
+        // Flex height
+        'flex-height' => true,
+        // Header text
+        'header-text' => false,
+      )
+    );
+    add_theme_support( 'custom-header', $header_settings );
+
+    // Add selective Widget refresh support
+    add_theme_support( 'customize-selective-refresh-widgets' );
+
+    // Add support for html5
+    add_theme_support( 'html5', array( 'search-form' ) );
+
+    // This theme uses wp_nav_menu(). https://codex.wordpress.org/Function_Reference/register_nav_menu
+    register_nav_menus(
+      array(
+        'primary'      => esc_html__( 'Primary Menu', 'hestia' ),
+        'footer'       => esc_html__( 'Footer Menu', 'hestia' ),
+        'top-bar-menu' => esc_html__( 'Very Top Bar', 'hestia' ) . ' ' . esc_html__( 'Menu', 'hestia' ),
+      )
+    );
+
+    // Adding image sizes. https://developer.wordpress.org/reference/functions/add_image_size/
+    add_image_size( 'hestia-blog', 360, 240, true );
+
+    if ( class_exists( 'woocommerce' ) ) {
+      add_image_size( 'hestia-shop', 230, 350, true );
+      add_image_size( 'hestia-shop-2x', 460, 700, true );
     }
+
+    // Add Portfolio Image size if Jetpack Portfolio CPT is enabled.
+    if ( class_exists( 'Jetpack' ) ) {
+      if ( Jetpack::is_module_active( 'custom-content-types' ) ) {
+        add_image_size( 'hestia-portfolio', 360, 300, true );
+      }
+    }
+
+    // Added WooCommerce support.
+    if ( class_exists( 'woocommerce' ) ) {
+      add_theme_support( 'woocommerce' );
+    }
+
+    // Added Jetpack Portfolio Support.
+    if ( class_exists( 'Jetpack' ) ) {
+      add_theme_support( 'jetpack-portfolio' );
+    }
+
+    /* Customizer upsell. */
+    $info_path = HESTIA_PHP_INCLUDE . 'customizer-info/class/class-hestia-customizer-info-singleton.php';
+    if ( file_exists( $info_path ) ) {
+      require_once( $info_path );
+    }
+
+    /* WooCommerce support for latest gallery */
+    if ( class_exists( 'WooCommerce' ) ) {
+      add_theme_support( 'wc-product-gallery-zoom' );
+      add_theme_support( 'wc-product-gallery-lightbox' );
+      add_theme_support( 'wc-product-gallery-slider' );
+    }
+
+    add_editor_style();
   }
-
-  if ( ! function_exists( 'hestia_setup_theme' ) ) {
-    /**
-     * Get the number of items in the cart.
-     *
-     * @since Hestia 1.0
-     */
-    function hestia_setup_theme() {
-      // Using this feature you can set the maximum allowed width for any content in the theme, like oEmbeds and images added to posts.  https://codex.wordpress.org/Content_Width
-      global $content_width;
-      if ( ! isset( $content_width ) ) {
-        $content_width = 750;
-      }
-
-      // Takes care of the <title> tag. https://codex.wordpress.org/Title_Tag
-      add_theme_support( 'title-tag' );
-
-      // Add theme support for custom logo. https://codex.wordpress.org/Theme_Logo
-      add_theme_support(
-        'custom-logo', array(
-          'flex-width'  => true,
-          'flex-height' => true,
-          'height'      => 100,
-        )
-      );
-
-      // Loads texdomain. https://codex.wordpress.org/Function_Reference/load_theme_textdomain
-      load_theme_textdomain( 'hestia', get_template_directory() . '/languages' );
-
-      // Add automatic feed links support. https://codex.wordpress.org/Automatic_Feed_Links
-      add_theme_support( 'automatic-feed-links' );
-
-      // Add post thumbnails support. https://codex.wordpress.org/Post_Thumbnails
-      add_theme_support( 'post-thumbnails' );
-
-      // Add custom header support. https://codex.wordpress.org/Custom_Headers
-      $header_settings = apply_filters(
-        'hestia_custom_header_settings', array(// Height
-          'height'      => 2000,
-          // Flex height
-          'flex-height' => true,
-          // Header text
-          'header-text' => false,
-        )
-      );
-      add_theme_support( 'custom-header', $header_settings );
-
-      // Add selective Widget refresh support
-      add_theme_support( 'customize-selective-refresh-widgets' );
-
-      // Add support for html5
-      add_theme_support( 'html5', array( 'search-form' ) );
-
-      // This theme uses wp_nav_menu(). https://codex.wordpress.org/Function_Reference/register_nav_menu
-      register_nav_menus(
-        array(
-          'primary'      => esc_html__( 'Primary Menu', 'hestia' ),
-          'footer'       => esc_html__( 'Footer Menu', 'hestia' ),
-          'top-bar-menu' => esc_html__( 'Very Top Bar', 'hestia' ) . ' ' . esc_html__( 'Menu', 'hestia' ),
-        )
-      );
-
-      // Adding image sizes. https://developer.wordpress.org/reference/functions/add_image_size/
-      add_image_size( 'hestia-blog', 360, 240, true );
-
-      if ( class_exists( 'woocommerce' ) ) {
-        add_image_size( 'hestia-shop', 230, 350, true );
-        add_image_size( 'hestia-shop-2x', 460, 700, true );
-      }
-
-      // Add Portfolio Image size if Jetpack Portfolio CPT is enabled.
-      if ( class_exists( 'Jetpack' ) ) {
-        if ( Jetpack::is_module_active( 'custom-content-types' ) ) {
-          add_image_size( 'hestia-portfolio', 360, 300, true );
-        }
-      }
-
-      // Added WooCommerce support.
-      if ( class_exists( 'woocommerce' ) ) {
-        add_theme_support( 'woocommerce' );
-      }
-
-      // Added Jetpack Portfolio Support.
-      if ( class_exists( 'Jetpack' ) ) {
-        add_theme_support( 'jetpack-portfolio' );
-      }
-
-      /* Customizer upsell. */
-      $info_path = HESTIA_PHP_INCLUDE . 'customizer-info/class/class-hestia-customizer-info-singleton.php';
-      if ( file_exists( $info_path ) ) {
-        require_once( $info_path );
-      }
-
-      /* WooCommerce support for latest gallery */
-      if ( class_exists( 'WooCommerce' ) ) {
-        add_theme_support( 'wc-product-gallery-zoom' );
-        add_theme_support( 'wc-product-gallery-lightbox' );
-        add_theme_support( 'wc-product-gallery-slider' );
-      }
-
-      add_editor_style();
-    }
-
-    add_action( 'after_setup_theme', 'hestia_setup_theme' );
-  }// End if().
-?>
-
-
