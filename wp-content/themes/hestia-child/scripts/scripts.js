@@ -5,6 +5,8 @@ jQuery(document).ready(function ($) {
 
     $.material.init();
 
+    console.log("test")
+
     var window_width = $(window).width();
 
     //  Activate the Tooltips
